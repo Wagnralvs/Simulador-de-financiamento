@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup,MinLengthValidator,Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup,MinLengthValidator,Validators , ValidatorFn} from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -14,12 +14,15 @@ import { DatasPropertyComponent } from '../datas-property/datas-property.compone
 })
 export class DatasComponent implements OnInit {
 //test
-public customPatterns = { '0': { pattern: new RegExp('\[a-zA-Z\]')} };
+//public customPatterns = { '1': { pattern: new RegExp('[a-zA-Z ]*')} };
+
+  control = new FormControl('1', Validators.pattern('[a-zA-Z ]*'));
+ // {pattern: {requiredPattern: '^[a-zA-Z ]*$', actualValue: '1'}}
 
   //text- formulario
 
   formulario: FormGroup = new FormGroup({
-    Nome: new FormControl((null) ) ,
+    Nome: new FormControl('', [Validators.pattern('[a-zA-Z ]*')]) ,
     Profissao: new FormControl (null),
     CPF : new FormControl (null), 
     DataDeNascimento: new FormControl(null),
@@ -37,6 +40,10 @@ public customPatterns = { '0': { pattern: new RegExp('\[a-zA-Z\]')} };
 
   ngOnInit(): void {
     this.usuario={};
+
+  console.log(this.control.errors);
+
+
   }
 
   onSubmit(form: any){

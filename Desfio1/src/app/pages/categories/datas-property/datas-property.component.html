@@ -11,12 +11,13 @@
   <div class="col-6">
 
       <select type="checkbox" class="form-select form-select-lg   form-control" id="validationTela3-01" 
-      name="TipoDeImovel" #TipoDeImovel="ngModel" FormControlName="TipoDeImovel" [(ngModel)]="usuario.TipoDeImovel"aria-label=".form-select-lg example" required >
+    aria-label=".form-select-lg example" required >
         <option selected>Tipo do imóvel:</option>
         <option value="1">Residencial</option>
         <option value="2">Comercial</option>
       </select>
 
+     <!-- <small class="text text-danger" [class.d-none]="TipoDeImovel.valid ||TipoDeImovel.untouched">Nome é obrigatório !</small>-->
       <label for="validationTela3-01"></label>
          
 
@@ -29,8 +30,10 @@
   <div class="col-6">
     <div class="form-floating">
       <input type="tell" prefix="R$" mask="separator.2" thousandSeparator="." [specialCharacters]="[ '[',']']"  class="form-control" 
-      name="RendaMensal" #RendaMensal="ngModel" FormControlName="RendaMensal" [(ngModel)]="usuario.RendaMensal"id="validationTela3-02" placeholder="monthly income" required >
+      name="RendaMensal" #RendaMensal="ngModel" [class.is-invalid]="RendaMensal.invalid && RendaMensal.touched" FormControlName="RendaMensal" [(ngModel)]="usuario.RendaMensal" id="validationTela3-02" placeholder="monthly income" required >
  
+      
+      <small class="text text-danger" [class.d-none]="RendaMensal.valid || RendaMensal.untouched">Renda Mensal é obrigatório !</small>
       <label for="validationTela3-02">Renda Mensal :</label>
      
     </div>
@@ -38,33 +41,48 @@
   <!-- ------Valor do imóvel-------------->
   <div class="col-6  mt-4" >
     <div class="form-floating"  >
-      <input type="tell" prefix="R$" mask="separator.2" thousandSeparator="." [specialCharacters]="[ '[',']']" class="form-control" id="validationTela3-03" placeholder="value of the property" required>
+      <input type="tell" prefix="R$" minlength="8" mask="separator.2" thousandSeparator="." [specialCharacters]="[ '[',']']" class="form-control"
+      name="ValorDoImovel" #ValorDoImovel="ngModel"  FormControlName="ValorDoImovel" [(ngModel)]="usuario.ValorDoImovel" id="valorDoImovel" placeholder="value of the property" required>
 
-      <label for="validationTela3-03">Valor do Imóvel :</label>
-      <div class="valid-feedback">
-        Looks good!
+      <div *ngIf="ValorDoImovel.errors && (ValorDoImovel.invalid && ValorDoImovel.touched)">
+        <small class="text text-danger" *ngIf="ValorDoImovel.errors.required">Valor do imóvel  é obrigatório !</small>
+        <small class="text text-danger" *ngIf="ValorDoImovel.errors.minlength">Valor do imóvel é inválido !</small>
       </div>
+      <label for="valorDoImovel">Valor do Imóvel :</label>
+     
     </div>
   </div>
   <!---------Valor da entrada ----------->
   <div class="col-6  mt-4" >
     <div class="form-floating"  >
-      <input type="tell" prefix="R$" mask="separator.2" thousandSeparator="." [specialCharacters]="[ '[',']']"  class="form-control" id="validationTela3-04" placeholder="value of input" required  >
-      <label for="validationTela3-04">Valor da Entrada :</label>
-      <div class="valid-feedback">
-        Looks good!
+      
+      <input type="tell" prefix="R$" mask="separator.2" minlength="8" thousandSeparator="." [specialCharacters]="[ '[',']']"  class="form-control" value=""
+      name="ValorDaEntrada" #ValorDaEntrada="ngModel"  FormControlName="ValorDaEntrada" [(ngModel)]="usuario.ValorDaEntrada" id="valorDaEntrada" placeholder="value of input" required  >
+     
+      <div *ngIf="ValorDaEntrada.errors && (ValorDaEntrada.invalid && ValorDaEntrada.touched)">
+        <small class="text text-danger" *ngIf="ValorDaEntrada.errors.required">Valor da entrada  é obrigatório !</small>
+        <small class="text text-danger" *ngIf="ValorDaEntrada.errors.minlength">Entrada mínimo 20% do valor do imóvel!</small>
+
       </div>
+      <label for="valorDaEntrada">Valor da Entrada :  </label>
+      {{((usuario.ValorDoImovel ))}}
+      
     </div>
   </div>
-
+  
   <!---------Quantidade de parcelas-->
   <div class="col-6  mt-4" >
     <div class="form-floating"  >
-      <input type="tell" min="1"max="360"  mask="000" class="form-control" id="validationTela3-05" placeholder="your phone" value="1" required  >
-      <label for="validationTela3-05">Em quantas parcelas deseja pagar? </label>
-      <div class="valid-feedback">
-        Looks good!
+
+      <input type="tell" min="1" maxlength="3" pattern="^$|^([0-9]|[0-9]|[0-9|[3][6][0]])?" mask="000" class="form-control" id="QuantidadeDeParcelas"
+      name="QuantidadeDeParcelas" #QuantidadeDeParcelas="ngModel"  FormControlName="QuantidadeDeParcelas" [(ngModel)]="usuario.QuantidadeDeParcelas" placeholder="your phone" value="1" required  >
+      
+      <div *ngIf="QuantidadeDeParcelas.errors && (QuantidadeDeParcelas.invalid && QuantidadeDeParcelas.touched)">
+        <small class="text text-danger" *ngIf="QuantidadeDeParcelas.errors.required">Quantidade de parcelas  é obrigatório !</small>
+        <small class="text text-danger" *ngIf="QuantidadeDeParcelas.errors.max">Quantidade de parcelas é inválida !</small>
       </div>
+      <label for="QuantidadeDeParcelas">Em quantas parcelas deseja pagar? </label>
+    
     </div>
   </div>
   
@@ -73,14 +91,15 @@
 <!--buttons-->
 <div class="row container-fluid text-center mt-4" >
   <div class="col-6" >
-    <button class="btn btn-danger btn-lg " id="btn-cancelar" routerLink="/home" type="menu">Cancelar</button>
+    <button class="btn btn-danger btn-lg " id="btn-cancelar" routerLink="/home" type="reset">Cancelar</button>
   </div>
    <div class="col-6">
-   <button class="btn btn-success btn-lg "  id="btn-proseguir" type="submit" [disabled]="f.invalid">Proseguir</button>
+   <button (click)="calcularEntrada()" class="btn btn-success btn-lg "  id="btn-proseguir" [disabled]="f.invalid" type="submit" >Proseguir</button>
  </div>
+ <!---->
  
 </div>
-
+{{this.ValorDaEntrada}}
 </form>
 
 
