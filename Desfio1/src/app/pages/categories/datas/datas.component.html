@@ -1,0 +1,128 @@
+
+
+<!----------Página 2 --------------->
+
+
+<h1 class="text-center  mt-5 mb-5 ">Dados do Proponente</h1>
+
+<form #f="ngForm" class="needs-validation" (ngSubmit)="onSubmit(f)">
+
+<!--nome  ----    -->
+
+<div class="row  container m-3">
+
+  <div class="col-6">
+    <div class="form-floating form-Group" >
+
+      <input type="text" mask="S*" [specialCharacters]="[ '[' ,']' , '\\' ]" [dropSpecialCharacters]="false"
+        class="form-control" #nome="ngModel" [class.is-invalid]="name.invalid && name.touched" name="nome" #name="ngModel" FormControlName="nome" [(ngModel)]="usuario.nome" id="validationCustom01" placeholder="your name" value="" required minlength="7">
+      
+      <label for="validationCustom01">Nome completo :</label>
+      <small class="text text-danger" [class.d-none]="name.valid || name.untouched">Nome é obrigatório !</small>
+     
+    </div>
+  </div>
+
+  <!---------------profissão------------>
+  <div class="col-6  form-Group">
+    <div class="form-floating">
+
+      <input type="text" mask="S*" class="form-control" id="validationCustom02"
+      name="profissao" #profissao="ngModel" [class.is-invalid]="profissao.invalid && profissao.touched" FormControlName="profissao" [(ngModel)]="usuario.profissao" placeholder="your Profession" required minlength="4">
+      
+      <label for="validationCustom02">Profissão :</label>
+      <small class="text text-danger" [class.d-none]="profissao.valid || profissao.untouched">Profissão é obrigatório !</small>
+    
+    </div>
+  </div>
+  <!-- ------CPF-------------->
+  <div class="col-6  mt-4" >
+    <div class="form-floating"  >
+
+      <input type="text" mask="000.000.000-00" [showMaskTyped] = "true" minlength="14" class="form-control" id="validationCustom03" 
+      name="cpf" #cpf="ngModel"  [class.is-invalid]="cpf.invalid && cpf.touched" FormControlName="cpf" [(ngModel)]="usuario.cpf" placeholder="your CPF" required>
+
+      <div *ngIf="cpf.errors && (cpf.invalid && cpf.touched)">
+        <small class="text text-danger" *ngIf="cpf.errors.required">CPF é obrigatório !</small>
+        <small class="text text-danger" *ngIf="cpf.errors.minlength">CPF inválido !</small>
+      </div>
+      <label for="validationCustom03">CPF :</label>
+      
+    </div>
+  </div>
+  <!---------email----------->
+  <div class="col-6  mt-4" >
+    <div class="form-floating"  >
+
+      <input type="email" email class="form-control" id="validationCustom04" placeholder="your e-mail"
+      name="email" #email="ngModel"  FormControlName="email" [(ngModel)]="usuario.email"  required minlength="7" >
+      
+ 
+   <div *ngIf="email.errors && (email.invalid && email.touched)">
+    <small class="text text-danger" *ngIf="email.errors.required">E-mail é obrigatório !</small>
+    <small class="text text-danger" *ngIf="email.errors.email"> formato inválido !</small>
+  </div>
+      <label for="validationCustom04">E-mail :</label>
+      
+    </div>
+  </div>
+  <!--------- data de nacimento-------->
+  <div class="col-6  mt-4" >
+    <div class="form-floating form-Group"  >
+
+      <input type="date"  max="2003-10-10" class="form-control" id="validationCustom05" placeholder="your date"
+      name="date" #dataDeNascimento="ngModel"  [class.is-invalid]="dataDeNascimento.invalid && dataDeNascimento.touched" FormControlName="date" [(ngModel)]="usuario.date" required  >
+      
+      <div *ngIf="dataDeNascimento.errors && (dataDeNascimento.invalid && dataDeNascimento.touched)">
+      <small class="text text-danger" *ngIf="dataDeNascimento.errors.required">Data de Nascimento é obrigatório !</small>
+      <small class="text text-danger" *ngIf="dataDeNascimento.errors.max ">Data de nascimento invalidar !</small>
+    </div>
+
+      <label for="validationCustom05">Data de Nascimento :</label>
+    
+    </div>
+  </div>
+  <!----------Cep----------->
+  <div class="col-6  mt-4" >
+    <div class="form-floating"  >
+
+      <input type="tel"   mask="00000-000" [showMaskTyped] = "true" class="form-control" id="validationCustom06" placeholder="your cep"
+      name="cep" #cep="ngModel" [class.is-invalid]="cep.invalid && cep.touched" FormControlName="cep" [(ngModel)]="usuario.cep"  required  >
+      
+      <small class="text text-danger" [class.d-none]="cep.valid || cep.untouched">CEP é obrigatório !</small>
+      <label for="validationCustom06">CEP :</label>
+     
+    </div>
+  </div>
+  <!---------telefone-->
+  <div class="col-6  mt-4" >
+    <div class="form-floating"  >
+
+      <input type="tel"  prefix="+55" mask="(00)00000-0000" minlength="17" class="form-control" id="validationCustom07" placeholder="your phone"
+      name="telefone" #telefone="ngModel"  [class.is-invalid]="telefone.invalid && telefone.touched"  FormControlName="telefone" [(ngModel)]="usuario.telefone" value="" required  >
+      
+      <div *ngIf="telefone.errors && (telefone.invalid && telefone.touched)">
+        <small class="text text-danger" *ngIf="telefone.errors.required">Telefone é obrigatório !</small>
+        <small class="text text-danger" *ngIf="telefone.errors.minlength"> Telefone inválido !</small>
+      </div>
+      <label for="validationCustom06">Celular :</label>
+     
+    </div>
+  </div>
+  
+ 
+</div>
+<!--buttons-->
+<div class="row container-fluid text-center mt-4" >
+  <div class="col-6" >
+    <button class="btn btn-danger btn-lg " id="btn-cancelar" routerLink="/home" type="reset">Cancelar</button>
+  </div>
+   <div class="col-6">
+   <button class="btn btn-success btn-lg "  id="btn-proseguir" routerLink="/property" type="submit" [disabled]="f.invalid ">Proseguir</button>
+ </div>
+ 
+</div>
+
+</form>
+
+{{usuario.nome}} {{usuario.profissao}}

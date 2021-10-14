@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+*{
+    margin: 0;
+    padding: 0;
+}
+.frases{
+    font-size: 33px;
+    
+}
+.m-4  {
+    border-top: solid 2px rgb(114, 67, 6);
+}
+.m-4 .mt-5{
+    border-top: solid 2px rgb(4, 122, 14);
+}
+#btn{
+    font-size: 25px;
+}
+
+#btn-cancelar{
+    font-size: 50px;
+}
+
+#btn-proseguir{
+    font-size: 50px;
+}
+div #btn-tela-2{
+    font-size: 50px;
+}
+
+input{
+    border-color: solid 2px;
+}
+
+input:focus:invalid , text:focus:invalid {
+    border-color: rgb(206, 32, 32);
+}
+input:valid, text:valid{
+    border-color: green;
+}

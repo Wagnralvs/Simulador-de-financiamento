@@ -1,0 +1,88 @@
+
+<!-------------- tela 3 -------------->
+<h1 class="text-center  mt-5 mb-5 ">Dados do Imóvel</h1>
+
+<form #f="ngForm" class="needs-validation" (ngSubmit)="onSubmit(f)">
+
+<!-- ------- tipo de imóvel  ---- -->
+
+<div class="row  container m-3">
+
+  <div class="col-6">
+
+      <select type="checkbox" class="form-select form-select-lg   form-control" id="validationTela3-01" 
+      name="TipoDeImovel" #TipoDeImovel="ngModel" FormControlName="TipoDeImovel" [(ngModel)]="usuario.TipoDeImovel"aria-label=".form-select-lg example" required >
+        <option selected>Tipo do imóvel:</option>
+        <option value="1">Residencial</option>
+        <option value="2">Comercial</option>
+      </select>
+
+      <label for="validationTela3-01"></label>
+         
+
+  
+  </div>
+
+  
+
+  <!---------------Renda mensal ------------>
+  <div class="col-6">
+    <div class="form-floating">
+      <input type="tell" prefix="R$" mask="separator.2" thousandSeparator="." [specialCharacters]="[ '[',']']"  class="form-control" 
+      name="RendaMensal" #RendaMensal="ngModel" FormControlName="RendaMensal" [(ngModel)]="usuario.RendaMensal"id="validationTela3-02" placeholder="monthly income" required >
+ 
+      <label for="validationTela3-02">Renda Mensal :</label>
+     
+    </div>
+  </div>
+  <!-- ------Valor do imóvel-------------->
+  <div class="col-6  mt-4" >
+    <div class="form-floating"  >
+      <input type="tell" prefix="R$" mask="separator.2" thousandSeparator="." [specialCharacters]="[ '[',']']" class="form-control" id="validationTela3-03" placeholder="value of the property" required>
+
+      <label for="validationTela3-03">Valor do Imóvel :</label>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+    </div>
+  </div>
+  <!---------Valor da entrada ----------->
+  <div class="col-6  mt-4" >
+    <div class="form-floating"  >
+      <input type="tell" prefix="R$" mask="separator.2" thousandSeparator="." [specialCharacters]="[ '[',']']"  class="form-control" id="validationTela3-04" placeholder="value of input" required  >
+      <label for="validationTela3-04">Valor da Entrada :</label>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+    </div>
+  </div>
+
+  <!---------Quantidade de parcelas-->
+  <div class="col-6  mt-4" >
+    <div class="form-floating"  >
+      <input type="tell" min="1"max="360"  mask="000" class="form-control" id="validationTela3-05" placeholder="your phone" value="1" required  >
+      <label for="validationTela3-05">Em quantas parcelas deseja pagar? </label>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+    </div>
+  </div>
+  
+ 
+</div>
+<!--buttons-->
+<div class="row container-fluid text-center mt-4" >
+  <div class="col-6" >
+    <button class="btn btn-danger btn-lg " id="btn-cancelar" routerLink="/home" type="menu">Cancelar</button>
+  </div>
+   <div class="col-6">
+   <button class="btn btn-success btn-lg "  id="btn-proseguir" type="submit" [disabled]="f.invalid">Proseguir</button>
+ </div>
+ 
+</div>
+
+</form>
+
+
+
+
