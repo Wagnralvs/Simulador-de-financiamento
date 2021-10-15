@@ -5,20 +5,24 @@ import { FormsModule } from '@angular/forms';
 
 import { DatasComponent } from '../datas/datas.component';
 import { AppComponent } from 'src/app/app.component';
+import { ResultComponent } from '../result/result.component';
 
 @Component({
   selector: 'app-datas-property',
   templateUrl: './datas-property.component.html',
   styleUrls: ['./datas-property.component.css']
 })
+
+
 export class DatasPropertyComponent implements OnInit {
   
+  
+
   ValorDoImovel= 10000;
   ValorDaEntrada = 50 ;
 
- // y = 'ValorDaEntrada' ;const x = 'ValorDoImovel' ; 
-  //const 
-  //const total = 'x - y ;
+  conteudoSalvo : any;
+
 
   formulario: FormGroup = new FormGroup({
     TipoDeImovel: new FormControl('', [Validators.required,]) ,
@@ -29,14 +33,28 @@ export class DatasPropertyComponent implements OnInit {
     Celular: new FormControl(null),
     })  //
 
+    onKeyup(event:any){
+      console.log(event)
+    }
+
+    onSave(valor:string){
+this.conteudoSalvo = valor
+    }
+
+    entrada() {
+      
+    
+     let x = 0.20;
+     let y = this.conteudoSalvo  ;
+       const total  = x * y  ;
+    return total
+   
+    }
+
 
   constructor() { }
 
-  calcularEntrada(){
-    this.ValorDaEntrada = Number(this.ValorDoImovel)/Number (2);
-
-
-  }
+  
 
   usuario: any ={
     nome: '',

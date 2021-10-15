@@ -10,14 +10,14 @@
 
   <div class="col-6">
 
-      <select type="checkbox" class="form-select form-select-lg   form-control" id="validationTela3-01" 
-    aria-label=".form-select-lg example" required >
+      <select type="text" class="form-select form-select-lg   form-control" id="validationTela3-01" 
+      name="TipoDeImovel" #TipoDeImovel="ngModel" [class.is-invalid]="TipoDeImovel.invalid && TipoDeImovel.touched" FormControlName="TipoDeImovel" [(ngModel)]="usuario.TipoDeImovel" aria-label=".form-select-lg example"  >
         <option selected>Tipo do imóvel:</option>
         <option value="1">Residencial</option>
         <option value="2">Comercial</option>
       </select>
 
-     <!-- <small class="text text-danger" [class.d-none]="TipoDeImovel.valid ||TipoDeImovel.untouched">Nome é obrigatório !</small>-->
+      <small class="text text-danger" [class.d-none]="TipoDeImovel.valid ||TipoDeImovel.untouched">Nome é obrigatório !</small>
       <label for="validationTela3-01"></label>
          
 
@@ -41,8 +41,11 @@
   <!-- ------Valor do imóvel-------------->
   <div class="col-6  mt-4" >
     <div class="form-floating"  >
-      <input type="tell" prefix="R$" minlength="8" mask="separator.2" thousandSeparator="." [specialCharacters]="[ '[',']']" class="form-control"
-      name="ValorDoImovel" #ValorDoImovel="ngModel"  FormControlName="ValorDoImovel" [(ngModel)]="usuario.ValorDoImovel" id="valorDoImovel" placeholder="value of the property" required>
+      <input type="tell"  minlength="8" mask="separator.2" thousandSeparator="." [specialCharacters]="[ '[',']']" class="form-control"
+      #ValorDoImoval name="ValorDoImovel" #ValorDoImovel="ngModel"  FormControlName="ValorDoImovel" [(ngModel)]="usuario.ValorDoImovel" id="valorDoImovel" placeholder="value of the property" required
+      (keyup)="onKeyup($event)" value="valorDoImovel"
+      (keyup.enter)="onSave(ValorDoImovel.value)"
+      (blur)="onSave(ValorDoImovel.value)">
 
       <div *ngIf="ValorDoImovel.errors && (ValorDoImovel.invalid && ValorDoImovel.touched)">
         <small class="text text-danger" *ngIf="ValorDoImovel.errors.required">Valor do imóvel  é obrigatório !</small>
@@ -56,23 +59,26 @@
   <div class="col-6  mt-4" >
     <div class="form-floating"  >
       
-      <input type="tell" prefix="R$" mask="separator.2" minlength="8" thousandSeparator="." [specialCharacters]="[ '[',']']"  class="form-control" value=""
-      name="ValorDaEntrada" #ValorDaEntrada="ngModel"  FormControlName="ValorDaEntrada" [(ngModel)]="usuario.ValorDaEntrada" id="valorDaEntrada" placeholder="value of input" required  >
+      <input type="tell" prefix="R$"  minlength="8"   class="form-control" value="R${{ entrada()}}"
+      name="ValorDaEntrada"  #ValorDaEntrada="ngModel"  FormControlName="ValorDaEntrada" [(ngModel)]="usuario.ValorDaEntrada" id="valorDaEntrada" placeholder="value of input" required  >
      
       <div *ngIf="ValorDaEntrada.errors && (ValorDaEntrada.invalid && ValorDaEntrada.touched)">
         <small class="text text-danger" *ngIf="ValorDaEntrada.errors.required">Valor da entrada  é obrigatório !</small>
         <small class="text text-danger" *ngIf="ValorDaEntrada.errors.minlength">Entrada mínimo 20% do valor do imóvel!</small>
 
       </div>
-      <label for="valorDaEntrada">Valor da Entrada :  </label>
-      {{((usuario.ValorDoImovel ))}}
+      <label for="valorDaEntrada">Valor da Entrada :   </label>
+     
+     <!--{{conteudoSalvo}}  {{ entrada()}} 
+    thousandSeparator="." [specialCharacters]="[ '[',']']" mask="separator.2"--> 
+     
       
     </div>
   </div>
   
   <!---------Quantidade de parcelas-->
   <div class="col-6  mt-4" >
-    <div class="form-floating"  >
+    <div class="form-floating "  >
 
       <input type="tell" min="1" maxlength="3" pattern="^$|^([0-9]|[0-9]|[0-9|[3][6][0]])?" mask="000" class="form-control" id="QuantidadeDeParcelas"
       name="QuantidadeDeParcelas" #QuantidadeDeParcelas="ngModel"  FormControlName="QuantidadeDeParcelas" [(ngModel)]="usuario.QuantidadeDeParcelas" placeholder="your phone" value="1" required  >
@@ -81,7 +87,7 @@
         <small class="text text-danger" *ngIf="QuantidadeDeParcelas.errors.required">Quantidade de parcelas  é obrigatório !</small>
         <small class="text text-danger" *ngIf="QuantidadeDeParcelas.errors.max">Quantidade de parcelas é inválida !</small>
       </div>
-      <label for="QuantidadeDeParcelas">Em quantas parcelas deseja pagar? </label>
+      <label id="parcelas" for="QuantidadeDeParcelas">Em quantas parcelas deseja pagar? </label>
     
     </div>
   </div>
@@ -94,12 +100,12 @@
     <button class="btn btn-danger btn-lg " id="btn-cancelar" routerLink="/home" type="reset">Cancelar</button>
   </div>
    <div class="col-6">
-   <button (click)="calcularEntrada()" class="btn btn-success btn-lg "  id="btn-proseguir" [disabled]="f.invalid" type="submit" >Proseguir</button>
+   <button  class="btn btn-success btn-lg " routerLink="/result" id="btn-proseguir" [disabled]="" type="submit" >Proseguir</button>
  </div>
- <!---->
+ <!--(click)="calcularEntrada()"-->
  
 </div>
-{{this.ValorDaEntrada}}
+
 </form>
 
 

@@ -11,14 +11,15 @@ import { AppComponent } from './app.component';
 import { DatasComponent } from './pages/categories/datas/datas.component';
 import { DatasPropertyComponent } from './pages/categories/datas-property/datas-property.component';
 import { HomeComponent } from './pages/categories/home/home.component';
-
+import { ResultComponent } from './pages/categories/result/result.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DatasComponent,
     DatasPropertyComponent,
-    HomeComponent
+    HomeComponent,
+    ResultComponent
   ],
   imports: [
     BrowserModule,

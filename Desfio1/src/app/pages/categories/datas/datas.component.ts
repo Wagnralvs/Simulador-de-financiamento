@@ -22,7 +22,7 @@ export class DatasComponent implements OnInit {
   //text- formulario
 
   formulario: FormGroup = new FormGroup({
-    Nome: new FormControl('', [Validators.pattern('[a-zA-Z ]*')]) ,
+    nome: new FormControl(null, [Validators.pattern('[a-zA-Z ]*')]) ,
     Profissao: new FormControl (null),
     CPF : new FormControl (null), 
     DataDeNascimento: new FormControl(null),

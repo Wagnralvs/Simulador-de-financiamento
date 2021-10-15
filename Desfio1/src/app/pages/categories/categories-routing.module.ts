@@ -6,7 +6,7 @@ import { DatasComponent } from './datas/datas.component';
 const routes: Routes = [
  // {path: 'new' , component: DatasComponent},
   //{path: '' , component: DatasComponent},
-  {path: '' , component: DatasComponent}
+  //{path: '' , component: DatasComponent}
 
     
 

@@ -15,13 +15,13 @@
     <div class="form-floating form-Group" >
 <!--mask="S*" [specialCharacters]="[ '[' ,']' , '\\' ]" [dropSpecialCharacters]="false"-->
       <input type="text"  pattern="[a-zA-Z ]*"
-        class="form-control" #nome="ngModel" [class.is-invalid]="name.invalid && name.touched" name="nome" #name="ngModel" FormControlName="nome" [(ngModel)]="usuario.nome" id="validationCustom01" placeholder="your name" value="" required minlength="7">
+        class="form-control" #nome="ngModel" [class.is-invalid]="name.invalid && name.touched" name="nome" #name="ngModel" FormControlName="nome" [(ngModel)]="usuario.nome" id="nome" placeholder="your name" value="" required minlength="7">
       
         <div *ngIf="nome.errors && (nome.invalid && nome.touched)">
           <small class="text text-danger" *ngIf="nome.errors.required">CPF é obrigatório !</small>
           <small class="text text-danger" *ngIf="nome.errors.pattern">CPF inválido !</small>
         </div>
-        <label for="validationCustom01">Nome completo :</label>
+        <label for="nome">Nome completo :</label>
       
      
     </div>

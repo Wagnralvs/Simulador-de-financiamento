@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { DatasPropertyComponent } from './pages/categories/datas-property/datas-property.component';
 import { DatasComponent } from './pages/categories/datas/datas.component';
 import { HomeComponent } from './pages/categories/home/home.component';
+import { ResultComponent } from './pages/categories/result/result.component';
 
 const routes: Routes = [
    //{ path: 'next', loadChildren: './pages/categories/categories.module.ts#CategoriesModule'},
@@ -14,7 +15,8 @@ const routes: Routes = [
    {path: '', component: HomeComponent},
    {path: 'home', component: HomeComponent},
    {path: 'next' , component: DatasComponent},
-   {path: 'property', component: DatasPropertyComponent}
+   {path: 'property', component: DatasPropertyComponent},
+   {path: 'result', component: ResultComponent}
    
    
   ];

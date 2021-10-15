@@ -3,6 +3,10 @@
     margin: 0;
     padding: 0;
 }
+
+#mobile{
+    display: none;
+}
 .frases{
     font-size: 33px;
     
@@ -38,3 +42,38 @@ input:focus:invalid , text:focus:invalid {
 input:valid, text:valid{
     border-color: green;
 }
+
+/*        --- Moble ---  
+                                */
+@media (max-width: 650px){
+    *{
+        overflow-x: hidden;
+        padding: 1px;
+    }
+    #pc{
+        display: none;
+    }
+    #mobile{
+        display: block;
+    }
+     .frases{
+        font-size: 17px;
+        
+    }
+    #btn{
+        font-size: 18px;
+    }
+
+
+    #btn-cancelar{
+        font-size: 35px;
+    }
+    
+    #btn-proseguir{
+        font-size: 35px;
+    }
+#parcelas{
+    font-size: 12px;
+}
+}
+
