@@ -13,13 +13,16 @@ import { DatasPropertyComponent } from './pages/categories/datas-property/datas-
 import { HomeComponent } from './pages/categories/home/home.component';
 import { ResultComponent } from './pages/categories/result/result.component';
 
+import { ResultsComponent } from './pages/categories/datas-property/results/results.component';
 @NgModule({
   declarations: [
     AppComponent,
     DatasComponent,
     DatasPropertyComponent,
     HomeComponent,
-    ResultComponent
+    ResultComponent,
+
+    ResultsComponent
   ],
   imports: [
     BrowserModule,

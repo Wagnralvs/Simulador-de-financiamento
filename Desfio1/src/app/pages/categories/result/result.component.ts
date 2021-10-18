@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, NgModule } from '@angular/core';
 import { DatasPropertyComponent } from '../datas-property/datas-property.component';
+
 
 @Component({
   selector: 'app-result',
@@ -12,6 +13,11 @@ export class ResultComponent implements OnInit {
   parcelaInicial= 0 ;
   valorAprovado = 0 ;
  
+  reprovado: string[]  = [];
+  
+  
+ //@Input() nome : string ='angula';
+
   constructor() { }
 
   ngOnInit(): void {
