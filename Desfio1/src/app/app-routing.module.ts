@@ -3,20 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 
 import { DatasPropertyComponent } from './pages/categories/datas-property/datas-property.component';
+import { ResultsComponent } from './pages/categories/datas-property/results/results.component';
 import { DatasComponent } from './pages/categories/datas/datas.component';
 import { HomeComponent } from './pages/categories/home/home.component';
 import { ResultComponent } from './pages/categories/result/result.component';
 
 const routes: Routes = [
-   //{ path: 'next', loadChildren: './pages/categories/categories.module.ts#CategoriesModule'},
-   //{ path: 'new', loadChildren: './pages/categories/categories.module.ts#CategoriesModule'}
-
+  
 
    {path: '', component: HomeComponent},
    {path: 'home', component: HomeComponent},
    {path: 'next' , component: DatasComponent},
    {path: 'property', component: DatasPropertyComponent},
-   {path: 'result', component: ResultComponent}
+   {path: 'results', component: ResultsComponent}
    
    
   ];

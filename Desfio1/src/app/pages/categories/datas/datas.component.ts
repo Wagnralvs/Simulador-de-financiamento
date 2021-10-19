@@ -15,21 +15,17 @@ import { DatasPropertyComponent } from '../datas-property/datas-property.compone
 export class DatasComponent implements OnInit {
 //test
 //public customPatterns = { '1': { pattern: new RegExp('[a-zA-Z ]*')} };
-
-  control = new FormControl('1', Validators.pattern('[a-zA-Z ]*'));
  // {pattern: {requiredPattern: '^[a-zA-Z ]*$', actualValue: '1'}}
-
-  //text- formulario
+  control = new FormControl('1', Validators.pattern('^[a-zA-Z ]*$'));
 
   formulario: FormGroup = new FormGroup({
-    nome: new FormControl(null, [Validators.pattern('[a-zA-Z ]*')]) ,
+    nome: new FormControl(null, [Validators.pattern('^[a-zA-Z ]*$')]) ,
     Profissao: new FormControl (null),
     CPF : new FormControl (null), 
     DataDeNascimento: new FormControl(null),
     CEP: new FormControl(null),
     Celular: new FormControl(null),
-    })  //
-
+    })  
 
   constructor() { }
 

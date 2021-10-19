@@ -1,12 +1,14 @@
-import { Component, OnInit, Input,Output, Injectable } from '@angular/core';
+import { Component, OnInit, Input,Output, Injectable ,EventEmitter} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 
 import { DatasComponent } from '../datas/datas.component';
 import { AppComponent } from 'src/app/app.component';
 import { ResultComponent } from '../result/result.component';
 import { ResultsComponent } from './results/results.component';
+
 
 @Component({
   selector: 'app-datas-property',
@@ -16,11 +18,20 @@ import { ResultsComponent } from './results/results.component';
 
 @Injectable()
 export class DatasPropertyComponent implements OnInit {
-  
- 
+//teste  -  enviar para outro componente
 
-  ValorDoImovel= 10000;
+ // emitirValorCriado = new EventEmitter<number>();
+//  getEntrada(){
+//    return this.entrada}
+//addEntrada(entrada:any){
+//this.entrada.push(entrada);
+//this.emitirValorCriado.emit(entrada)}
+//---------------
+@ Input()counter = 0;
+
+  @Input() ValorDoImovel= 10000;
   ValorDaEntrada = 50 ;
+
 
   conteudoSalvo : any;
   quantidadeParcelas: any;
@@ -29,13 +40,13 @@ export class DatasPropertyComponent implements OnInit {
   nomeCurso : number = 55;
 
   formulario: FormGroup = new FormGroup({
-    TipoDeImovel: new FormControl('', [Validators.required,]) ,
+    TipoDeImovel: new FormControl(null) ,
     RendaMensal: new FormControl (null),
-    ValorDoImovel : new FormControl (null), 
+    ValorDoImovel: new FormControl (null), 
     ValorDaEntrada: new FormControl(null),
-    quantidadePacelas: new FormControl('', [Validators.required, Validators.max(360)]),
-    Celular: new FormControl(null),
-    })  //
+    quantidadePacelas: new FormControl(null, [Validators.required , Validators.max(3)]),
+   parcelas: new FormControl(null, [Validators.required])   
+  })  //
 
     onKeyup(event:any){
       console.log(event)
@@ -55,12 +66,15 @@ this.conteudoSalvo = valor
       this.quantidadeParcelas = valor
           }
 
-    @Output() entrada() {
+    @Input() entrada() {
       
      let x = 0.20;
      let y:number = this.conteudoSalvo   ;
        const total  = x * y  ;
     return total
+    }
+    get entradaValor(){
+return this.entrada;
     }
 
     parcelas(){
@@ -92,17 +106,13 @@ this.conteudoSalvo = valor
 
   ngOnInit(): void {
     this.usuario={};
+    console.log("total");
 
-    console.log("total")
   }
   onSubmit(form: any){
     console.log(form);
 
     console.log(this.usuario);
-
-    //test
-
-    
   }
  
 

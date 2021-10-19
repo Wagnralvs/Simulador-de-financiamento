@@ -2,28 +2,24 @@
 <!-------------- tela 3 -------------->
 <h1 class="text-center  mt-5 mb-5 ">Dados do Imóvel</h1>
 
-<form #f="ngForm" class="needs-validation" (ngSubmit)="onSubmit(f)">
+<form #f="ngForm" class="needs-validation" (ngSubmit)="onSubmit(f)" method="get">
 
 <!-- ------- tipo de imóvel  ---- -->
 
 <div class="row  container m-3">
 
-  <div class="col-6">
-
-      <select type="text" class="form-select form-select-lg   form-control" id="validationTela3-01" 
-      name="TipoDeImovel" #TipoDeImovel="ngModel" [class.is-invalid]="TipoDeImovel.invalid && TipoDeImovel.touched" FormControlName="TipoDeImovel" [(ngModel)]="usuario.TipoDeImovel" aria-label=".form-select-lg example"  >
-        <option selected>Tipo do imóvel:</option>
+  <div class="col-6 ">
+  
+      <select type="text" class="form-select form-select-lg  is-valid form-control" id="validationTela3-01" 
+      aria-label=".form-select-lg example"  >
+       <option selected>Tipo do imóvel:</option>
         <option value="1">Residencial</option>
         <option value="2">Comercial</option>
       </select>
-
-      <small class="text text-danger" [class.d-none]="TipoDeImovel.valid ||TipoDeImovel.untouched">Nome é obrigatório !</small>
+    
       <label for="validationTela3-01"></label>
          
-
-  
   </div>
-
   
 
   <!---------------Renda mensal ------------>
@@ -41,7 +37,7 @@
   <!-- ------Valor do imóvel-------------->
   <div class="col-6  mt-4" >
     <div class="form-floating"  >
-      <input type="tell"  minlength="5" mask="separator.2" thousandSeparator="." prefix=""   class="form-control"
+      <input type="tell"  minlength="5" prefix=""  mask="separator.2" thousandSeparator="."   class="form-control"
       #ValorDoImoval name="ValorDoImovel" #ValorDoImovel="ngModel"  FormControlName="ValorDoImovel" [(ngModel)]="usuario.ValorDoImovel" id="valorDoImovel" placeholder="value of the property" required
       (keyup)="onKeyup($event)" value="valorDoImovel"
       (keyup.enter)="onSave(ValorDoImovel.value)"
@@ -75,22 +71,23 @@
     </div>
   </div>
   
-  <!---------Quantidade de parcelas-->
+  <!---------Quantidade de parcelas-- 
+    min="1" max="360" maxlength="3"-->
+
   <div class="col-6  mt-4" >
     <div class="form-floating "  >
 
-      <input type="tell" min="1" maxlength="3" pattern="^$|^([0-9]|[0-9]|[0-9|[3][6][0]])?" mask="000" class="form-control" id="quantidadeParcelas"
+      <input type="tell"  pattern="" mask="000" class="form-control" id="quantidadeParcelas"
       name="quantidadeParcelas" #quantidadeParcelas="ngModel"  FormControlName="quantidadeParcelas" [(ngModel)]="usuario.quantidadeParcelas" placeholder="your phone"  required 
       (keyup)="onKeyup2($event)" value="quantidadeParcelas"
       (keyup.enter)="onSave2(quantidadeParcelas.value)"
       (blur)="onSave2(quantidadeParcelas.value)" >
       
      
-
       <div *ngIf="quantidadeParcelas.errors && (quantidadeParcelas.invalid && quantidadeParcelas.touched)">
         <small class="text text-danger" *ngIf="quantidadeParcelas.errors.required">Quantidade de parcelas  é obrigatório !</small>
-        <small class="text text-danger" *ngIf="quantidadeParcelas.errors.onSave2 > 360">Quantidade de parcelas é inválida !</small>
-        <small class="text text-danger" *ngIf="quantidadeParcelas.errors.$ > 360">Quantidade de parcelas é inválida !</small>
+        <small class="text text-danger" *ngIf="quantidadeParcelas.errors.max"> Max. de parcelas: 360 !</small>
+        
       </div>
       <label id="parcelas" for="quantidadeParcelas">Em quantas parcelas deseja pagar? </label>
     
@@ -104,19 +101,20 @@
 <!--buttons-->
 <div class="row container-fluid text-center mt-4" >
   <div class="col-6" >
-    <button class="btn btn-danger btn-lg " id="btn-cancelar" routerLink="/home" type="reset">Cancelar</button>
+    <button class="btn btn-danger btn-lg " id="btn-cancelar" routerLink="/home" type="reset" >Cancelar</button>
   </div>
    <div class="col-6">
-   <button  class="btn btn-success btn-lg " routerLink="/result" id="btn-proseguir" [disabled]="" type="submit" >Proseguir</button>
+   <button  class="btn btn-success btn-lg " routerLink="/results" id="btn-proseguir" [disabled]="f.invalid" type="submit" >Proseguir</button>
  </div>
- <!--(click)="calcularEntrada()"-->
+
  
 </div>
 
 </form>
 
-<app-results [nome]="nomeCurso"></app-results>
-<!--<app-result nome="nome">{{entrada()}}</app-result>-->
+<!--<app-results  [nome]="entrada()"></app-results>
+-<app-result nome="nome">{{entrada()}}</app-result>-->
+<app-results  [counter]="counter"></app-results>
 
 
 

@@ -25,6 +25,7 @@ import { ResultsComponent } from './datas-property/results/results.component';
     FormsModule,
     CategoriesRoutingModule,
     NgxMaskModule.forChild()
-  ]
+  ],
+  exports:[DatasPropertyComponent]
 })
 export class CategoriesModule { }

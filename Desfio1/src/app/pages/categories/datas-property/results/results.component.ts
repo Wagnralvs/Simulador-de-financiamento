@@ -9,7 +9,15 @@ import { DatasPropertyComponent } from '../datas-property.component';
 export class ResultsComponent implements OnInit {
 
   @Input() nome : number =0;
+  @Input() ValorDoImovel = 0;
+  @ Input()counter = 0;
   //@Input() entrada: any;
+
+  taxa= 7;
+  parcelaInicial= 0 ;
+  valorAprovado = 0 ;
+ 
+  reprovado: string[]  = [];
 
   constructor() { }
 
