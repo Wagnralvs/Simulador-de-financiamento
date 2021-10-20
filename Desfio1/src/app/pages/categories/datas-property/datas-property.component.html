@@ -2,7 +2,7 @@
 <!-------------- tela 3 -------------->
 <h1 class="text-center  mt-5 mb-5 ">Dados do Imóvel</h1>
 
-<form #f="ngForm" class="needs-validation" (ngSubmit)="onSubmit(f)" method="get">
+<form #f="ngForm" class="needs-validation" (ngSubmit)="onSubmit(f)" method="get" FormGroup="formulario">
 
 <!-- ------- tipo de imóvel  ---- -->
 
@@ -21,7 +21,6 @@
          
   </div>
   
-
   <!---------------Renda mensal ------------>
   <div class="col-6">
     <div class="form-floating">
@@ -37,15 +36,15 @@
   <!-- ------Valor do imóvel-------------->
   <div class="col-6  mt-4" >
     <div class="form-floating"  >
-      <input type="tell"  minlength="5" prefix=""  mask="separator.2" thousandSeparator="."   class="form-control"
+      <input type="tell"  min="5" suffix=",00" mask="0*" kzMaskCurrency   class="form-control"
       #ValorDoImoval name="ValorDoImovel" #ValorDoImovel="ngModel"  FormControlName="ValorDoImovel" [(ngModel)]="usuario.ValorDoImovel" id="valorDoImovel" placeholder="value of the property" required
-      (keyup)="onKeyup($event)" value="valorDoImovel"
+      (keyup)="onKeyup($event)" value="valorDoImovel" 
       (keyup.enter)="onSave(ValorDoImovel.value)"
       (blur)="onSave(ValorDoImovel.value)">
 
       <div *ngIf="ValorDoImovel.errors && (ValorDoImovel.invalid && ValorDoImovel.touched)">
         <small class="text text-danger" *ngIf="ValorDoImovel.errors.required">Valor do imóvel  é obrigatório !</small>
-        <small class="text text-danger" *ngIf="ValorDoImovel.errors.minlength">Valor do imóvel é inválido !</small>
+        <small class="text text-danger" *ngIf="ValorDoImovel.errors.min">Valor do imóvel é inválido !</small>
       </div>
       <label for="valorDoImovel">Valor do Imóvel :</label>
      
@@ -55,7 +54,7 @@
   <div class="col-6  mt-4" >
     <div class="form-floating"  >
       
-      <input type="tell" prefix="R$"  mask="separator.2" thousandSeparator="." minlength=""   class="form-control" value="R${{ entrada()}}"
+      <input type="tell"   mask="separator.2" thousandSeparator="." minlength=""   class="form-control" value="{{ entrada()|currency:'BRL'}}"
       name="ValorDaEntrada"  #ValorDaEntrada="ngModel"  FormControlName="ValorDaEntrada" [(ngModel)]="usuario.ValorDaEntrada" id="valorDaEntrada" placeholder="value of input" required  >
      
       <div *ngIf="ValorDaEntrada.errors && (ValorDaEntrada.invalid && ValorDaEntrada.touched)">
@@ -65,7 +64,7 @@
       </div>
       <label for="valorDaEntrada">Valor da Entrada :   </label>
      
-     <!--{{conteudoSalvo}}  [specialCharacters]="[ '[',']']" --> 
+     <!--{{conteudoSalvo}}  [specialCharacters]="[ '[',']']" mask="separator.2" thousandSeparator="."--> 
      
       
     </div>
@@ -75,10 +74,10 @@
     min="1" max="360" maxlength="3"-->
 
   <div class="col-6  mt-4" >
-    <div class="form-floating "  >
+    <div class="form-floating form-group "  >
 
-      <input type="tell"  pattern="" mask="000" class="form-control" id="quantidadeParcelas"
-      name="quantidadeParcelas" #quantidadeParcelas="ngModel"  FormControlName="quantidadeParcelas" [(ngModel)]="usuario.quantidadeParcelas" placeholder="your phone"  required 
+      <input type="tell"  min="1" max="360" maxlength=""  pattern="" mask="000" class="form-control" id="quantidadeParcelas"
+      name="quantidadeParcelas" #quantidadeParcelas="ngModel"  FormControlName="quantidadeParcelas" [(ngModel)]="usuario.quantidadeParcelas" placeholder="your phone"  required
       (keyup)="onKeyup2($event)" value="quantidadeParcelas"
       (keyup.enter)="onSave2(quantidadeParcelas.value)"
       (blur)="onSave2(quantidadeParcelas.value)" >
@@ -95,8 +94,8 @@
   </div>
   
 </div>
-<div >valor da primeira parcela R${{parcelas()}}</div>
-<div>valor aprovado para o financiamento {{valorAprovado()}}</div>
+<div >valor da primeira parcela {{parcelas()|currency:'BRL'}}</div>
+<div>valor aprovado para o financiamento {{valorAprovado()|currency:'BRL'}}</div>
 
 <!--buttons-->
 <div class="row container-fluid text-center mt-4" >
@@ -113,8 +112,8 @@
 </form>
 
 <!--<app-results  [nome]="entrada()"></app-results>
--<app-result nome="nome">{{entrada()}}</app-result>-->
-<app-results  [counter]="counter"></app-results>
+-<app-result nome="nome">{{entrada()}}</app-result>
+<app-results  [counter]="counter"></app-results>-->
 
 
 

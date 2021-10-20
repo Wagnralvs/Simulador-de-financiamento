@@ -19,7 +19,7 @@ export class DatasComponent implements OnInit {
   control = new FormControl('1', Validators.pattern('^[a-zA-Z ]*$'));
 
   formulario: FormGroup = new FormGroup({
-    nome: new FormControl(null, [Validators.pattern('^[a-zA-Z ]*$')]) ,
+    nome: new FormControl(null) ,
     Profissao: new FormControl (null),
     CPF : new FormControl (null), 
     DataDeNascimento: new FormControl(null),

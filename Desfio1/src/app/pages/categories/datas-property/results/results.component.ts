@@ -14,8 +14,8 @@ export class ResultsComponent implements OnInit {
   //@Input() entrada: any;
 
   taxa= 7;
-  parcelaInicial= 0 ;
-  valorAprovado = 0 ;
+  parcelaInicial = '' ;
+  valorAprovado = '' ;
  
   reprovado: string[]  = [];
 

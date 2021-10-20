@@ -71,8 +71,13 @@ this.conteudoSalvo = valor
      let x = 0.20;
      let y:number = this.conteudoSalvo   ;
        const total  = x * y  ;
-    return total
+    
+
+    console.log(total)
+
+    return total 
     }
+    
     get entradaValor(){
 return this.entrada;
     }
