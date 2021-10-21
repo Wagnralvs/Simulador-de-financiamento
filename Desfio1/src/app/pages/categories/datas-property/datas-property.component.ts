@@ -27,16 +27,16 @@ export class DatasPropertyComponent implements OnInit {
   private router!: Router;
   public formulario!: FormGroup;
 
-  //formulario!: FormGroup;
+ 
 
 @ Input()financiamento: any;
  
 setFinanciamento(financiamento: any) {
- // faz aqui de guardar na variável criada acima
+
  this.entrada = this.entrada ;
 }
  getFinanciamento(): any {
- // retorna o valor que foi atribuído antes
+
  return this.entrada
 }
 
@@ -80,7 +80,7 @@ this.conteudoSalvo = valor
   }
 
   renda(): boolean{
-  //  let aprovado: boolean = true;
+  
     let x: number = (this.rendaMensal * 0.3 );
     let y: number = this.parcelas() ;
     let w : number = this.rendaMensal;
@@ -134,11 +134,8 @@ return this.entrada;
     
    }
 
-
-
   usuario: any ={
-    nome: '',
-     email: '',
+  
   }
 
   ngOnInit(): void {
@@ -157,8 +154,6 @@ return this.entrada;
      quantidadePacelas: [null, [Validators.required , Validators.max(3)]],
      parcelas: new FormControl(null, [Validators.required]) 
      })}
- // get ValorDoImovel() {
- //   return this.formulario.get('ValorDoImovel');}
 
   onSubmit(form: any){
     console.log(form);
@@ -177,21 +172,9 @@ return this.entrada;
 
   }
   validarDados(){
-    alert("ola mundo;");
+    alert("Formulário enviado !");
     alert(this.ValorDoImovel);
-    alert(this.entrada());
-
-    //alert(this.formulario);
-
- //   let valido: boolean = true;
-   // this.mensagem = "";
-  //  this.validaValorEntrada();
-
-   // valido = this.validaPrestacao();
-
-  //  if (valido){
-     
-     
+   
      // this.service.valorDoImovel=this.formulario.get("ValorDoImovel");
    //   this.service.valorDoImovel=this.formulario.controls["ValorDoImovel"].value;
    //   debugger

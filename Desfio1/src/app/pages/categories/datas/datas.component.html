@@ -7,15 +7,15 @@
 
 <form #f="ngForm" class="needs-validation" (ngSubmit)="onSubmit(f)" >
 
-<!--nome  ---- [formGrup]="formulario"   -->
+<!------------    nome  --------->
 
 <div class="row  container m-3">
 
   <div class="col-6">
     <div class="form-floating form-Group" >
-<!--mask="S*" [specialCharacters]="[ '[' ,']' , '\\' ]" [dropSpecialCharacters]="false"-->
-      <input type="text"  mask="0*" [specialCharacters]="[ '[' ,']' , '\\' ]" [dropSpecialCharacters]="false"
-        class="form-control" #nome="ngModel" [class.is-invalid]="name.invalid && name.touched" name="nome" #name="ngModel" FormControlName="nome" [(ngModel)]="usuario.nome" id="nome" placeholder="your name" value="" required minlength="7">
+
+      <input type="text" pattern="[a-zA-Z ]*" mask="S*" 
+        class="form-control" #nome="ngModel" [class.is-invalid]="name.invalid && name.touched" name="nome" #name="ngModel" FormControlName="nome" [(ngModel)]="usuario.nome" id="nome" placeholder="your name" value="" required minlength="4">
       
         <div *ngIf="nome.errors && (nome.invalid && nome.touched)">
           <small class="text text-danger" *ngIf="nome.errors.required">Nome é obrigatório !</small>
@@ -86,7 +86,7 @@
     
     </div>
   </div>
-  <!----------Cep----------->
+  <!-----------------Cep----------->
   <div class="col-6  mt-4" >
     <div class="form-floating"  >
 
@@ -98,7 +98,7 @@
      
     </div>
   </div>
-  <!---------telefone-->
+  <!---------telefone----------------->
   <div class="col-6  mt-4" >
     <div class="form-floating"  >
 
@@ -116,7 +116,7 @@
   
  
 </div>
-<!--buttons-->
+<!---------buttons---------->
 <div class="row container-fluid text-center mt-4" >
   <div class="col-6" >
     <button class="btn btn-danger btn-lg " id="btn-cancelar" routerLink="/home" type="reset">Cancelar</button>

@@ -12,7 +12,7 @@
   
       <select type="text" class="form-select form-select-lg  is-valid form-control" id="validationTela3-01" 
       aria-label=".form-select-lg example"  >
-      <!-- <option selected>Tipo do imóvel:</option>-->
+     <option selected>Tipo do imóvel:</option>
         <option value="1">Residencial</option>
         <option value="2">Comercial</option>
       </select>
@@ -58,16 +58,14 @@
     <div class="form-floating form-group"  >
       
       <input type="tell"   mask="separator.2" thousandSeparator="." minlength=""   class="form-control" value="{{ entrada()|currency:'BRL'}}"
-      name="ValorDaEntrada"  #ValorDaEntrada="ngModel"  FormControlName="ValorDaEntrada" [(ngModel)]="usuario.ValorDaEntrada" id="valorDaEntrada" placeholder="value of input" required  >
+      name="valorEntrada"  #valorEntrada="ngModel"  FormControlName="valorEntrada" [(ngModel)]="usuario.valorEntrada" id="valorEntrada" placeholder="value of input" required  >
      
-      <div *ngIf="ValorDaEntrada.errors && (ValorDaEntrada.invalid && ValorDaEntrada.touched)">
-        <small class="text text-danger" *ngIf="ValorDaEntrada.errors.required">Valor da entrada  é obrigatório !</small>
-        <small class="text text-danger" *ngIf="ValorDaEntrada.errors.minlength">Entrada mínimo 20% do valor do imóvel!</small>
+      <div *ngIf="valorEntrada.errors && (valorEntrada.invalid && valorEntrada.touched)">
+        <small class="text text-danger" *ngIf="valorEntrada.errors.required">Valor da entrada  é obrigatório !</small>
+        <small class="text text-danger" *ngIf="valorEntrada.errors.minlength">Entrada mínimo 20% do valor do imóvel!</small>
 
       </div>
-      <label for="valorDaEntrada">Valor da Entrada :   </label>
-     
-     <!--{{conteudoSalvo}}  [specialCharacters]="[ '[',']']" mask="separator.2" thousandSeparator="."--> 
+      <label for="valorEntrada">Valor da Entrada :   </label>
      
     </div>
   </div>
@@ -96,8 +94,8 @@
   </div>
   
 </div>
-<div >valor da primeira parcela {{parcelas()|currency:'BRL'}}</div>
-<div>valor aprovado para o financiamento {{valorAprovado()|currency:'BRL'}}</div>
+<div >Valor da primeira parcela {{parcelas()|currency:'BRL'}}</div>
+<div>Valor aprovado para o financiamento {{valorAprovado()|currency:'BRL'}}</div>
 
 <!--buttons-->
 <div class="row container-fluid text-center mt-4" >

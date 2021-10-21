@@ -16,8 +16,7 @@ import { DatasPropertyComponent } from '../datas-property/datas-property.compone
 export class DatasComponent implements OnInit {
  
   //public customPatterns = { '0': { pattern: new RegExp('^[a-zA-Z ]*$')} };
-  control = new FormControl('1', Validators.pattern('^[a-zA-Z ]*$'));
-//private formulario!:FormGroup;
+  public patterns ='^[a-zA-Z ]*$'
 
   formulario: FormGroup = new FormGroup({
     nome: new FormControl(null) ,
@@ -31,15 +30,11 @@ export class DatasComponent implements OnInit {
   constructor() { }
 
   usuario: any ={
-   nome: '',
-    email: '',
+  
   }
 
   ngOnInit(): void {
     this.usuario={};
-
-  console.log(this.control.errors);
-
   }
 
   onSubmit(form: any){
