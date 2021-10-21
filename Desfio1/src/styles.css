@@ -63,6 +63,9 @@ input:valid, text:valid{
     #btn{
         font-size: 18px;
     }
+    #btn-result{
+        font-size: 14px
+    }
 
 
     #btn-cancelar{

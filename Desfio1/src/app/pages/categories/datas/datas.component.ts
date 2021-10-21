@@ -3,6 +3,7 @@ import { FormControl, FormGroup,MinLengthValidator,Validators , ValidatorFn} fro
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+
 import { AppComponent } from 'src/app/app.component';
 import { DatasPropertyComponent } from '../datas-property/datas-property.component';
 
@@ -13,10 +14,10 @@ import { DatasPropertyComponent } from '../datas-property/datas-property.compone
   styleUrls: ['./datas.component.css']
 })
 export class DatasComponent implements OnInit {
-//test
-//public customPatterns = { '1': { pattern: new RegExp('[a-zA-Z ]*')} };
- // {pattern: {requiredPattern: '^[a-zA-Z ]*$', actualValue: '1'}}
+ 
+  //public customPatterns = { '0': { pattern: new RegExp('^[a-zA-Z ]*$')} };
   control = new FormControl('1', Validators.pattern('^[a-zA-Z ]*$'));
+//private formulario!:FormGroup;
 
   formulario: FormGroup = new FormGroup({
     nome: new FormControl(null) ,
@@ -39,17 +40,12 @@ export class DatasComponent implements OnInit {
 
   console.log(this.control.errors);
 
-
   }
 
   onSubmit(form: any){
     console.log(form);
 
     console.log(this.usuario);
-
-    //test
-
-    
   }
 
 }

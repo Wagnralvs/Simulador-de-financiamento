@@ -5,21 +5,21 @@
 
 <h1 class="text-center  mt-5 mb-5 ">Dados do Proponente</h1>
 
-<form #f="ngForm" class="needs-validation" (ngSubmit)="onSubmit(f)">
+<form #f="ngForm" class="needs-validation" (ngSubmit)="onSubmit(f)" >
 
-<!--nome  ----    -->
+<!--nome  ---- [formGrup]="formulario"   -->
 
 <div class="row  container m-3">
 
   <div class="col-6">
     <div class="form-floating form-Group" >
 <!--mask="S*" [specialCharacters]="[ '[' ,']' , '\\' ]" [dropSpecialCharacters]="false"-->
-      <input type="text"    mask="S*" [specialCharacters]="[ '[' ,']' , '\\' ]" [dropSpecialCharacters]="false"
+      <input type="text"  mask="0*" [specialCharacters]="[ '[' ,']' , '\\' ]" [dropSpecialCharacters]="false"
         class="form-control" #nome="ngModel" [class.is-invalid]="name.invalid && name.touched" name="nome" #name="ngModel" FormControlName="nome" [(ngModel)]="usuario.nome" id="nome" placeholder="your name" value="" required minlength="7">
       
         <div *ngIf="nome.errors && (nome.invalid && nome.touched)">
           <small class="text text-danger" *ngIf="nome.errors.required">Nome é obrigatório !</small>
-          <small class="text text-danger" *ngIf="nome.errors">Nome inválido !</small>
+          <small class="text text-danger" *ngIf="nome.errors.pattern">Nome inválido !</small>
         </div>
         <label for="nome">Nome completo :</label>
       

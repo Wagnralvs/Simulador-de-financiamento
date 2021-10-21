@@ -6,7 +6,7 @@ import { DatasPropertyComponent } from './pages/categories/datas-property/datas-
 import { ResultsComponent } from './pages/categories/datas-property/results/results.component';
 import { DatasComponent } from './pages/categories/datas/datas.component';
 import { HomeComponent } from './pages/categories/home/home.component';
-import { ResultComponent } from './pages/categories/result/result.component';
+
 
 const routes: Routes = [
   

@@ -2,17 +2,17 @@
 <!-------------- tela 3 -------------->
 <h1 class="text-center  mt-5 mb-5 ">Dados do Imóvel</h1>
 
-<form #f="ngForm" class="needs-validation" (ngSubmit)="onSubmit(f)" method="get" FormGroup="formulario">
+<form #f="ngForm" class="needs-validation" (ngSubmit)="onSubmit(f)"  >
 
-<!-- ------- tipo de imóvel  ---- -->
+<!-- ------- tipo de imóvel [formGroup]="formulario" ---- -->
 
 <div class="row  container m-3">
 
-  <div class="col-6 ">
+  <div class="col-6 form-group">
   
       <select type="text" class="form-select form-select-lg  is-valid form-control" id="validationTela3-01" 
       aria-label=".form-select-lg example"  >
-       <option selected>Tipo do imóvel:</option>
+      <!-- <option selected>Tipo do imóvel:</option>-->
         <option value="1">Residencial</option>
         <option value="2">Comercial</option>
       </select>
@@ -23,9 +23,12 @@
   
   <!---------------Renda mensal ------------>
   <div class="col-6">
-    <div class="form-floating">
-      <input type="tell" prefix="R$" mask="separator.2" thousandSeparator="." [specialCharacters]="[ '[',']']"  class="form-control" 
-      name="RendaMensal" #RendaMensal="ngModel" [class.is-invalid]="RendaMensal.invalid && RendaMensal.touched" FormControlName="RendaMensal" [(ngModel)]="usuario.RendaMensal" id="validationTela3-02" placeholder="monthly income" required >
+    <div class="form-floating form-group">
+      <input type="tell" prefix="R$" suffix=",00" mask="separator.2" thousandSeparator="." [dropSpecialCharacters]="true" class="form-control" 
+      name="RendaMensal" #RendaMensal="ngModel" [class.is-invalid]="RendaMensal.invalid && RendaMensal.touched" FormControlName="RendaMensal" [(ngModel)]="usuario.RendaMensal" id="validationTela3-02" placeholder="monthly income" required
+      (keyup)="onKeyup0($event)" value="RendaMensal" 
+      (keyup.enter)="onSave0(RendaMensal.value)"
+      (blur)="onSave0(RendaMensal.value)" >
  
       
       <small class="text text-danger" [class.d-none]="RendaMensal.valid || RendaMensal.untouched">Renda Mensal é obrigatório !</small>
@@ -35,9 +38,9 @@
   </div>
   <!-- ------Valor do imóvel-------------->
   <div class="col-6  mt-4" >
-    <div class="form-floating"  >
-      <input type="tell"  min="5" suffix=",00" mask="0*" kzMaskCurrency   class="form-control"
-      #ValorDoImoval name="ValorDoImovel" #ValorDoImovel="ngModel"  FormControlName="ValorDoImovel" [(ngModel)]="usuario.ValorDoImovel" id="valorDoImovel" placeholder="value of the property" required
+    <div class="form-floating form-group"  >
+      <input type="tell"  min="5" prefix="R$" suffix=",00" [dropSpecialCharacters]="true" mask="separator.2" thousandSeparator="."  class="form-control"
+      #ValorDoImoval name="ValorDoImovel" #ValorDoImovel="ngModel"  FormControlName="ValorDoImovel" [(ngModel)]="usuario.ValorDoImovel" id="valorDoImovel" placeholder="value of the property " required 
       (keyup)="onKeyup($event)" value="valorDoImovel" 
       (keyup.enter)="onSave(ValorDoImovel.value)"
       (blur)="onSave(ValorDoImovel.value)">
@@ -52,7 +55,7 @@
   </div>
   <!---------Valor da entrada ----------->
   <div class="col-6  mt-4" >
-    <div class="form-floating"  >
+    <div class="form-floating form-group"  >
       
       <input type="tell"   mask="separator.2" thousandSeparator="." minlength=""   class="form-control" value="{{ entrada()|currency:'BRL'}}"
       name="ValorDaEntrada"  #ValorDaEntrada="ngModel"  FormControlName="ValorDaEntrada" [(ngModel)]="usuario.ValorDaEntrada" id="valorDaEntrada" placeholder="value of input" required  >
@@ -66,7 +69,6 @@
      
      <!--{{conteudoSalvo}}  [specialCharacters]="[ '[',']']" mask="separator.2" thousandSeparator="."--> 
      
-      
     </div>
   </div>
   
@@ -103,7 +105,7 @@
     <button class="btn btn-danger btn-lg " id="btn-cancelar" routerLink="/home" type="reset" >Cancelar</button>
   </div>
    <div class="col-6">
-   <button  class="btn btn-success btn-lg " routerLink="/results" id="btn-proseguir" [disabled]="f.invalid" type="submit" >Proseguir</button>
+   <button (click)="validarDados()" class="btn btn-success btn-lg " routerLink="/results" id="btn-proseguir" [disabled]="f.invalid" type="submit" >Proseguir</button>
  </div>
 
  

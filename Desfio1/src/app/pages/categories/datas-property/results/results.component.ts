@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { DatasPropertyComponent } from '../datas-property.component';
+import { DatasPropertyService } from '../shared/dastas-property-service';
+import { Service } from './shared/service';
 
 @Component({
   selector: 'app-results',
@@ -9,19 +12,20 @@ import { DatasPropertyComponent } from '../datas-property.component';
 export class ResultsComponent implements OnInit {
 
   @Input() nome : number =0;
-  @Input() ValorDoImovel = 0;
-  @ Input()counter = 0;
-  //@Input() entrada: any;
+   ValorDoImovel = '';
+  @Input() entrada: string[]=[''];
 
   taxa= 7;
-  parcelaInicial = '' ;
-  valorAprovado = '' ;
+  parcelaInicial! : string ;
+  valorAprovado! : string ;
  
-  reprovado: string[]  = [];
+ reprovado: string[]  = [];
 
-  constructor() { }
+  constructor(private service:DatasPropertyService) { }
 
   ngOnInit(): void {
+    this.ValorDoImovel=this.service.valorDoImovel;
+  // this.parcelaInicial = DatasPropertyService.model.parcelaInicial1.toLocaleString('pt-BR');
   }
 
 }
