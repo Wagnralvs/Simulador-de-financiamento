@@ -4,20 +4,20 @@
 
 <form #f="ngForm" class="needs-validation" (ngSubmit)="onSubmit(f)"  >
 
-<!-- ------- tipo de imóvel [formGroup]="formulario" ---- -->
+<!-- ------- tipo de imóvel  ---- -->
 
 <div class="row  container m-3">
 
   <div class="col-6 form-group">
   
-      <select type="text" class="form-select form-select-lg  is-valid form-control" id="validationTela3-01" 
+      <select type="text" class="form-select form-select-lg  is-valid form-control" id="tipoImovel" 
       aria-label=".form-select-lg example"  >
      <option selected>Tipo do imóvel:</option>
         <option value="1">Residencial</option>
         <option value="2">Comercial</option>
       </select>
     
-      <label for="validationTela3-01"></label>
+      <label for="tipoImovel"></label>
          
   </div>
   
@@ -25,13 +25,13 @@
   <div class="col-6">
     <div class="form-floating form-group">
       <input type="tell" prefix="R$" suffix=",00" mask="separator.2" thousandSeparator="." [dropSpecialCharacters]="true" class="form-control" 
-      name="RendaMensal" #RendaMensal="ngModel" [class.is-invalid]="RendaMensal.invalid && RendaMensal.touched" FormControlName="RendaMensal" [(ngModel)]="usuario.RendaMensal" id="validationTela3-02" placeholder="monthly income" required
-      (keyup)="onKeyup0($event)" value="RendaMensal" 
-      (keyup.enter)="onSave0(RendaMensal.value)"
-      (blur)="onSave0(RendaMensal.value)" >
+      name="rendaMensal" #rendaMensal="ngModel" [class.is-invalid]="rendaMensal.invalid && rendaMensal.touched" FormControlName="rendaMensal" [(ngModel)]="usuario.rendaMensal" id="validationTela3-02" placeholder="monthly income" required
+      (keyup)="onKeyup0($event)" value="rendaMensal" 
+      (keyup.enter)="onSave0(rendaMensal.value)"
+      (blur)="onSave0(rendaMensal.value)" >
  
       
-      <small class="text text-danger" [class.d-none]="RendaMensal.valid || RendaMensal.untouched">Renda Mensal é obrigatório !</small>
+      <small class="text text-danger" [class.d-none]="rendaMensal.valid || rendaMensal.untouched">Renda Mensal é obrigatório !</small>
       <label for="validationTela3-02">Renda Mensal :</label>
      
     </div>
@@ -40,16 +40,16 @@
   <div class="col-6  mt-4" >
     <div class="form-floating form-group"  >
       <input type="tell"  min="5" prefix="R$" suffix=",00" [dropSpecialCharacters]="true" mask="separator.2" thousandSeparator="."  class="form-control"
-      #ValorDoImoval name="ValorDoImovel" #ValorDoImovel="ngModel"  FormControlName="ValorDoImovel" [(ngModel)]="usuario.ValorDoImovel" id="valorDoImovel" placeholder="value of the property " required 
-      (keyup)="onKeyup($event)" value="valorDoImovel" 
-      (keyup.enter)="onSave(ValorDoImovel.value)"
-      (blur)="onSave(ValorDoImovel.value)">
+      #ValorDoImoval name="valorImovel" #valorImovel="ngModel"  FormControlName="valorImovel" [(ngModel)]="usuario.valorImovel" id="valorImovel" placeholder="value of the property " required 
+      (keyup)="onKeyup($event)" value="valorImovel" 
+      (keyup.enter)="onSave(valorImovel.value)"
+      (blur)="onSave(valorImovel.value)">
 
-      <div *ngIf="ValorDoImovel.errors && (ValorDoImovel.invalid && ValorDoImovel.touched)">
-        <small class="text text-danger" *ngIf="ValorDoImovel.errors.required">Valor do imóvel  é obrigatório !</small>
-        <small class="text text-danger" *ngIf="ValorDoImovel.errors.min">Valor do imóvel é inválido !</small>
+      <div *ngIf="valorImovel.errors && (valorImovel.invalid && valorImovel.touched)">
+        <small class="text text-danger" *ngIf="valorImovel.errors.required">Valor do imóvel  é obrigatório !</small>
+        <small class="text text-danger" *ngIf="valorImovel.errors.min">Valor do imóvel é inválido !</small>
       </div>
-      <label for="valorDoImovel">Valor do Imóvel :</label>
+      <label for="valorImovel">Valor do Imóvel :</label>
      
     </div>
   </div>
@@ -57,7 +57,7 @@
   <div class="col-6  mt-4" >
     <div class="form-floating form-group"  >
       
-      <input type="tell"   mask="separator.2" thousandSeparator="." minlength=""   class="form-control" value="{{ entrada()|currency:'BRL'}}"
+      <input type="tell"   mask="separator.2" thousandSeparator="." minlength="1"   class="form-control" value="{{ entrada()|currency:'BRL'}}"
       name="valorEntrada"  #valorEntrada="ngModel"  FormControlName="valorEntrada" [(ngModel)]="usuario.valorEntrada" id="valorEntrada" placeholder="value of input" required  >
      
       <div *ngIf="valorEntrada.errors && (valorEntrada.invalid && valorEntrada.touched)">
@@ -70,13 +70,12 @@
     </div>
   </div>
   
-  <!---------Quantidade de parcelas-- 
-    min="1" max="360" maxlength="3"-->
+  <!---------Quantidade de parcelas---->
 
   <div class="col-6  mt-4" >
     <div class="form-floating form-group "  >
 
-      <input type="tell"  min="1" max="360" maxlength=""  pattern="" mask="000" class="form-control" id="quantidadeParcelas"
+      <input type="number"   min="1" max="360"   mask="000" class="form-control" id="quantidadeParcelas"
       name="quantidadeParcelas" #quantidadeParcelas="ngModel"  FormControlName="quantidadeParcelas" [(ngModel)]="usuario.quantidadeParcelas" placeholder="your phone"  required
       (keyup)="onKeyup2($event)" value="quantidadeParcelas"
       (keyup.enter)="onSave2(quantidadeParcelas.value)"
@@ -89,13 +88,13 @@
         
       </div>
       <label id="parcelas" for="quantidadeParcelas">Em quantas parcelas deseja pagar? </label>
-    
     </div>
+
   </div>
-  
-</div>
-<div >Valor da primeira parcela {{parcelas()|currency:'BRL'}}</div>
+  <div >Valor da primeira parcela {{parcelas()|currency:'BRL'}}</div>
 <div>Valor aprovado para o financiamento {{valorAprovado()|currency:'BRL'}}</div>
+</div>
+
 
 <!--buttons-->
 <div class="row container-fluid text-center mt-4" >
@@ -111,9 +110,8 @@
 
 </form>
 
-<!--<app-results  [nome]="entrada()"></app-results>
--<app-result nome="nome">{{entrada()}}</app-result>
-<app-results  [counter]="counter"></app-results>-->
+<!--<app-results  [nome]="entrada()"></app-results>-->
+
 
 
 

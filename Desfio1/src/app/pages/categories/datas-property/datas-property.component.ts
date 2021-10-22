@@ -27,9 +27,8 @@ export class DatasPropertyComponent implements OnInit {
   private router!: Router;
   public formulario!: FormGroup;
 
- 
 
-@ Input()financiamento: any;
+/*@ Input()financiamento: any;
  
 setFinanciamento(financiamento: any) {
 
@@ -38,25 +37,14 @@ setFinanciamento(financiamento: any) {
  getFinanciamento(): any {
 
  return this.entrada
-}
+}*/
 
-  ValorDoImovel= '';
-  ValorDaEntrada = '';
+  valorImovel= '';
+  ValorEntrada = '';
 
   conteudoSalvo : any;
   quantidadeParcelas: any;
   rendaMensal:any;
-
-  
-
- // formulario: FormGroup = new FormGroup({
- //   TipoDeImovel: new FormControl(null) ,
- //   RendaMensal: new FormControl (null),
-//    ValorDoImovel: new FormControl (""), 
- //   ValorDaEntrada: new FormControl(""),
- //   quantidadePacelas: new FormControl(null, [Validators.required , Validators.max(3)]),
- //  parcelas: new FormControl(null, [Validators.required])   
-   // })
 
 // Capituar dados do input
    onKeyup0(event:any){
@@ -148,11 +136,11 @@ return this.entrada;
   criarFormulario(){
   this.formulario = this.formBuilder.group({
      TipoDeImovel:[null,[Validators.required]],
-      RendaMensal: [null ,[Validators.required, Validators.maxLength(4)]],
-      ValorDoImovel: [null,[Validators.required]], 
+    rendaMensal: [null ,[Validators.required, Validators.maxLength(4)]],
+    valorImovel: [null,[Validators.required]], 
      ValorDaEntrada: [null,[Validators.required]],
-     quantidadePacelas: [null, [Validators.required , Validators.max(3)]],
-     parcelas: new FormControl(null, [Validators.required]) 
+    quantidadePacelas: [null, [Validators.required , Validators.max(3)]],
+    parcelas: new FormControl(null, [Validators.required]) 
      })}
 
   onSubmit(form: any){
@@ -172,8 +160,8 @@ return this.entrada;
 
   }
   validarDados(){
-    alert("Formulário enviado !");
-    alert(this.ValorDoImovel);
+    alert("Solicitação enviada com sucesso!");
+   // alert(this.ValorDoImovel);
    
      // this.service.valorDoImovel=this.formulario.get("ValorDoImovel");
    //   this.service.valorDoImovel=this.formulario.controls["ValorDoImovel"].value;

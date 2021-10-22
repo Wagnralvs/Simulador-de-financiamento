@@ -1,9 +1,9 @@
 export class Service {    
     constructor(
-        public parcelaInicial1: number,
+        public parcelaInicial: number,
         public valorAprovado: number
     ) {
-        this.parcelaInicial1 = parcelaInicial1;
+        this.parcelaInicial = parcelaInicial;
         this.valorAprovado = valorAprovado;
     }
 }

@@ -20,11 +20,11 @@ export class DatasComponent implements OnInit {
 
   formulario: FormGroup = new FormGroup({
     nome: new FormControl(null) ,
-    Profissao: new FormControl (null),
-    CPF : new FormControl (null), 
-    DataDeNascimento: new FormControl(null),
-    CEP: new FormControl(null),
-    Celular: new FormControl(null),
+    profissao: new FormControl (null),
+    cpf : new FormControl (null), 
+    dataNascimento: new FormControl(null),
+    cep: new FormControl(null),
+    telefone: new FormControl(null),
     })  
 
   constructor() { }

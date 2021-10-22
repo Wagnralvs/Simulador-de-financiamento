@@ -7,7 +7,7 @@
 
 <form #f="ngForm" class="needs-validation" (ngSubmit)="onSubmit(f)" >
 
-<!------------    nome  --------->
+<!---------   nome  --------->
 
 <div class="row  container m-3">
 
@@ -15,11 +15,11 @@
     <div class="form-floating form-Group" >
 
       <input type="text" pattern="[a-zA-Z ]*" mask="S*" 
-        class="form-control" #nome="ngModel" [class.is-invalid]="name.invalid && name.touched" name="nome" #name="ngModel" FormControlName="nome" [(ngModel)]="usuario.nome" id="nome" placeholder="your name" value="" required minlength="4">
+        class="form-control" #nome="ngModel" [class.is-invalid]="name.invalid && name.touched" name="nome" #name="ngModel" FormControlName="nome" [(ngModel)]="usuario.nome" id="nome" placeholder="your name" value="" required minlength="3">
       
         <div *ngIf="nome.errors && (nome.invalid && nome.touched)">
           <small class="text text-danger" *ngIf="nome.errors.required">Nome é obrigatório !</small>
-          <small class="text text-danger" *ngIf="nome.errors.pattern">Nome inválido !</small>
+          <small class="text text-danger" *ngIf="nome.errors.minlength">Nome inválido !</small>
         </div>
         <label for="nome">Nome completo :</label>
       
@@ -74,15 +74,15 @@
   <div class="col-6  mt-4" >
     <div class="form-floating form-Group"  >
 
-      <input type="date"  max="2003-10-10" class="form-control" id="validationCustom05" placeholder="your date"
-      name="date" #dataDeNascimento="ngModel"  [class.is-invalid]="dataDeNascimento.invalid && dataDeNascimento.touched" FormControlName="date" [(ngModel)]="usuario.date" required  >
+      <input type="date"  max="2003-10-10" class="form-control" id="dataNascimento" placeholder="your date"
+      name="date" #dataNascimento="ngModel"  [class.is-invalid]="dataNascimento.invalid && dataNascimento.touched" FormControlName="date" [(ngModel)]="usuario.date" required  >
       
-      <div *ngIf="dataDeNascimento.errors && (dataDeNascimento.invalid && dataDeNascimento.touched)">
-      <small class="text text-danger" *ngIf="dataDeNascimento.errors.required">Data de Nascimento é obrigatório !</small>
-      <small class="text text-danger" *ngIf="dataDeNascimento.errors.max ">Data de nascimento invalidar !</small>
+      <div *ngIf="dataNascimento.errors && (dataNascimento.invalid && dataNascimento.touched)">
+      <small class="text text-danger" *ngIf="dataNascimento.errors.required">Data de Nascimento é obrigatório !</small>
+      <small class="text text-danger" *ngIf="dataNascimento.errors.max ">Data de nascimento invalidar !</small>
     </div>
 
-      <label for="validationCustom05">Data de Nascimento :</label>
+      <label for="dataNascimento">Data de Nascimento :</label>
     
     </div>
   </div>
