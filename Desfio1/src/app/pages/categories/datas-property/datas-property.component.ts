@@ -1,22 +1,20 @@
-import { Component, OnInit, Input,Output, Injectable ,EventEmitter} from '@angular/core';
-import { FormControl, FormGroup, Validators , FormBuilder} from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { AbstractControl } from '@angular/forms';
+import { Component,NgModule, OnInit, Input,Output, Injectable ,EventEmitter} from '@angular/core';
+import {AbstractControl, NgForm,FormsModule, FormControl, FormGroup, Validators , FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { DatasComponent } from '../datas/datas.component';
 import { AppComponent } from 'src/app/app.component';
 import { ResultsComponent } from './results/results.component';
 import { Service } from './results/shared/service';
-import { DatasPropertyService } from './shared/dastas-property-service';
+import { DatasPropertyService } from './shared/datas-property-service';
 
 
 @Component({
   selector: 'app-datas-property',
   templateUrl: './datas-property.component.html',
   styleUrls: ['./datas-property.component.css'],
-  providers: [DatasPropertyService]
+  providers: [DatasPropertyService],
+  //exportAs:'ngForm'
 })
 
 @Injectable()
@@ -24,8 +22,9 @@ export class DatasPropertyComponent implements OnInit {
 
   private aprovado!: Service;
   private DatasPropertyService !: DatasPropertyService;
-  private router!: Router;
-  public formulario!: FormGroup;
+  
+
+ //formulario: FormGroup;
 
 
 /*@ Input()financiamento: any;
@@ -118,6 +117,15 @@ return this.entrada;
      return total
      }
 
+     formulario = this.formBuilder.group({
+      TipoDeImovel:[null,[Validators.required]],
+     rendaMensal: [null ,[Validators.required, Validators.maxLength(4), Validators.max(4)]],
+     valorImovel: [null,[Validators.required]], 
+      ValorDaEntrada: [null,[Validators.required]],
+     quantidadePacelas: [null, [Validators.required , Validators.max(3)]],
+     parcelas: new FormControl(null, [Validators.required]) 
+      })
+
   constructor(private service:DatasPropertyService,private formBuilder:FormBuilder) {
     
    }
@@ -130,23 +138,18 @@ return this.entrada;
     this.usuario={};
     console.log("total");
     
- this.criarFormulario();
+ //this.criarFormulario();
      
   }
-  criarFormulario(){
-  this.formulario = this.formBuilder.group({
-     TipoDeImovel:[null,[Validators.required]],
-    rendaMensal: [null ,[Validators.required, Validators.maxLength(4)]],
-    valorImovel: [null,[Validators.required]], 
-     ValorDaEntrada: [null,[Validators.required]],
-    quantidadePacelas: [null, [Validators.required , Validators.max(3)]],
-    parcelas: new FormControl(null, [Validators.required]) 
-     })}
+ 
+
 
   onSubmit(form: any){
     console.log(form);
 
     console.log(this.usuario);
+
+    console.warn(this.formulario.value);
   }
  
 
@@ -154,7 +157,6 @@ return this.entrada;
  encaminhoAprovado() {
    // this.DatasPropertyService.enviaDados(this.aprovado);
 
-    this.router.navigate(['/results']);
   }
   encaminhaReprovado(){
 

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { DatasPropertyComponent } from '../datas-property.component';
-import { DatasPropertyService } from '../shared/dastas-property-service';
+import { DatasPropertyService } from '../shared/datas-property-service';
 import { Service } from './shared/service';
 
 @Component({

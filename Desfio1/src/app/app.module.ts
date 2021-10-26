@@ -30,8 +30,7 @@ import { ResultsComponent } from './pages/categories/datas-property/results/resu
     })
   ],
   providers: [],
-  bootstrap: [AppComponent]
-
+  bootstrap: [AppComponent],
   
 })
 export class AppModule { }

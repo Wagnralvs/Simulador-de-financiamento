@@ -8,7 +8,8 @@ import { Service } from '../results/shared/service';
 export class DatasPropertyService {
 
  valorDoImovel= '';
- public valorDaEntrada = '';
+ //valorDoImovel:string[]=[];
+  valorDaEntrada :string[]= [];
 
 
   static model: Service;
