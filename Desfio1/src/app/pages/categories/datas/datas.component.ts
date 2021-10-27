@@ -14,7 +14,8 @@ import { DatasPropertyComponent } from '../datas-property/datas-property.compone
 })
 export class DatasComponent implements OnInit {
  
-  public patterns ='^[a-zA-Z ]*$'
+  public patterns ='^[a-zA-Z ]*$';
+  submitted = false ;
 
   formulario: FormGroup = new FormGroup({
     nome: new FormControl(null) ,
@@ -36,9 +37,9 @@ export class DatasComponent implements OnInit {
   }
 
   onSubmit(form: any){
-    console.log(form);
-
-    console.log(this.usuario);
+   // console.log(form);
+this.submitted = true
+   // console.log(this.usuario);
   }
 
 }

@@ -11,6 +11,7 @@ import { DatasComponent } from './pages/categories/datas/datas.component';
 import { DatasPropertyComponent } from './pages/categories/datas-property/datas-property.component';
 import { HomeComponent } from './pages/categories/home/home.component';
 import { ResultsComponent } from './pages/categories/datas-property/results/results.component';
+import { DatasPropertyService } from './pages/categories/datas-property/shared/datas-property-service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,7 @@ import { ResultsComponent } from './pages/categories/datas-property/results/resu
       dropSpecialCharacters:false
     })
   ],
-  providers: [],
+  providers: [DatasPropertyService],
   bootstrap: [AppComponent],
   
 })

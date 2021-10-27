@@ -122,7 +122,7 @@
     <button class="btn btn-danger btn-lg " id="btn-cancelar" routerLink="/home" type="reset">Cancelar</button>
   </div>
    <div class="col-6">
-   <button class="btn btn-success btn-lg "  id="btn-proseguir" routerLink="/property" type="submit" [disabled]="f.invalid ">Proseguir</button>
+   <button (click)="onSubmit" class="btn btn-success btn-lg "  id="btn-proseguir" routerLink="/property" type="submit" [disabled]="f.invalid ">Proseguir</button>
  </div>
  
 </div>

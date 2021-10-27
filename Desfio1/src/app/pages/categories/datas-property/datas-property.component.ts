@@ -14,7 +14,7 @@ import { DatasPropertyService } from './shared/datas-property-service';
   templateUrl: './datas-property.component.html',
   styleUrls: ['./datas-property.component.css'],
   providers: [DatasPropertyService],
-  //exportAs:'ngForm'
+
 })
 
 @Injectable()
@@ -27,16 +27,6 @@ export class DatasPropertyComponent implements OnInit {
  //formulario: FormGroup;
 
 
-/*@ Input()financiamento: any;
- 
-setFinanciamento(financiamento: any) {
-
- this.entrada = this.entrada ;
-}
- getFinanciamento(): any {
-
- return this.entrada
-}*/
 
   valorImovel= '';
   ValorEntrada = '';
@@ -44,6 +34,8 @@ setFinanciamento(financiamento: any) {
   conteudoSalvo : any;
   quantidadeParcelas: any;
   rendaMensal:any;
+
+  submitted = false
 
 // Capituar dados do input
    onKeyup0(event:any){
@@ -66,7 +58,7 @@ this.conteudoSalvo = valor
       this.quantidadeParcelas = valor
   }
 
-  renda(): boolean{
+  /*renda(): boolean{
   
     let x: number = (this.rendaMensal * 0.3 );
     let y: number = this.parcelas() ;
@@ -79,14 +71,12 @@ this.conteudoSalvo = valor
     }
     else(y < x)
       return true
-
-      
-    }
+    } */
   
 
 
 
-  @Input() entrada(): number {
+ entrada(): number {
       
      let x = 0.20;
      let y:number = this.conteudoSalvo   ;
@@ -145,11 +135,10 @@ return this.entrada;
 
 
   onSubmit(form: any){
-    console.log(form);
-
-    console.log(this.usuario);
-
-    console.warn(this.formulario.value);
+   // console.log(form);
+  //  console.log(this.usuario);
+   // console.warn(this.formulario.value);
+   this.submitted = true
   }
  
 
@@ -158,9 +147,8 @@ return this.entrada;
    // this.DatasPropertyService.enviaDados(this.aprovado);
 
   }
-  encaminhaReprovado(){
+ //encaminhaReprovado(){}
 
-  }
   validarDados(){
     alert("Solicitação enviada com sucesso!");
    // alert(this.ValorDoImovel);

@@ -7,6 +7,9 @@ import { DatasPropertyComponent } from './datas-property.component';
 describe('DatasPropertyComponent', () => {
   let component: DatasPropertyComponent;
   let fixture: ComponentFixture<DatasPropertyComponent>;
+  let parcela : ComponentFixture<DatasPropertyComponent> ;
+  
+ 
 
   const spyDatasPropertyService = jasmine.createSpyObj("spyDatasPropertyService",
   ["validarDados"]
@@ -29,9 +32,26 @@ describe('DatasPropertyComponent', () => {
     fixture = TestBed.createComponent(DatasPropertyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+   
+   
+    //testes
+   parcela = TestBed.createComponent(DatasPropertyComponent);
+   parcela.detectChanges();
+
+  //parcela = parcela.componentInstance.parcelas;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should st submitted to true', () => {
+    fixture.componentInstance.onSubmit;
+    //let parcela = fixture.componentInstance.parcelas;
+
+    expect(fixture.componentInstance.onSubmit).toBeTruthy();
+
+    expect(component).toBeTruthy();
+  });
+
+
 });
