@@ -15,6 +15,7 @@ describe('DatasPropertyComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ DatasPropertyComponent ],
+      imports: [ FormsModule ],
       //alterações no providers
       providers:[
         FormBuilder,
