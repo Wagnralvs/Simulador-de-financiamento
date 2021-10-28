@@ -1,10 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { DatasComponent } from './datas.component';
+
 
 describe('DadasComponent', () => {
   let component: DatasComponent;
   let fixture: ComponentFixture<DatasComponent>;
+
+  //let onSubmit : onSubimit;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -23,6 +26,7 @@ describe('DadasComponent', () => {
    // fixture = TestBed.createComponent(DatasComponent);
    // component = fixture.componentInstance;
   //  fixture.detectChanges();
+ // onSubmit = new onSubmit();
   });
 
   it('should create', () => {
@@ -37,15 +41,20 @@ describe('DadasComponent', () => {
   // 
     expect(component).toBeTruthy();
   });
+  //test 2
   it('should set submitted to true',() => {
 
    //fixture.componentInstance.onSubmit ;
 component.onSubmit;
     //fixture.detectChanges();
-
     expect(component.onSubmit).toBeTruthy();
 
   });
+
+//test 3
+//it('should set submitted to true this', inject([DatasComponent],(service:DatasComponent) => {
+
+  // expect(service.onSubmit).toBeTruthy();}));
 
 
 

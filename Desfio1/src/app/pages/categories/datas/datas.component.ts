@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Injectable, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup,MinLengthValidator,Validators , ValidatorFn} from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -12,6 +12,7 @@ import { DatasPropertyComponent } from '../datas-property/datas-property.compone
   templateUrl: './datas.component.html',
   styleUrls: ['./datas.component.css']
 })
+@Injectable()
 export class DatasComponent implements OnInit {
  
   public patterns ='^[a-zA-Z ]*$';

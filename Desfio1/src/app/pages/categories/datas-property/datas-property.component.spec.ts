@@ -5,11 +5,10 @@ import { DatasPropertyService } from './shared/datas-property-service';
 import { DatasPropertyComponent } from './datas-property.component';
 
 describe('DatasPropertyComponent', () => {
+
   let component: DatasPropertyComponent;
   let fixture: ComponentFixture<DatasPropertyComponent>;
-  let parcela : ComponentFixture<DatasPropertyComponent> ;
-  
- 
+  let parcela : DatasPropertyComponent ;
 
   const spyDatasPropertyService = jasmine.createSpyObj("spyDatasPropertyService",
   ["validarDados"]
@@ -33,25 +32,29 @@ describe('DatasPropertyComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
    
-   
+  //component = new DatasPropertyComponent(); 
+  
     //testes
-   parcela = TestBed.createComponent(DatasPropertyComponent);
-   parcela.detectChanges();
+   //parcela = TestBed.createComponent(DatasPropertyComponent);
+  //let parcela = new DatasPropertyComponent();
 
-  //parcela = parcela.componentInstance.parcelas;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
   it('should st submitted to true', () => {
-    fixture.componentInstance.onSubmit;
-    //let parcela = fixture.componentInstance.parcelas;
+    fixture.componentInstance.parcelas;
+    let total = fixture.componentInstance.parcelas
 
-    expect(fixture.componentInstance.onSubmit).toBeTruthy();
+    expect(fixture.componentInstance.parcelas).toBeTruthy();
 
     expect(component).toBeTruthy();
   });
-
+  //    test 3
+  /*it('should create', () => {
+    fixture.componentInstance.onSave0
+    expect(component.onSave0()).toBeFalse();
+  });  */
 
 });

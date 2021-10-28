@@ -8,9 +8,7 @@ import { Service } from '../results/shared/service';
 export class DatasPropertyService {
 
  valorDoImovel= '';
- //valorDoImovel:string[]=[];
   valorDaEntrada :string[]= [];
-
 
   static model: Service;
 
@@ -19,6 +17,7 @@ export class DatasPropertyService {
   enviaDados(dados: Service) {
     DatasPropertyService.model = dados;
   }
+
 
   recuperaDados(): Service {
     return DatasPropertyService.model;

@@ -22,16 +22,12 @@ export class DatasPropertyComponent implements OnInit {
 
   private aprovado!: Service;
   private DatasPropertyService !: DatasPropertyService;
-  
-
  //formulario: FormGroup;
-
-
 
   valorImovel= '';
   ValorEntrada = '';
 
-  conteudoSalvo : any;
+  conteudoSalvo: any;
   quantidadeParcelas: any;
   rendaMensal:any;
 
@@ -39,13 +35,13 @@ export class DatasPropertyComponent implements OnInit {
 
 // Capituar dados do input
    onKeyup0(event:any){
-    console.log(event)
+   // console.log(event)
   }
     onKeyup(event:any){
-      console.log(event)
+    //  console.log(event)
     }
     onKeyup2(event:any){
-      console.log(event)
+     // console.log(event)
     }
 
     onSave0(valor:number){
@@ -53,6 +49,7 @@ export class DatasPropertyComponent implements OnInit {
     }
     onSave(valor:number){
 this.conteudoSalvo = valor
+return valor
 }
     onSave2(valor:string){
       this.quantidadeParcelas = valor
@@ -73,8 +70,6 @@ this.conteudoSalvo = valor
       return true
     } */
   
-
-
 
  entrada(): number {
       
