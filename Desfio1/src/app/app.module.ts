@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import {Router, RouterModule, Routes} from '@angular/router';
-import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskModule  } from 'ngx-mask';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -27,7 +27,7 @@ import { DatasPropertyService } from './pages/categories/datas-property/shared/d
     FormsModule,
     RouterModule,
     NgxMaskModule.forRoot({
-      dropSpecialCharacters:false
+     dropSpecialCharacters:false
     })
   ],
   providers: [DatasPropertyService],

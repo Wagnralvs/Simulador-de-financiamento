@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, NgForm , FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { NgxMaskModule} from 'ngx-mask';
+
 import { DatasPropertyService } from './shared/datas-property-service';
 import { DatasPropertyComponent } from './datas-property.component';
 
@@ -34,27 +36,36 @@ describe('DatasPropertyComponent', () => {
    
   //component = new DatasPropertyComponent(); 
   
-    //testes
-   //parcela = TestBed.createComponent(DatasPropertyComponent);
-  //let parcela = new DatasPropertyComponent();
-
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('should st submitted to true', () => {
-    fixture.componentInstance.parcelas;
-    let total = fixture.componentInstance.parcelas
-
-    expect(fixture.componentInstance.parcelas).toBeTruthy();
-
-    expect(component).toBeTruthy();
-  });
-  //    test 3
+ 
+  //     test 1
   /*it('should create', () => {
     fixture.componentInstance.onSave0
     expect(component.onSave0()).toBeFalse();
   });  */
+//       test 1
+  it('should alert is working', () => {
+    
+   spyOn(window , "alert");
+   component.validarDados();
 
+    expect(window.alert).toHaveBeenCalled();
+    expect(window.alert).toHaveBeenCalledWith('Solicitação enviada com sucesso!');
+    expect(component.validarDados).toBeTruthy();
+
+  });
+//     test 2 
+it('should alert is working', () => {
+    
+//  spyOn(window , "submitted");
+ component.onKeyup;
+
+  //expect(component.onKeyup).toHaveBeenCalled();
+ // expect(component.onKeyup).toBeTruthy();
+
+ });
 });

@@ -43,7 +43,7 @@
   <div class="col-6  mt-4" >
     <div class="form-floating"  >
 
-      <input type="text" mask="000.000.000-00" [showMaskTyped] = "true" minlength="14" class="form-control" id="validationCustom03" 
+      <input type="text" mask="000.000.000-00"  minlength="14" class="form-control" id="validationCustom03" 
       name="cpf" #cpf="ngModel"  [class.is-invalid]="cpf.invalid && cpf.touched" FormControlName="cpf" [(ngModel)]="usuario.cpf" placeholder="your CPF" required>
 
       <div *ngIf="cpf.errors && (cpf.invalid && cpf.touched)">
@@ -86,11 +86,11 @@
     
     </div>
   </div>
-  <!-----------------Cep----------->
+  <!-----------------Cep----- ------>
   <div class="col-6  mt-4" >
     <div class="form-floating"  >
 
-      <input type="tel"   mask="00000-000" [showMaskTyped] = "true" class="form-control" id="validationCustom06" placeholder="your cep"
+      <input type="tel"   mask="00000-000" class="form-control" id="validationCustom06" placeholder="your cep"
       name="cep" #cep="ngModel" [class.is-invalid]="cep.invalid && cep.touched" FormControlName="cep" [(ngModel)]="usuario.cep"  required  >
       
       <small class="text text-danger" [class.d-none]="cep.valid || cep.untouched">CEP é obrigatório !</small>

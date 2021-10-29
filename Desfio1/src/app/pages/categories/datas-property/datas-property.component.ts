@@ -1,10 +1,11 @@
 import { Component,NgModule, OnInit, Input,Output, Injectable ,EventEmitter} from '@angular/core';
 import {AbstractControl, NgForm,FormsModule, FormControl, FormGroup, Validators , FormBuilder} from '@angular/forms';
-import { Router } from '@angular/router';
+//import { Router } from '@angular/router';
 
-import { DatasComponent } from '../datas/datas.component';
-import { AppComponent } from 'src/app/app.component';
-import { ResultsComponent } from './results/results.component';
+import { NgxMaskModule} from 'ngx-mask';
+//import { DatasComponent } from '../datas/datas.component';
+//import { AppComponent } from 'src/app/app.component';
+//import { ResultsComponent } from './results/results.component';
 import { Service } from './results/shared/service';
 import { DatasPropertyService } from './shared/datas-property-service';
 
@@ -130,10 +131,8 @@ return this.entrada;
 
 
   onSubmit(form: any){
-   // console.log(form);
-  //  console.log(this.usuario);
-   // console.warn(this.formulario.value);
-   this.submitted = true
+  // console.log(this.formulario)
+   //this.submitted = true
   }
  
 
@@ -142,10 +141,21 @@ return this.entrada;
    // this.DatasPropertyService.enviaDados(this.aprovado);
 
   }
- //encaminhaReprovado(){}
 
   validarDados(){
     alert("Solicitação enviada com sucesso!");
+  }
+
+
+
+
+
+
+
+
+
+
+
    // alert(this.ValorDoImovel);
    
      // this.service.valorDoImovel=this.formulario.get("ValorDoImovel");
@@ -153,7 +163,6 @@ return this.entrada;
    //   debugger
   //    this.encaminhoAprovado();
   //  } 
-  //  else this.encaminhaReprovado();
-  }
+  //  else this.encaminhaReprovado();}
 
 }

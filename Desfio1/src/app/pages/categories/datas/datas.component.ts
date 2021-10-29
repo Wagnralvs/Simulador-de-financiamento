@@ -39,8 +39,9 @@ export class DatasComponent implements OnInit {
 
   onSubmit(form: any){
    // console.log(form);
+  // alert('Formulário enviado com sucesso!')
 this.submitted = true
-   // console.log(this.usuario);
+   
   }
 
 }

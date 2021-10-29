@@ -19,7 +19,6 @@ export class DatasPropertyService {
   }
 
 
-  recuperaDados(): Service {
-    return DatasPropertyService.model;
-  } 
+ // recuperaDados(): Service {
+  //  return DatasPropertyService.model; } 
 }

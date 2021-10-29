@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { DatasComponent } from './datas.component';
 
 
+
 describe('DadasComponent', () => {
   let component: DatasComponent;
   let fixture: ComponentFixture<DatasComponent>;
@@ -33,28 +34,47 @@ describe('DadasComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should patterns to be valid', () => {
-    //test 
+  
     fixture.componentInstance.patterns ;
     fixture.detectChanges();
 
   expect(fixture.componentInstance.patterns).toEqual('^[a-zA-Z ]*$');
-  // 
-    expect(component).toBeTruthy();
+  expect(component).toBeTruthy();
   });
   //test 2
-  it('should set submitted to true',() => {
-
-   //fixture.componentInstance.onSubmit ;
-component.onSubmit;
-    //fixture.detectChanges();
-    expect(component.onSubmit).toBeTruthy();
+  it('should call submitted function',() => {
+  const form : any ='';
+  spyOn(component, 'onSubmit').and.callThrough();
+     component.onSubmit(form);
+    
+    expect(component.onSubmit).toHaveBeenCalled();
 
   });
 
 //test 3
-//it('should set submitted to true this', inject([DatasComponent],(service:DatasComponent) => {
+it('should set submitted to true this', () => {
+  let form : any ='';
 
-  // expect(service.onSubmit).toBeTruthy();}));
+  component.submitted = false;
+  component.onSubmit(form);
+
+  expect(component.submitted).toBeTruthy();
+  expect(component.submitted).toEqual(true);
+  expect(component.onSubmit).toMatch('submitted');
+
+  
+});
+//     test   4
+it('should alert is working', () => {
+    
+  spyOn(window , "alert");
+  component.onSubmit;
+
+   //expect(window.alert).toHaveBeenCalled();
+  //expect(window.alert).toHaveBeenCalledWith('Formulário enviado com sucesso!');
+  // expect(component.onSubmit).toBeTruthy();
+
+ });
 
 
 
