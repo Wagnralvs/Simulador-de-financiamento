@@ -100,5 +100,44 @@ let valor =  '';
        expect(rendaMensal).toEqual(5000);
        expect(valor).toEqual(5000);
        
+  }); 
+       // ----test  6----
+       it('should onSave() is working', () => {
+        let  conteudoSalvo = 100000 ;
+        let valor = conteudoSalvo;
+   
+             component.onSave(conteudoSalvo) ;
+            
+             expect(component.onSave).toBeTruthy();
+             expect(conteudoSalvo).toEqual(100000);
+             expect(valor).toEqual(100000);
+             
+   });   
+        //---test   7----
+      it('should onSave2() is working', () => {
+      let  quantidadeParcelas: any = 360 ;
+      let valor = quantidadeParcelas;
+     
+           component.onSave2(quantidadeParcelas) ;
+              
+            expect(component.onSave2).toBeTruthy();
+            expect(quantidadeParcelas).toEqual(360);
+            expect(valor).toEqual(360);
+               
+  });
+               //---test   8----
+      it('should entradaValor() is working', () => {
+      let  entrada: number = 20000 ;
+      component.entradaValor() ;
+            
+      expect(component.entradaValor).toBeTruthy();
+          
        }); 
+       
+       //---test 9------
+    //   it('should entradaValor() is working', () => {
+        //let  entrada: number = 20000 ;
+     //   component.onSubmit ;
+              
+    //    expect(component.onSubmit).toBeTruthy() });  
 });
