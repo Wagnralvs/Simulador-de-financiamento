@@ -10,7 +10,8 @@ import { DatasPropertyComponent } from '../datas-property/datas-property.compone
 @Component({
   selector: 'app-dadas',
   templateUrl: './datas.component.html',
-  styleUrls: ['./datas.component.css']
+  styleUrls: ['./datas.component.css'],
+  
 })
 @Injectable()
 export class DatasComponent implements OnInit {

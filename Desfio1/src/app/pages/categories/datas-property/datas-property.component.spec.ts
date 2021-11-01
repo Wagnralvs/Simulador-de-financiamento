@@ -5,6 +5,7 @@ import { NgxMaskModule} from 'ngx-mask';
 
 import { DatasPropertyService } from './shared/datas-property-service';
 import { DatasPropertyComponent } from './datas-property.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('DatasPropertyComponent', () => {
 
@@ -24,16 +25,19 @@ describe('DatasPropertyComponent', () => {
       providers:[
         FormBuilder,
         {provide: DatasPropertyService, useValue: spyDatasPropertyService  }
-      ]
+      ],
+      schemas:[CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DatasPropertyComponent);
+   fixture = TestBed.createComponent(DatasPropertyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
    
+    //TestBed.configureTestingModule({});
+   //component = TestBed.inject(DatasPropertyComponent);
   //component = new DatasPropertyComponent(); 
   
   });
@@ -41,13 +45,8 @@ describe('DatasPropertyComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
- 
-  //     test 1
-  /*it('should create', () => {
-    fixture.componentInstance.onSave0
-    expect(component.onSave0()).toBeFalse();
-  });  */
-//       test 1
+
+//     ----  test 1 ------
   it('should alert is working', () => {
     
    spyOn(window , "alert");
@@ -58,14 +57,48 @@ describe('DatasPropertyComponent', () => {
     expect(component.validarDados).toBeTruthy();
 
   });
-//     test 2 
-it('should alert is working', () => {
-    
-//  spyOn(window , "submitted");
- component.onKeyup;
+//    --- test 2 ----
+it('should onkeyup() is working', () => {
 
-  //expect(component.onKeyup).toHaveBeenCalled();
- // expect(component.onKeyup).toBeTruthy();
+let valor =  '';
+ component.onKeyup(valor);
+
+ // expect(component.onKeyup).not.toHaveBeenCalled();
+ expect(component.onKeyup).toBeTruthy();
+ expect(component.onKeyup).not.toBeUndefined();
+ //expect(valor).not.toThrow();
+ //expect(component.onKeyup).toEqual(1000);
 
  });
+ //----test  3-------
+ it('should onkeyup0() is working', () => {
+
+  let valor =  '1000, 2000';
+   component.onKeyup0(valor);
+  
+   expect(component.onKeyup0).toBeTruthy();
+   
+   });
+   //----test   4-----
+   it('should onkeyup2() is working', () => {
+
+    let valor =  '1000, 2000';
+     component.onKeyup2(valor);
+    
+     expect(component.onKeyup2).toBeTruthy();
+     
+     });
+     // --- test  5
+     it('should onSave0() is working', () => {
+  let  rendaMensal = 5000 ;
+  let valor = rendaMensal;
+  //componet.onSave () = new valor;
+      //spyOn(window, "valor");
+       component.onSave0(rendaMensal) ;
+      
+       expect(component.onSave0).toBeTruthy();
+       expect(rendaMensal).toEqual(5000);
+       expect(valor).toEqual(5000);
+       
+       }); 
 });

@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { DatasComponent } from './datas.component';
@@ -14,6 +15,7 @@ describe('DadasComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ DatasComponent ],
       imports: [ FormsModule ],
+      schemas:[CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents().then(()=>{
       fixture = TestBed.createComponent(DatasComponent);
