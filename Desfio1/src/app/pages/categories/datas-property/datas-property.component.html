@@ -2,16 +2,16 @@
 <!-------------- tela 3 -------------->
 <h1 class="text-center  mt-5 mb-5 ">Dados do Imóvel</h1>
 
-<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="needs-validation"    >
+<form  (ngSubmit)="onSubmit()"  [formGroup]="formulario"   >
 
-<!-- ------- tipo de imóvel [formGroup]="formulario"  ---- -->
+<!-- ------- tipo de imóvel  ---- -->
 
 <div class="row  container m-3">
 
   <div class="col-6 form-group">
   
       <select type="text" class="form-select form-select-lg  is-valid form-control" id="tipoImovel" 
-      aria-label=".form-select-lg example"  >
+     formControlName="tipoImovel" aria-label=".form-select-lg example"  >
      <option selected>Tipo do imóvel:</option>
         <option value="1">Residencial</option>
         <option value="2">Comercial</option>
@@ -25,84 +25,97 @@
   <div class="col-6">
     <div class="form-floating form-group">
       <input type="tell" prefix="R$" suffix=",00"  mask="separator.2" thousandSeparator="." [dropSpecialCharacters]="true" class="form-control" 
-      name="rendaMensal" #rendaMensal="ngModel" [class.is-invalid]="rendaMensal.invalid && rendaMensal.touched" FormControlName="rendaMensal" [(ngModel)]="usuario.rendaMensal" id="validationTela3-02" placeholder="monthly income" required
-      (keyup)="onKeyup0($event)" value="rendaMensal" 
-      (keyup.enter)="onSave0(rendaMensal.value)"
-      (blur)="onSave0(rendaMensal.value)" >
+      formControlName="rendaMensal"  id="rendaMensal" placeholder="monthly income" 
+     >
 
+      <div *ngIf="formulario.controls.rendaMensal.touched && formulario.controls.rendaMensal?.errors" >
+        <small class="text text-danger" *ngIf="formulario.controls.rendaMensal.errors?.required">
+          Renda mensal é obrigatoria</small>
+        </div>
       
-      <small class="text text-danger" [class.d-none]="rendaMensal.valid || rendaMensal.untouched">Renda Mensal é obrigatório !</small>
-      <label for="validationTela3-02">Renda Mensal :</label>
+      <label for="rendaMensal">Renda Mensal :</label>
      
     </div>
   </div>
+
+  
   <!-- ------Valor do imóvel------------>
   <div class="col-6  mt-4" >
     <div class="form-floating form-group"  >
-      <input type="tell"  min="5" prefix="R$" suffix=",00" [dropSpecialCharacters]="true" mask="separator.2" thousandSeparator="."  class="form-control"
-      #ValorDoImoval name="valorImovel" #valorImovel="ngModel"  FormControlName="valorImovel" [(ngModel)]="usuario.valorImovel" id="valorImovel" placeholder="value of the property " required 
-      (keyup)="onKeyup($event)" value="valorImovel" 
-      (keyup.enter)="onSave(valorImovel.value)"
-      (blur)="onSave(valorImovel.value)">
 
-      <div *ngIf="valorImovel.errors && (valorImovel.invalid && valorImovel.touched)">
-        <small class="text text-danger" *ngIf="valorImovel.errors.required">Valor do imóvel  é obrigatório !</small>
-        <small class="text text-danger" *ngIf="valorImovel.errors.min">Valor do imóvel é inválido !</small>
-      </div>
+      <input type="tell"  min="5" prefix="R$" suffix=",00" [dropSpecialCharacters]="true" mask="separator.2" thousandSeparator="."  class="form-control"
+       formControlName="valorImovel"  id="valorImovel" placeholder="value of the property "  >
+   
+       <div *ngIf="formulario.controls.valorImovel.touched && formulario.controls.valorImovel?.errors" >
+        <small class="text text-danger" *ngIf="formulario.controls.valorImovel.errors?.required">
+          Valor do imóvel é obrigatório</small>
+        </div>
       <label for="valorImovel">Valor do Imóvel :</label>
      
     </div>
   </div>
+
+
   <!---------Valor da entrada --------->
   <div class="col-6  mt-4" >
     <div class="form-floating form-group"  >
       
-      <input type="tell"   mask="separator.2" thousandSeparator="." minlength="1"   class="form-control" value="{{ entrada()|currency:'BRL'}}"
-      name="valorEntrada"  #valorEntrada="ngModel"  FormControlName="valorEntrada" [(ngModel)]="usuario.valorEntrada" id="valorEntrada" placeholder="value of input" required  >
+      <input type="tell" prefix="R$" suffix=",00" mask="separator.2" thousandSeparator="." minlength="1"  [dropSpecialCharacters]="true" class="form-control" 
+      formControlName="valorEntrada"  id="valorEntrada" placeholder="value of input" required  >
      
-      <div *ngIf="valorEntrada.errors && (valorEntrada.invalid && valorEntrada.touched)">
-        <small class="text text-danger" *ngIf="valorEntrada.errors.required">Valor da entrada  é obrigatório !</small>
-        <small class="text text-danger" *ngIf="valorEntrada.errors.minlength">Entrada mínimo 20% do valor do imóvel!</small>
-
-      </div>
+      <div *ngIf="formulario.controls.valorEntrada.touched && formulario.controls.valorEntrada?.errors" >
+        <small class="text text-danger" *ngIf="formulario.controls.valorEntrada.errors?.required">
+          Valor da entrada é obrigatório</small>
+        </div>
+       <small class="text text-danger" >{{menssage}}</small> 
       <label for="valorEntrada">Valor da Entrada :   </label>
      
     </div>
   </div>
+ 
+
   
   <!---------Quantidade de parcelas---->
 
   <div class="col-6  mt-4" >
     <div class="form-floating form-group "  >
 
-      <input type="number"   min="1" max="360"   mask="000" class="form-control" id="quantidadeParcelas"
-      name="quantidadeParcelas" #quantidadeParcelas="ngModel"  FormControlName="quantidadeParcelas" [(ngModel)]="usuario.quantidadeParcelas" placeholder="your phone"  required
-      (keyup)="onKeyup2($event)" value="quantidadeParcelas"
-      (keyup.enter)="onSave2(quantidadeParcelas.value)"
-      (blur)="onSave2(quantidadeParcelas.value)" >
+      <input type="tel"  mask="000" class="form-control" id="quantidadeParcelas"
+     formControlName="quantidadeParcelas"  placeholder="your phone" 
+    >
+
+      <div *ngIf="formulario.controls.quantidadeParcelas.touched && formulario.controls.quantidadeParcelas?.errors" >
+        <small class="text text-danger" *ngIf="formulario.controls.quantidadeParcelas.errors?.required">
+          Parcelas é obrigatoria !.</small>
       
-     
-      <div *ngIf="quantidadeParcelas.errors && (quantidadeParcelas.invalid && quantidadeParcelas.touched)">
-        <small class="text text-danger" *ngIf="quantidadeParcelas.errors.required">Quantidade de parcelas  é obrigatório !</small>
-        <small class="text text-danger" *ngIf="quantidadeParcelas.errors.max"> Max. de parcelas: 360 !</small>
+        </div>
+        <div *ngIf="formulario.controls.quantidadeParcelas.touched && formulario.controls.quantidadeParcelas?.errors" >
+          <small class="text text-danger" *ngIf="formulario.controls.quantidadeParcelas.errors?.max">
+            Parcelas máxima de 360!.</small>
         
+          </div>
+        <label  for="quantidadeParcelas">Em quantas parcelas deseja pagar? </label>
       </div>
-      <label id="parcelas" for="quantidadeParcelas">Em quantas parcelas deseja pagar? </label>
+     
     </div>
 
-  </div>
-  <div >Valor da primeira parcela {{parcelas()|currency:'BRL'}}</div>
-<div>Valor aprovado para o financiamento {{valorAprovado()|currency:'BRL'}}</div>
+  
+
 </div>
+<div >Valor da primeira parcela {{parcelas()|currency:'BRL'}}</div>
+<div>Valor aprovado para o financiamento {{valorAprovado()|currency:'BRL'}}</div>
+<div>Renda reprovada ou aprovada {{renda()}}</div>
+<div>entrada {{entrada()}}</div>
+<div>validacao entrada {{entradaValidacao()}}</div>
 
 
 <!--buttons-->
 <div class="row container-fluid text-center mt-4" >
   <div class="col-6" >
-    <button class="btn btn-danger btn-lg " id="btn-cancelar" routerLink="/home" type="reset" >Cancelar</button>
+    <button class="btn btn-danger btn-lg " id="btn-cancelar" routerLink="/home" >Cancelar</button>
   </div>
    <div class="col-6">
-   <button (click)="validarDados()"[disabled]="f.invalid" class="btn btn-success btn-lg " routerLink="/results" id="btn-proseguir"  type="submit" >Proseguir</button>
+   <button   class="btn btn-success btn-lg "  [disabled]="formulario.invalid"  id="btn-proseguir"  type="submit" >Proseguir</button>
  </div>
 
  
@@ -110,7 +123,7 @@
 
 </form>
 
-<!--<app-results  [nome]="entrada()"></app-results> form="formulario"  -->
+<!--<app-results  [nome]="entrada()"></app-results> form="formulario" [disabled]="formulario.invalid" -->
 
 
 

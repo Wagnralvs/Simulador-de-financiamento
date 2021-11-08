@@ -9,6 +9,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { HomeComponent } from './home/home.component';
 import { DatasPropertyComponent } from './datas-property/datas-property.component';
 import { ResultsComponent } from './datas-property/results/results.component';
+import { ResultReprovadoComponent } from './datas-property/result-reprovado/result-reprovado.component';
 
 
 
@@ -17,7 +18,8 @@ import { ResultsComponent } from './datas-property/results/results.component';
     DatasComponent,
     HomeComponent,
     DatasPropertyComponent,
-    ResultsComponent 
+    ResultsComponent,
+    ResultReprovadoComponent 
   ],
   imports: [
     CommonModule,

@@ -1,143 +1,164 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormBuilder, NgForm , FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { NgxMaskModule} from 'ngx-mask';
+import { FormBuilder,  FormsModule, ReactiveFormsModule,  Validators } from '@angular/forms';
 
 import { DatasPropertyService } from './shared/datas-property-service';
 import { DatasPropertyComponent } from './datas-property.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+
 
 describe('DatasPropertyComponent', () => {
 
   let component: DatasPropertyComponent;
   let fixture: ComponentFixture<DatasPropertyComponent>;
   let parcela : DatasPropertyComponent ;
+ // let router: Router;
 
+  const spyRouter = jasmine.createSpyObj("spyRouter",
+  ["navigate" , "aprovado"  , "reprovado"])
   const spyDatasPropertyService = jasmine.createSpyObj("spyDatasPropertyService",
-  ["validarDados"]
-  )
+  ["aprovado"  , "valorAprovado"])
+  const formBuilder: FormBuilder = new FormBuilder();
+
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ DatasPropertyComponent ],
-      imports: [ FormsModule ],
+      imports: [ FormsModule, ReactiveFormsModule, ],
       //alterações no providers
       providers:[
-        FormBuilder,
-        {provide: DatasPropertyService, useValue: spyDatasPropertyService  }
+        FormBuilder, 
+        { provide: FormBuilder, useValue: formBuilder },
+        {provide: DatasPropertyService, useValue: spyDatasPropertyService  },
+        { provide : Router, useValue: spyRouter}
+
       ],
       schemas:[CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
+    //router = TestBed.get(Router)
   });
 
   beforeEach(() => {
    fixture = TestBed.createComponent(DatasPropertyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    //component = TestBed.inject(DatasPropertyComponent)
+
+    component.formulario= formBuilder.group({
+      
+        tipoImovel:[null,[Validators.required]],
+        rendaMensal: [null ,[Validators.required, Validators.maxLength(4)]],
+        valorImovel: [null,[Validators.required]], 
+        valorEntrada: [null,[Validators.required]],
+        quantidadeParcelas: [null, [Validators.required ,]],
+    })
    
     //TestBed.configureTestingModule({});
    //component = TestBed.inject(DatasPropertyComponent);
   //component = new DatasPropertyComponent(); 
   
   });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-//     ----  test 1 ------
-  it('should alert is working', () => {
+  //  ----test 1----
+  it( ' should formulario ngOnit(), ',() => {
     
-   spyOn(window , "alert");
-   component.validarDados();
+   
+    component.ngOnInit
+    component.formulario;
 
-    expect(window.alert).toHaveBeenCalled();
-    expect(window.alert).toHaveBeenCalledWith('Solicitação enviada com sucesso!');
-    expect(component.validarDados).toBeTruthy();
+    expect(component.ngOnInit).toBeTruthy();
+    expect(component.formulario).toBeTruthy();
+    //expect(component.formulario).toHaveBeenCalled()
+  })
+  // ----- test 2 ------
+  it( ' should router call in aprovado() ',() => {
+
+    component.aprovado();
+    expect(spyRouter.navigate).toHaveBeenCalledWith(['/results']);
+  
+  })
+
+
+//     ----  test 3 ------
+  it('should router call in reprovado()', () => {
+    
+    component.reprovado();
+    expect(spyRouter.navigate).toHaveBeenCalledWith(['/reprov'])
+  
 
   });
 //    --- test 2 ----
-it('should onkeyup() is working', () => {
+it('should onSubmit() is working', () => {
 
-let valor =  '';
- component.onKeyup(valor);
+
+ component.onSubmit();
 
  // expect(component.onKeyup).not.toHaveBeenCalled();
- expect(component.onKeyup).toBeTruthy();
- expect(component.onKeyup).not.toBeUndefined();
+ expect(component.onSubmit).toBeTruthy();
+// expect(component.onKeyup).not.toBeUndefined();
  //expect(valor).not.toThrow();
  //expect(component.onKeyup).toEqual(1000);
 
  });
  //----test  3-------
- it('should onkeyup0() is working', () => {
+ it('should entrada() is working', () => {
 
-  let valor =  '1000, 2000';
-   component.onKeyup0(valor);
+  let valor =  1000;
+  let entrada = valor
+
+   component.entrada();
   
-   expect(component.onKeyup0).toBeTruthy();
+   //expect(valor).toEqual(1000);
+   expect(entrada).toEqual(valor);
    
    });
    //----test   4-----
-   it('should onkeyup2() is working', () => {
+   xit('should onkeyup2() is working', () => {
 
     let valor =  '1000, 2000';
-     component.onKeyup2(valor);
+  //   component.onKeyup2(valor);
     
-     expect(component.onKeyup2).toBeTruthy();
+  //   expect(component.onKeyup2).toBeTruthy();
      
      });
      // --- test  5
-     it('should onSave0() is working', () => {
-  let  rendaMensal = 5000 ;
-  let valor = rendaMensal;
-  //componet.onSave () = new valor;
-      //spyOn(window, "valor");
-       component.onSave0(rendaMensal) ;
-      
-       expect(component.onSave0).toBeTruthy();
-       expect(rendaMensal).toEqual(5000);
-       expect(valor).toEqual(5000);
-       
+     it('should renda() is working', () => {
+  let rendaTest:  any = component.renda;
+  rendaTest = false;
+
+   //component.renda();
+   component.renda().valueOf;
+
+   expect(component.renda).toBeTruthy();
+  // expect().toBeTruthy();
+   expect(rendaTest).toBeFalsy();
+   expect(rendaTest).toEqual(false)
   }); 
        // ----test  6----
-       it('should onSave() is working', () => {
-        let  conteudoSalvo = 100000 ;
-        let valor = conteudoSalvo;
-   
-             component.onSave(conteudoSalvo) ;
-            
-             expect(component.onSave).toBeTruthy();
-             expect(conteudoSalvo).toEqual(100000);
-             expect(valor).toEqual(100000);
+  it('should parcelas() is working', () => {
+      
+        let parcelas = component.parcelas
+
+      
+       
+         expect( parcelas).toBeTruthy();
+           //  expect(valor).toEqual(100000);
              
    });   
         //---test   7----
-      it('should onSave2() is working', () => {
+      xit('should onSave2() is working', () => {
       let  quantidadeParcelas: any = 360 ;
       let valor = quantidadeParcelas;
      
-           component.onSave2(quantidadeParcelas) ;
+          // component.onSave2(quantidadeParcelas) ;
               
-            expect(component.onSave2).toBeTruthy();
+          //  expect(component.onSave2).toBeTruthy();
             expect(quantidadeParcelas).toEqual(360);
             expect(valor).toEqual(360);
                
   });
-               //---test   8----
-      it('should entradaValor() is working', () => {
-      let  entrada: number = 20000 ;
-      component.entradaValor() ;
-            
-      expect(component.entradaValor).toBeTruthy();
-          
-       }); 
+ 
        
-       //---test 9------
-    //   it('should entradaValor() is working', () => {
-        //let  entrada: number = 20000 ;
-     //   component.onSubmit ;
-              
-    //    expect(component.onSubmit).toBeTruthy() });  
+
 });

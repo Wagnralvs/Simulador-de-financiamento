@@ -25,7 +25,7 @@ it('should service to be running ', () => {
 it('should have no value to strat', () =>{
     servico = new DatasPropertyService();
 
-    expect(servico.valorDaEntrada.length).toBe(0);
+    expect(servico.valorEntrada.length).toBe(0);
 
 })
 it( 'should have dados in enviaDados' , () => {

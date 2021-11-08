@@ -1,24 +1,30 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Input } from '@angular/core';
 import { Service } from '../results/shared/service';
+
+import { DatasPropertyComponent } from '../datas-property.component';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class DatasPropertyService {
+// testes
+ valorImovel : any = '';
 
- valorDoImovel= '';
-  valorDaEntrada :string[]= [];
+ valorEntrada :string[]= [];
+//--------
+
 
   static model: Service;
 
   constructor() { }
 
-  enviaDados(dados: Service) {
+  enviaDados(dados: Service): any {
     DatasPropertyService.model = dados;
+     //this.valorImovel = Service;
   }
 
 
- // recuperaDados(): Service {
-  //  return DatasPropertyService.model; } 
+  receberDados(): Service {
+    return DatasPropertyService.model; } 
 }

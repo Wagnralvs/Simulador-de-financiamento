@@ -19,7 +19,9 @@ describe('ResultsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should  value of taxa', () => {
+  component.taxa
+
+    expect(component.taxa).toEqual(7);
   });
 });

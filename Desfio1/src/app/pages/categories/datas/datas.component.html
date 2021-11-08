@@ -5,126 +5,198 @@
 
 <h1 class="text-center  mt-5 mb-5 ">Dados do Proponente</h1>
 
-<form #f="ngForm" class="needs-validation" (ngSubmit)="onSubmit(f)" >
+<form  (ngSubmit)="onSubmit()"  [formGroup]="formulario">
 
-<!---------   nome  --------->
+<!---------   nome #f="ngForm" class="needs-validation" (ngSubmit)="onSubmit(f)" --------->
 
 <div class="row  container m-3">
 
   <div class="col-6">
     <div class="form-floating form-Group" >
 
-      <input type="text" pattern="[a-zA-Z ]*" mask="S*" 
-        class="form-control" #nome="ngModel" [class.is-invalid]="name.invalid && name.touched" name="nome" #name="ngModel" FormControlName="nome" [(ngModel)]="usuario.nome" id="nome" placeholder="your name" value="" required minlength="3">
-      
-        <div *ngIf="nome.errors && (nome.invalid && nome.touched)">
-          <small class="text text-danger" *ngIf="nome.errors.required">Nome é obrigatório !</small>
-          <small class="text text-danger" *ngIf="nome.errors.minlength">Nome inválido !</small>
-        </div>
-        <label for="nome">Nome completo :</label>
-      
+      <input type="text" 
+        class="form-control"    formControlName="nome"  id="nome" placeholder="your name" value="" >
      
+           <div *ngIf="formulario.controls.nome.touched && formulario.controls.nome?.errors" >
+            <small class="text text-danger" *ngIf="formulario.controls.nome.errors?.required">
+              Nome é obrigatório</small>
+            <small class="text text-danger" *ngIf="formulario.controls.nome.errors?.minlength">
+                Nome inválido</small>
+            <small class="text text-danger" *ngIf="formulario.controls.nome.errors?.pattern">
+                  Apenas letras</small>
+        </div>
+
+       <label for="nome">Nome completo :</label>
+      
     </div>
   </div>
 
+   <!--excluir----
+#name="ngModel"   ,  [(ngModel)]="usuario.nome,   [class.is-invalid]="name.invalid && name.touched"",required ,,
+name="nome", pattern="[a-zA-Z ]*"  mask="S*"
+      -->
+        <!--  <div *ngIf="nome.errors && (nome.invalid && nome.touched)">
+           <small class="text text-danger" *ngIf="nome.errors.required">Nome é obrigatório !</small>
+          <small class="text text-danger" *ngIf="nome.errors.minlength">Nome inválido !</small>
+          -->
   <!---------------profissão------------>
   <div class="col-6  form-Group">
     <div class="form-floating">
 
-      <input type="text" mask="S*" class="form-control" id="validationCustom02"
-      name="profissao" #profissao="ngModel" [class.is-invalid]="profissao.invalid && profissao.touched" FormControlName="profissao" [(ngModel)]="usuario.profissao" placeholder="your Profession" required minlength="4">
-      
-      <label for="validationCustom02">Profissão :</label>
-      <small class="text text-danger" [class.d-none]="profissao.valid || profissao.untouched">Profissão é obrigatório !</small>
+      <input type="text"  class="form-control" id="profissao"
+        formControlName="profissao"  placeholder="your Profession"  >
+ 
+    <div *ngIf="formulario.controls.profissao.touched && formulario.controls.profissao?.invalid" >
+      <small class="text text-danger" *ngIf="formulario.controls.profissao.errors?.required">
+        Profissão é obrigatório.</small>
+      <small class="text text-danger" *ngIf="formulario.controls.profissao.errors?.minlength">
+          Profissão invalida.</small>
+      <small class="text text-danger" *ngIf="formulario.controls.profissao.errors?.pattern">
+            Apenas letras.</small>
+  </div>
+      <label for="profissao">Profissão :</label>
+     
     
     </div>
   </div>
-  <!-- ------CPF-------------->
+       <!--  excluir  
+      [(ngModel)]="usuario.profissao" ,#profissao="ngModel",[class.is-invalid]="profissao.invalid && profissao.touched"
+     name="profissao",  mask="S*",
+    --><!-- <small class="text text-danger" [class.d-none]="profissao.valid || profissao.untouched">Profissão é obrigatório !</small>-->
+ 
+    <!-- ------CPF-------------->
+
   <div class="col-6  mt-4" >
-    <div class="form-floating"  >
+    <div class="form-floating form-Group"  >
 
-      <input type="text" mask="000.000.000-00"  minlength="14" class="form-control" id="validationCustom03" 
-      name="cpf" #cpf="ngModel"  [class.is-invalid]="cpf.invalid && cpf.touched" FormControlName="cpf" [(ngModel)]="usuario.cpf" placeholder="your CPF" required>
-
-      <div *ngIf="cpf.errors && (cpf.invalid && cpf.touched)">
-        <small class="text text-danger" *ngIf="cpf.errors.required">CPF é obrigatório !</small>
-        <small class="text text-danger" *ngIf="cpf.errors.minlength">CPF inválido !</small>
-      </div>
-      <label for="validationCustom03">CPF :</label>
+      <input type="text" mask="000.000.000-00"  class="form-control" id="cpf" 
+       formControlName="cpf"  placeholder="your CPF" >
+    
+       <div *ngIf="formulario.controls.cpf.touched && formulario.controls.cpf?.invalid" >
+        <small class="text text-danger" *ngIf="formulario.controls.cpf.errors?.required">
+          CPF é obrigatório.</small>
+        <small class="text text-danger" *ngIf="formulario.controls.cpf.errors?.minlength">
+            CPF inválido.</small>
+       </div>
+     <label for="cpf">CPF :</label>
       
     </div>
   </div>
+  <!--     excluir
+[(ngModel)]="usuario.cpf",name="cpf" #cpf="ngModel" , [class.is-invalid]="cpf.invalid && cpf.touched",
+  <div *ngIf="cpf.errors && (cpf.invalid && cpf.touched)">
+        <small class="text text-danger" *ngIf="cpf.errors.required">CPF é obrigatório !</small>
+        <small class="text text-danger" *ngIf="cpf.errors.minlength">CPF inválido !</small>
+      </div>
+-->
   <!---------email----------->
   <div class="col-6  mt-4" >
-    <div class="form-floating"  >
+    <div class="form-floating  form-Group"  >
 
-      <input type="email" email class="form-control" id="validationCustom04" placeholder="your e-mail"
-      name="email" #email="ngModel"  FormControlName="email" [(ngModel)]="usuario.email"  required minlength="7" >
+      <input type="email"  class="form-control" id="email" placeholder="your e-mail"
+       formControlName="email"  minlength="7" >
       
- 
+       <div *ngIf="formulario.controls.email.touched && formulario.controls.email?.invalid" >
+        <small class="text text-danger" *ngIf="formulario.controls.email.errors?.required">
+          E-mail é obrigatório.</small>
+        <small class="text text-danger" *ngIf="formulario.controls.email.errors?.email">
+            E-mail inválido.</small>
+       </div>
+
+      <label for="email">E-mail :</label>
+      
+    </div>
+  </div>
+
+  <!--    excluir
+[(ngModel)]="usuario.email" , required ,name="email", #email="ngModel", email
    <div *ngIf="email.errors && (email.invalid && email.touched)">
     <small class="text text-danger" *ngIf="email.errors.required">E-mail é obrigatório !</small>
     <small class="text text-danger" *ngIf="email.errors.email"> formato inválido !</small>
   </div>
-      <label for="validationCustom04">E-mail :</label>
-      
-    </div>
-  </div>
+  -->
   <!--------- data de nacimento-------->
   <div class="col-6  mt-4" >
     <div class="form-floating form-Group"  >
 
-      <input type="date"  max="2003-10-10" class="form-control" id="dataNascimento" placeholder="your date"
-      name="date" #dataNascimento="ngModel"  [class.is-invalid]="dataNascimento.invalid && dataNascimento.touched" FormControlName="date" [(ngModel)]="usuario.date" required  >
+      <input type="date"  class="form-control"   id="dataNascimento" placeholder="your date"
+       formControlName="dataNascimento" >
       
-      <div *ngIf="dataNascimento.errors && (dataNascimento.invalid && dataNascimento.touched)">
-      <small class="text text-danger" *ngIf="dataNascimento.errors.required">Data de Nascimento é obrigatório !</small>
-      <small class="text text-danger" *ngIf="dataNascimento.errors.max ">Data de nascimento invalidar !</small>
-    </div>
+       <div *ngIf="formulario.controls.dataNascimento.touched && formulario.controls.dataNascimento?.invalid" >
+        <small class="text text-danger" *ngIf="formulario.controls.dataNascimento.errors?.required">
+          Data de nascimento é obrigatório.</small>
+       <small class="text text-danger" *ngIf="formulario.controls.dataNascimento.errors?.max">
+          A sua idade não poder ser menor que 18 anos!</small> 
+       </div>
 
       <label for="dataNascimento">Data de Nascimento :</label>
     
     </div>
   </div>
+
+  <!--  excluir
+  name="date" #dataNascimento="ngModel"  [class.is-invalid]="dataNascimento.invalid && dataNascimento.touched"
+  [(ngModel)]="usuario.date",    max="2003-10-10"  
+    <div *ngIf="dataNascimento.errors && (dataNascimento.invalid && dataNascimento.touched)">
+      <small class="text text-danger" *ngIf="dataNascimento.errors.required">Data de Nascimento é obrigatório !</small>
+      <small class="text text-danger" *ngIf="dataNascimento.errors.max ">Data de nascimento invalidar !</small>
+    </div>
+  -->
   <!-----------------Cep----- ------>
   <div class="col-6  mt-4" >
-    <div class="form-floating"  >
+    <div class="form-floating form-Group"  >
 
-      <input type="tel"   mask="00000-000" class="form-control" id="validationCustom06" placeholder="your cep"
-      name="cep" #cep="ngModel" [class.is-invalid]="cep.invalid && cep.touched" FormControlName="cep" [(ngModel)]="usuario.cep"  required  >
+      <input type="tel"   mask="00000-000" class="form-control" id="cep" placeholder="your cep"
+    formControlName="cep"  >
       
-      <small class="text text-danger" [class.d-none]="cep.valid || cep.untouched">CEP é obrigatório !</small>
-      <label for="validationCustom06">CEP :</label>
+    <div *ngIf="formulario.controls.cep.touched && formulario.controls.cep?.invalid" >
+      <small class="text text-danger" *ngIf="formulario.controls.cep.errors?.required">
+        CEP é obrigatório.</small>
+      <small class="text text-danger" *ngIf="formulario.controls.cep.errors?.minlength">
+        CEP inválido !</small>
+     </div>
+      <label for="cep">CEP :</label>
      
     </div>
   </div>
+
+  <!--  excluir  
+   <small class="text text-danger" [class.d-none]="cep.valid || cep.untouched">CEP é obrigatório !</small>
+  -->
   <!---------telefone----------------->
   <div class="col-6  mt-4" >
-    <div class="form-floating"  >
+    <div class="form-floating form-Group"  >
 
-      <input type="tel"  prefix="+55" mask="(00)00000-0000" minlength="17" class="form-control" id="validationCustom07" placeholder="your phone"
-      name="telefone" #telefone="ngModel"  [class.is-invalid]="telefone.invalid && telefone.touched"  FormControlName="telefone" [(ngModel)]="usuario.telefone" value="" required  >
+      <input type="tel"  prefix="+55" mask="(00)00000-0000"  class="form-control" id="telefone" placeholder="your phone"
+        formControlName="telefone"    >
       
-      <div *ngIf="telefone.errors && (telefone.invalid && telefone.touched)">
-        <small class="text text-danger" *ngIf="telefone.errors.required">Telefone é obrigatório !</small>
-        <small class="text text-danger" *ngIf="telefone.errors.minlength"> Telefone inválido !</small>
-      </div>
-      <label for="validationCustom06">Celular :</label>
+        <div *ngIf="formulario.controls.telefone.touched && formulario.controls.telefone?.invalid" >
+          <small class="text text-danger" *ngIf="formulario.controls.telefone.errors?.required">
+            Telefone é obrigatório.</small>
+          <small class="text text-danger" *ngIf="formulario.controls.telefone.errors?.minlength">
+            Telefone inválido !</small>
+         </div>
+    
+      <label for="telefone">Celular :</label>
      
     </div>
   </div>
-  
- 
 </div>
+
+<!---  excluir ----
+  <div *ngIf="telefone.errors && (telefone.invalid && telefone.touched)">
+        <small class="text text-danger" *ngIf="telefone.errors.required">Telefone é obrigatório !</small>
+        <small class="text text-danger" *ngIf="telefone.errors.minlength"> Telefone inválido !</small>
+      </div>-->
 <!---------buttons---------->
 <div class="row container-fluid text-center mt-4" >
   <div class="col-6" >
-    <button class="btn btn-danger btn-lg " id="btn-cancelar" routerLink="/home" type="reset">Cancelar</button>
+    <button class="btn btn-danger btn-lg " id="btn-cancelar" routerLink="/home" >Cancelar</button>
   </div>
    <div class="col-6">
-   <button (click)="onSubmit" class="btn btn-success btn-lg "  id="btn-proseguir" routerLink="/property" type="submit" [disabled]="f.invalid ">Proseguir</button>
+   <button   class="btn btn-success btn-lg " [disabled]="formulario.invalid " id="btn-proseguir"  >Proseguir</button>
  </div>
- 
+ <!--routerLink="/property" [disabled]="f.invalid " [disabled]="formulario.invalid " [ngClass]="{'disabled': this.formulario.invalid}"-->
 </div>
 
 </form>

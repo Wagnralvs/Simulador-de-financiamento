@@ -1,13 +1,15 @@
-import { Component,NgModule, OnInit, Input,Output, Injectable ,EventEmitter} from '@angular/core';
+import { Component,NgModule, OnInit, Input,Output, Injectable ,EventEmitter, ViewChild} from '@angular/core';
 import {AbstractControl, NgForm,FormsModule, FormControl, FormGroup, Validators , FormBuilder} from '@angular/forms';
-//import { Router } from '@angular/router';
+import { Router } from '@angular/router';
 
-import { NgxMaskModule} from 'ngx-mask';
+//import { NgxMaskModule} from 'ngx-mask';
 //import { DatasComponent } from '../datas/datas.component';
 //import { AppComponent } from 'src/app/app.component';
-//import { ResultsComponent } from './results/results.component';
+import { ResultsComponent } from './results/results.component';
+import { ResultReprovadoComponent } from './result-reprovado/result-reprovado.component';
 import { Service } from './results/shared/service';
 import { DatasPropertyService } from './shared/datas-property-service';
+import { invalid } from '@angular/compiler/src/render3/view/util';
 
 
 @Component({
@@ -20,11 +22,15 @@ import { DatasPropertyService } from './shared/datas-property-service';
 
 @Injectable()
 export class DatasPropertyComponent implements OnInit {
+  @ViewChild(ResultsComponent) child:ResultsComponent | any;
 
-  private aprovado!: Service;
+  private aprovadar!: Service;
   private DatasPropertyService !: DatasPropertyService;
- //formulario: FormGroup;
+  private Imovel! : number;
+  formulario!: FormGroup;
 
+  
+  menssage : any ='';
   valorImovel= '';
   ValorEntrada = '';
 
@@ -34,135 +40,148 @@ export class DatasPropertyComponent implements OnInit {
 
   submitted = false
 
-// Capituar dados do input
-   onKeyup0(event:any){
-   // console.log(event)
-  }
-    onKeyup(event:any){
-    //  console.log(event)
-    }
-    onKeyup2(event:any){
-     // console.log(event)
-    }
 
-    onSave0(valor:number){
-      this.rendaMensal= valor
-    }
-    onSave(valor:number){
-this.conteudoSalvo = valor
-return valor
-}
-    onSave2(valor:string){
-      this.quantidadeParcelas = valor
-  }
-
-  /*renda(): boolean{
-  
-    let x: number = (this.rendaMensal * 0.3 );
-    let y: number = this.parcelas() ;
-    let w : number = this.rendaMensal;
-
-    console.log()
-
-    if( y  >=  x){
-        return false;
-    }
-    else(y < x)
-      return true
-    } */
-  
-
- entrada(): number {
+//  -----caclulos -----//
+valorAprovado() {
       
-     let x = 0.20;
-     let y:number = this.conteudoSalvo   ;
-       const total  = x * y  ;
+  let x: any = this.formulario.get('valorEntrada')?.value;
+  let y: any = this.formulario.get('valorImovel')?.value   ;
+  let valorAprovado  = y - x  ;
+
+  return valorAprovado
+ }
+ 
+
+ entrada() {
     
-    console.log(total)
+  let x = 0.20;
+  let y:any  = this.formulario.get('valorImovel')?.value ;
+  let total:any  = x * y  ;
 
-    return total 
-    }
-    
-    get entradaValor(){
-return this.entrada;
-    }
+  return total 
+}
+entradaValidacao(): boolean{
+  let x: number = this.entrada();
+  let y: number =this.formulario.get('valorEntrada')?.value
+   
+ 
+  if(x > y ) {
+  
+    //this.menssage = false;
+    //this.menssage = 'O valor da entrada não pode ser inferior a 20% do imóvel'
+    return false
+  }
+  
+else return true 
 
-    parcelas(){
-      let x = this.conteudoSalvo;
-      let y = this.quantidadeParcelas;
+}
+   
+  
 
+parcelas(){
+      let x: any =  this.formulario.get('valorImovel')?.value;
+      let y: any = this.formulario.get('quantidadeParcelas')?.value;
       const total = (x * 0.80/ y)* 1.058 ;
+
       return total
     }
-    
-    valorAprovado() {
-      
-      let x = 0.80;
-      let y:number = this.conteudoSalvo   ;
-        const total  = x * y  ;
-     return total
-     }
 
-     formulario = this.formBuilder.group({
-      TipoDeImovel:[null,[Validators.required]],
-     rendaMensal: [null ,[Validators.required, Validators.maxLength(4), Validators.max(4)]],
-     valorImovel: [null,[Validators.required]], 
-      ValorDaEntrada: [null,[Validators.required]],
-     quantidadePacelas: [null, [Validators.required , Validators.max(3)]],
-     parcelas: new FormControl(null, [Validators.required]) 
-      })
+// -----caclulo validação-----
+validacao() {
+let valido:Boolean = true;
 
-  constructor(private service:DatasPropertyService,private formBuilder:FormBuilder) {
+let parcelas:any = this.parcelas;
+let valorAprovado: any = this.valorAprovado;
+
+valido = this.renda();
+
+if(valido) {
+ // debugger
+
+ this.service.enviaDados(parcelas );
+ //this.service.enviaDados(valorAprovado );
+//this.aprovadar.parcelaInicial = this.parcelas()
+
+  this.aprovado();
+} 
+else this.reprovado();
+  
+}
+
+
+renda(): boolean{
+  
+  let x: number = (this.formulario.get('rendaMensal')?.value * 0.3 );
+  let y: number = this.parcelas() ;
+
+  if (  y  >  x){
+      return false;
+  }
+   return true
+  } 
+  
+  
+constructor(private service:DatasPropertyService,
+              private formBuilder:FormBuilder,
+              private router: Router) {
     
    }
 
-  usuario: any ={
+  ngOnInit(): void {
+
+    this.formulario = this.formBuilder.group({
+     tipoImovel:[null,[Validators.required]],
+     rendaMensal: [null ,[Validators.required,]],
+     valorImovel: [null,[Validators.required]], 
+     valorEntrada: [null,[Validators.required, ]],
+     quantidadeParcelas: [null, [Validators.required , Validators.max(360), Validators.min(1) ]],
+     
+      })
+   
   
   }
+  /*customizarValidacao(control: FormControl ){
 
-  ngOnInit(): void {
-    this.usuario={};
-    console.log("total");
-    
- //this.criarFormulario();
-     
-  }
+    let x:any =this.formulario.get('valorImovel')?.value;
+    let y = this.entrada();
+
+   // return ( valorEntrada.value <= this.entrada?);
+   if (x <= y) {
+     return false ? null:{ string : 'entrada menor'}
+   }
+   return true
+
+  }*/
+
+
+  onSubmit(){
+  
+   this.validacao();
+   //alert(this.entrada())
+   console.log(this.formulario);
+   console.log(this.formulario.value)
+
  
-
-
-  onSubmit(form: any){
-  // console.log(this.formulario)
-   //this.submitted = true
+   this.service.valorImovel = this.formulario.get('valorImovel')?.value
+     // this.service.valorImovel=this.formulario.get("valorImovel");
+  //  this.service.valorImovel=this.formulario.controls["valorImovel"].value;
+   //   debugger
   }
- 
+  // --- resulatdo = aprovado /reprovado
+ reprovado(){
+  this.router.navigate(['/reprov'])
+ }
+ aprovado() {
+  this.router.navigate(['/results'])
+
+  
+
+  }
 
   //---------testes-------------
- encaminhoAprovado() {
-   // this.DatasPropertyService.enviaDados(this.aprovado);
+     // this.service.valorDoImovel=this.formulario.get("valorImovel");
+   //   this.service.valorDoImovel=this.formulario.controls["valorImovel"].value;
+   //   debugger } 
 
-  }
-
-  validarDados(){
-    alert("Solicitação enviada com sucesso!");
-  }
-
-
-
-
-
-
-
-
-
-
-
-   // alert(this.ValorDoImovel);
-   
-     // this.service.valorDoImovel=this.formulario.get("ValorDoImovel");
-   //   this.service.valorDoImovel=this.formulario.controls["ValorDoImovel"].value;
-   //   debugger
-  //    this.encaminhoAprovado();
-  //  } 
-  //  else this.encaminhaReprovado();}
 
 }

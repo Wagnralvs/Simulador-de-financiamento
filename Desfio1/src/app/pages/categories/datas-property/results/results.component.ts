@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { DatasPropertyComponent } from '../datas-property.component';
 import { DatasPropertyService } from '../shared/datas-property-service';
@@ -11,21 +11,25 @@ import { Service } from './shared/service';
 })
 export class ResultsComponent implements OnInit {
 
-  @Input() nome : number =0;
-   ValorDoImovel = '';
-  @Input() entrada: string[]=[''];
-
-  taxa= 7;
-  parcelaInicial! : string ;
-  valorAprovado! : string ;
  
- reprovado: string[]  = [];
 
-  constructor(private service:DatasPropertyService) { }
+ valorImovel = '';
+ taxa = 7;
+ totalParcelaInicial! : any ;
+ totalValorAprovado! : any;
+ 
+
+  constructor() { }
 
   ngOnInit(): void {
-    this.ValorDoImovel=this.service.valorDoImovel;
-  // this.parcelaInicial = DatasPropertyService.model.parcelaInicial1.toLocaleString('pt-BR');
+    //this.valorImovel = DatasPropertyService.model.parcelaInicial
+  //  this.valorImovel=this.service.valorImovel;
+  this.totalParcelaInicial = DatasPropertyService.model.parcelaInicial.toLocaleString("pt-BR");
+  // this.totalParcelaInicial = DatasPropertyService.model.parcelaInicial;
+   this.totalValorAprovado = DatasPropertyService.model.valorAprovado.toLocaleString("pt-BR");
+
+  //  this.totalParcelaInicial = DatasPropertyService.model.parcelaInicial.valueOf();  .toLocaleString("pt-BR")
   }
+ 
 
 }
