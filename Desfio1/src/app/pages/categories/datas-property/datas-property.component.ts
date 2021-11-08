@@ -24,9 +24,9 @@ import { invalid } from '@angular/compiler/src/render3/view/util';
 export class DatasPropertyComponent implements OnInit {
   @ViewChild(ResultsComponent) child:ResultsComponent | any;
 
-  private aprovadar!: Service;
-  private DatasPropertyService !: DatasPropertyService;
-  private Imovel! : number;
+  private Model!: Service;
+ // private DatasPropertyService !: DatasPropertyService;
+  //private Imovel! : number;
   formulario!: FormGroup;
 
   
@@ -39,6 +39,7 @@ export class DatasPropertyComponent implements OnInit {
   rendaMensal:any;
 
   submitted = false
+  Serv: any;
 
 
 //  -----caclulos -----//
@@ -90,17 +91,20 @@ parcelas(){
 validacao() {
 let valido:Boolean = true;
 
-let parcelas:any = this.parcelas;
-let valorAprovado: any = this.valorAprovado;
+let parcelas:any = this.parcelas();
+let valorAprovado: any = this.valorAprovado();
+
 
 valido = this.renda();
 
 if(valido) {
  // debugger
+this.Model = new Service (parcelas , valorAprovado );
+ this.service.enviaDados(this.Model);
+// this.service.enviaDados(valorAprovado);
+// console.log(this.service.enviaDados)
 
- this.service.enviaDados(parcelas );
- //this.service.enviaDados(valorAprovado );
-//this.aprovadar.parcelaInicial = this.parcelas()
+//this.service.parcelaInicial = this.parcelas()
 
   this.aprovado();
 } 

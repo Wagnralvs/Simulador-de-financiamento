@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideRoutes, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { DatasComponent } from './datas.component';
 
 
@@ -9,6 +9,7 @@ import { DatasComponent } from './datas.component';
 describe('DadasComponent', () => {
   let component: DatasComponent;
   let fixture: ComponentFixture<DatasComponent>;
+  let fb: FormBuilder;
 
   const spyRouter = jasmine.createSpyObj("spyRouter",
   ["navigate"])
@@ -33,27 +34,18 @@ describe('DadasComponent', () => {
    // fixture = TestBed.createComponent(DatasComponent);
    // component = fixture.componentInstance;
   //  fixture.detectChanges();
- // onSubmit = new onSubmit();
-  });
-
-
-
-  //test 2
-  xit('should call submitted function',() => {
- 
-  spyOn(component, 'onSubmit').and.callThrough();
-     component.onSubmit();
-    
-    expect(component.onSubmit).toHaveBeenCalled();
+ // onSubmit = new onSubmit(); 
 
   });
 
-//test 3
-it('should set submitted to true this', () => {
-  
+
+
+//test 1
+it('should alert to be call', () => {
+  spyOn(window , 'alert');
   component.onSubmit();
 
-  expect(component.onSubmit).toMatch('alert');
+  expect(window.alert).toHaveBeenCalledWith('Formulário enviado com sucesso!')
 
 });
 //     test   4

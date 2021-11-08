@@ -19,15 +19,18 @@ export class ResultsComponent implements OnInit {
  totalValorAprovado! : any;
  
 
-  constructor() { }
+  constructor(private service:DatasPropertyService) { }
 
   ngOnInit(): void {
+
+  this.totalParcelaInicial = DatasPropertyService.model.parcelaInicial.toLocaleString("pt-BR");
+  this.totalValorAprovado = DatasPropertyService.model.valorAprovado.toLocaleString("pt-BR");
+  
+  
+  
+   // this.totalParcelaInicial = DatasPropertyService.model.parcelaInicial;
     //this.valorImovel = DatasPropertyService.model.parcelaInicial
   //  this.valorImovel=this.service.valorImovel;
-  this.totalParcelaInicial = DatasPropertyService.model.parcelaInicial.toLocaleString("pt-BR");
-  // this.totalParcelaInicial = DatasPropertyService.model.parcelaInicial;
-   this.totalValorAprovado = DatasPropertyService.model.valorAprovado.toLocaleString("pt-BR");
-
   //  this.totalParcelaInicial = DatasPropertyService.model.parcelaInicial.valueOf();  .toLocaleString("pt-BR")
   }
  

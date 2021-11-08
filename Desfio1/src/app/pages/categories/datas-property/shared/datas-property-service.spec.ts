@@ -11,8 +11,8 @@ beforeEach(() => {
 
   TestBed.configureTestingModule({});
   servico = TestBed.inject(DatasPropertyService);
-})
-it('should service to be running ', () => {
+})// test 1
+it('should enviarDados to be running ', () => {
  let Dados: Service = new Service(40000, 160000);
 
  servico.enviaDados(Dados);
@@ -20,7 +20,18 @@ it('should service to be running ', () => {
  expect(Dados.parcelaInicial).toEqual(40000);
  expect(Dados.valorAprovado).toEqual(160000);
 });
+// test 2
+it('should receberDados to be running ', () => {
+  let Dados: Service = new Service(20000, 80000);
+ 
+  servico.receberDados();
+ 
+  expect(servico.receberDados).toBeTruthy()
+  expect(Dados.parcelaInicial).toEqual(20000);
+  expect(Dados.valorAprovado).toEqual(80000);
 
+ });
+// test 3 
 
 it('should have no value to strat', () =>{
     servico = new DatasPropertyService();
@@ -28,7 +39,7 @@ it('should have no value to strat', () =>{
     expect(servico.valorEntrada.length).toBe(0);
 
 })
-it( 'should have dados in enviaDados' , () => {
+xit( 'should have dados in enviaDados' , () => {
  let dados : any = '' ;
 
   servico.enviaDados;
