@@ -18,10 +18,11 @@ describe('ResultsComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
+//  test 1
   it('should  value of taxa', () => {
   component.taxa
 
     expect(component.taxa).toEqual(7);
   });
+
 });

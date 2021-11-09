@@ -12,7 +12,7 @@ describe('DatasPropertyComponent', () => {
   let component: DatasPropertyComponent;
   let fixture: ComponentFixture<DatasPropertyComponent>;
   let parcela : DatasPropertyComponent ;
- // let router: Router;
+
 
   const spyRouter = jasmine.createSpyObj("spyRouter",
   ["navigate" , "aprovado"  , "reprovado"])
@@ -61,7 +61,7 @@ describe('DatasPropertyComponent', () => {
   
   });
   //  ----test 1----
-  it( ' should formulario ngOnit(), ',() => {
+  it( ' should formulario in ngOnit(), ',() => {
     
    
     component.ngOnInit
@@ -72,7 +72,7 @@ describe('DatasPropertyComponent', () => {
     //expect(component.formulario).toHaveBeenCalled()
   })
   // ----- test 2 ------
-  it( ' should router call in aprovado() ',() => {
+  it( ' should router called in aprovado() ',() => {
 
     component.aprovado();
     expect(spyRouter.navigate).toHaveBeenCalledWith(['/results']);
@@ -81,7 +81,7 @@ describe('DatasPropertyComponent', () => {
 
 
 //     ----  test 3 ------
-  it('should router call in reprovado()', () => {
+  it('should router called in reprovado()', () => {
     
     component.reprovado();
     expect(spyRouter.navigate).toHaveBeenCalledWith(['/reprov'])
@@ -110,28 +110,20 @@ it('should onSubmit() is working', () => {
    component.entrada();
   
    //expect(valor).toEqual(1000);
+   expect(component.entrada).toBeTruthy();
    expect(entrada).toEqual(valor);
    
    });
-   //----test   4-----
-   xit('should onkeyup2() is working', () => {
-
-    let valor =  '1000, 2000';
-  //   component.onKeyup2(valor);
-    
-  //   expect(component.onKeyup2).toBeTruthy();
-     
-     });
-     // --- test  5
+ 
+     // --- test  4
      it('should renda() is working', () => {
   let rendaTest:  any = component.renda;
   rendaTest = false;
 
-   //component.renda();
    component.renda().valueOf;
 
    expect(component.renda).toBeTruthy();
-  // expect().toBeTruthy();
+ 
    expect(rendaTest).toBeFalsy();
    expect(rendaTest).toEqual(false)
   }); 
@@ -143,22 +135,8 @@ it('should onSubmit() is working', () => {
       
        
          expect( parcelas).toBeTruthy();
-           //  expect(valor).toEqual(100000);
+          
              
    });   
-        //---test   7----
-      xit('should onSave2() is working', () => {
-      let  quantidadeParcelas: any = 360 ;
-      let valor = quantidadeParcelas;
-     
-          // component.onSave2(quantidadeParcelas) ;
-              
-          //  expect(component.onSave2).toBeTruthy();
-            expect(quantidadeParcelas).toEqual(360);
-            expect(valor).toEqual(360);
-               
-  });
- 
-       
-
+  
 });

@@ -1,15 +1,10 @@
-import { Component,NgModule, OnInit, Input,Output, Injectable ,EventEmitter, ViewChild} from '@angular/core';
-import {AbstractControl, NgForm,FormsModule, FormControl, FormGroup, Validators , FormBuilder} from '@angular/forms';
+import { Component, OnInit,  Injectable , } from '@angular/core';
+import { FormGroup, Validators , FormBuilder, } from '@angular/forms';
 import { Router } from '@angular/router';
 
-//import { NgxMaskModule} from 'ngx-mask';
-//import { DatasComponent } from '../datas/datas.component';
-//import { AppComponent } from 'src/app/app.component';
-import { ResultsComponent } from './results/results.component';
-import { ResultReprovadoComponent } from './result-reprovado/result-reprovado.component';
 import { Service } from './results/shared/service';
 import { DatasPropertyService } from './shared/datas-property-service';
-import { invalid } from '@angular/compiler/src/render3/view/util';
+
 
 
 @Component({
@@ -22,23 +17,11 @@ import { invalid } from '@angular/compiler/src/render3/view/util';
 
 @Injectable()
 export class DatasPropertyComponent implements OnInit {
-  @ViewChild(ResultsComponent) child:ResultsComponent | any;
 
   private Model!: Service;
- // private DatasPropertyService !: DatasPropertyService;
-  //private Imovel! : number;
   formulario!: FormGroup;
 
-  
   menssage : any ='';
-  valorImovel= '';
-  ValorEntrada = '';
-
-  conteudoSalvo: any;
-  quantidadeParcelas: any;
-  rendaMensal:any;
-
-  submitted = false
   Serv: any;
 
 
@@ -60,17 +43,18 @@ valorAprovado() {
   let total:any  = x * y  ;
 
   return total 
-}
-entradaValidacao(): boolean{
+};
+
+ entradaX = '';
+entradaValidacao(){
   let x: number = this.entrada();
   let y: number =this.formulario.get('valorEntrada')?.value
-   
- 
-  if(x > y ) {
   
-    //this.menssage = false;
-    //this.menssage = 'O valor da entrada não pode ser inferior a 20% do imóvel'
-    return false
+  
+ if(x > y ) {
+  this.menssage = 'O valor da entrada não pode ser inferior a';
+  this.entradaX = this.entrada();
+    return   false 
   }
   
 else return true 
@@ -98,13 +82,10 @@ let valorAprovado: any = this.valorAprovado();
 valido = this.renda();
 
 if(valido) {
- // debugger
+ // envio de dados para o Service
 this.Model = new Service (parcelas , valorAprovado );
  this.service.enviaDados(this.Model);
-// this.service.enviaDados(valorAprovado);
-// console.log(this.service.enviaDados)
 
-//this.service.parcelaInicial = this.parcelas()
 
   this.aprovado();
 } 
@@ -137,14 +118,21 @@ constructor(private service:DatasPropertyService,
      tipoImovel:[null,[Validators.required]],
      rendaMensal: [null ,[Validators.required,]],
      valorImovel: [null,[Validators.required]], 
-     valorEntrada: [null,[Validators.required, ]],
+     valorEntrada: [null,[Validators.required,  ]],
      quantidadeParcelas: [null, [Validators.required , Validators.max(360), Validators.min(1) ]],
      
       })
    
-  
   }
-  /*customizarValidacao(control: FormControl ){
+   /*  entradaValidacaoTest (control: FormControl){
+    let parcelas = this.formulario.get('valorimovel')?.value * 0.20;
+    let value = this.formulario.get('valorEntrada')?.value;
+    if (value < parcelas ){
+        return {entradaValor: false}
+    }
+    return null;
+}
+customizarValidacao(control: FormControl ){
 
     let x:any =this.formulario.get('valorImovel')?.value;
     let y = this.entrada();
@@ -161,31 +149,19 @@ constructor(private service:DatasPropertyService,
   onSubmit(){
   
    this.validacao();
-   //alert(this.entrada())
+   
    console.log(this.formulario);
    console.log(this.formulario.value)
 
  
-   this.service.valorImovel = this.formulario.get('valorImovel')?.value
-     // this.service.valorImovel=this.formulario.get("valorImovel");
-  //  this.service.valorImovel=this.formulario.controls["valorImovel"].value;
-   //   debugger
   }
-  // --- resulatdo = aprovado /reprovado
+  // --- rotas = aprovado /reprovado
  reprovado(){
   this.router.navigate(['/reprov'])
  }
  aprovado() {
   this.router.navigate(['/results'])
 
-  
-
   }
-
-  //---------testes-------------
-     // this.service.valorDoImovel=this.formulario.get("valorImovel");
-   //   this.service.valorDoImovel=this.formulario.controls["valorImovel"].value;
-   //   debugger } 
-
 
 }

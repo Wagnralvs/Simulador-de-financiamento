@@ -10,7 +10,7 @@
 
   <div class="col-6 form-group">
   
-      <select type="text" class="form-select form-select-lg  is-valid form-control" id="tipoImovel" 
+      <select type="text" class="form-select form-select-lg   form-control" id="tipoImovel" 
      formControlName="tipoImovel" aria-label=".form-select-lg example"  >
      <option selected>Tipo do imóvel:</option>
         <option value="1">Residencial</option>
@@ -60,14 +60,14 @@
   <div class="col-6  mt-4" >
     <div class="form-floating form-group"  >
       
-      <input type="tell" prefix="R$" suffix=",00" mask="separator.2" thousandSeparator="." minlength="1"  [dropSpecialCharacters]="true" class="form-control" 
+      <input type="tell" prefix="R$" suffix=",00" mask="separator.2" thousandSeparator="."   [dropSpecialCharacters]="true" class="form-control" 
       formControlName="valorEntrada"  id="valorEntrada" placeholder="value of input" required  >
      
       <div *ngIf="formulario.controls.valorEntrada.touched && formulario.controls.valorEntrada?.errors" >
         <small class="text text-danger" *ngIf="formulario.controls.valorEntrada.errors?.required">
           Valor da entrada é obrigatório</small>
         </div>
-       <small class="text text-danger" >{{menssage}}</small> 
+        <small class="text text-danger" >{{menssage}} {{entradaX |currency:'BRL' }}</small>
       <label for="valorEntrada">Valor da Entrada :   </label>
      
     </div>
@@ -75,33 +75,31 @@
  
 
   
-  <!---------Quantidade de parcelas---->
+  <!---------Quantidade de parcelas ---->
 
   <div class="col-6  mt-4" >
     <div class="form-floating form-group "  >
 
-      <input type="tel"  mask="000" class="form-control" id="quantidadeParcelas"
+      <input type="number"  class="form-control" id="quantidadeParcelas"
      formControlName="quantidadeParcelas"  placeholder="your phone" 
     >
 
       <div *ngIf="formulario.controls.quantidadeParcelas.touched && formulario.controls.quantidadeParcelas?.errors" >
         <small class="text text-danger" *ngIf="formulario.controls.quantidadeParcelas.errors?.required">
           Parcelas é obrigatoria !.</small>
-      
-        </div>
+       </div>
+
         <div *ngIf="formulario.controls.quantidadeParcelas.touched && formulario.controls.quantidadeParcelas?.errors" >
           <small class="text text-danger" *ngIf="formulario.controls.quantidadeParcelas.errors?.max">
             Parcelas máxima de 360!.</small>
-        
-          </div>
+       </div>
+
         <label  for="quantidadeParcelas">Em quantas parcelas deseja pagar? </label>
       </div>
      
     </div>
-
-  
-
 </div>
+
 <div >Valor da primeira parcela {{parcelas()|currency:'BRL'}}</div>
 <div>Valor aprovado para o financiamento {{valorAprovado()|currency:'BRL'}}</div>
 <div>Renda reprovada ou aprovada {{renda()}}</div>
@@ -109,13 +107,13 @@
 <div>validacao entrada {{entradaValidacao()}}</div>
 
 
-<!--buttons-->
+<!--buttons  -->
 <div class="row container-fluid text-center mt-4" >
   <div class="col-6" >
     <button class="btn btn-danger btn-lg " id="btn-cancelar" routerLink="/home" >Cancelar</button>
   </div>
    <div class="col-6">
-   <button   class="btn btn-success btn-lg "  [disabled]="formulario.invalid"  id="btn-proseguir"  type="submit" >Proseguir</button>
+   <button   class="btn btn-success btn-lg " [disabled]="formulario.invalid"   id="btn-proseguir"  type="submit" >Proseguir</button>
  </div>
 
  
@@ -123,7 +121,6 @@
 
 </form>
 
-<!--<app-results  [nome]="entrada()"></app-results> form="formulario" [disabled]="formulario.invalid" -->
 
 
 

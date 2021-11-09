@@ -39,15 +39,6 @@ it('should have no value to strat', () =>{
     expect(servico.valorEntrada.length).toBe(0);
 
 })
-xit( 'should have dados in enviaDados' , () => {
- let dados : any = '' ;
 
-  servico.enviaDados;
-
-   expect(servico.enviaDados).toMatch('dados');
-   expect(servico.enviaDados).toBeTruthy();
-
-
-})
 
 })

@@ -12,26 +12,18 @@ import { Service } from './shared/service';
 export class ResultsComponent implements OnInit {
 
  
-
- valorImovel = '';
  taxa = 7;
  totalParcelaInicial! : any ;
  totalValorAprovado! : any;
  
-
-  constructor(private service:DatasPropertyService) { }
+//private service:DatasPropertyService
+  constructor() { }
 
   ngOnInit(): void {
 
   this.totalParcelaInicial = DatasPropertyService.model.parcelaInicial.toLocaleString("pt-BR");
   this.totalValorAprovado = DatasPropertyService.model.valorAprovado.toLocaleString("pt-BR");
   
-  
-  
-   // this.totalParcelaInicial = DatasPropertyService.model.parcelaInicial;
-    //this.valorImovel = DatasPropertyService.model.parcelaInicial
-  //  this.valorImovel=this.service.valorImovel;
-  //  this.totalParcelaInicial = DatasPropertyService.model.parcelaInicial.valueOf();  .toLocaleString("pt-BR")
   }
  
 

@@ -48,16 +48,6 @@ it('should alert to be call', () => {
   expect(window.alert).toHaveBeenCalledWith('Formulário enviado com sucesso!')
 
 });
-//     test   4
-xit('should alert is working', () => {
-    
-
-
-   expect(component.onSubmit).toHaveBeenCalled();
-  // expect(component.ngOnInit).toMatch('this.formulario');
-   expect(component.ngOnInit).toBeTruthy();
-
- });
 
 
 
