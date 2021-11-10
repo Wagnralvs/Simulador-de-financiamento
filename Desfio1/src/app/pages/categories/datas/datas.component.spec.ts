@@ -31,11 +31,7 @@ describe('DadasComponent', () => {
   });
 
   beforeEach(() => {
-   // fixture = TestBed.createComponent(DatasComponent);
-   // component = fixture.componentInstance;
-  //  fixture.detectChanges();
- // onSubmit = new onSubmit(); 
-
+   
   });
 
 

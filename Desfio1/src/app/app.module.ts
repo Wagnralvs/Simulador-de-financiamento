@@ -13,6 +13,7 @@ import { HomeComponent } from './pages/categories/home/home.component';
 import { ResultsComponent } from './pages/categories/datas-property/results/results.component';
 import { DatasPropertyService } from './pages/categories/datas-property/shared/datas-property-service';
 import { ResultReprovadoComponent } from './pages/categories/datas-property/result-reprovado/result-reprovado.component';
+import { HistoricComponent } from './pages/categories/historic/historic.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { ResultReprovadoComponent } from './pages/categories/datas-property/resu
     DatasPropertyComponent,
     HomeComponent,
     ResultsComponent,
-    ResultReprovadoComponent
+    ResultReprovadoComponent,
+    HistoricComponent
   ],
   imports: [
     ReactiveFormsModule,

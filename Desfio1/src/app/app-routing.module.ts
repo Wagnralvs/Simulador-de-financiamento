@@ -6,6 +6,7 @@ import { DatasPropertyComponent } from './pages/categories/datas-property/datas-
 import { ResultReprovadoComponent } from './pages/categories/datas-property/result-reprovado/result-reprovado.component';
 import { ResultsComponent } from './pages/categories/datas-property/results/results.component';
 import { DatasComponent } from './pages/categories/datas/datas.component';
+import { HistoricComponent } from './pages/categories/historic/historic.component';
 import { HomeComponent } from './pages/categories/home/home.component';
 
 
@@ -17,7 +18,8 @@ const routes: Routes = [
    {path: 'next' , component: DatasComponent},
    {path: 'property', component: DatasPropertyComponent},
    {path: 'results', component: ResultsComponent},
-   {path: 'reprov', component: ResultReprovadoComponent}
+   {path: 'reprov', component: ResultReprovadoComponent},
+   {path: 'historic' , component: HistoricComponent}
 
    
    

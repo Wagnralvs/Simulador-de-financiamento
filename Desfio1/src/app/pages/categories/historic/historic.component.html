@@ -1,0 +1,41 @@
+<div class="container-fluid">
+<h3 class="m-5 me-5 ">Histórico de Propostas</h3>
+
+<div >
+<table class="container table-responsive" >
+<tr id="titule">
+  
+    <th >Nome do proponente</th>
+    <th>Data de simulação</th>
+    <th>Valor do imóvel</th>
+    <th>Números de parcelas</th>
+</tr>
+<tr>
+    <td>{{nome}}</td>
+    <td>{{data}}</td>
+    <td>{{valorImovel}}</td>
+    <td>{{parcelas}}</td>
+    <td><a ><img routerLink=""  src="/assets/icons/eye-fill.svg" class="text-success"width="20" height="20" title="Visualizar" alt=""></a></td>
+    <td><a onclick="onDelete()"><img  src="/assets/icons/trash.svg" width="20" height="20" title="Excuir" alt=""></a></td>
+</tr>
+<tr>
+    <td>{{nome}}</td>
+    <td>{{data}}</td>
+    <td>{{valorImovel}}</td>
+    <td>{{parcelas}}</td>
+    <td><img src="/assets/icons/eye-fill.svg" width="20" height="20" title="Visualizar" alt=""></td>
+    <td><a href=""><img src="/assets/icons/trash.svg" width="20" height="20" title="Excuir" alt=""></a></td>
+</tr>
+</table>
+</div>
+</div>
+
+
+<div>
+<div class="container mt-4">
+    <strong class="text-center ">  <p>Desculpe :( <br>
+        Não encontramos nenhum histórico de propostas. <br>
+        Por favor, simule um financiamento para que os dados apareçam aqui.
+   </p> </strong>
+</div>
+</div>

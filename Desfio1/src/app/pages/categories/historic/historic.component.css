@@ -1,0 +1,11 @@
+table{
+    background-color: rgb(250, 254, 255);
+    box-shadow:1px 1px 0px 0px rgb(142, 163, 177);
+}
+#titule{
+    opacity: 0.8;
+}
+strong p{
+    background-color: rgb(250, 254, 255);
+    box-shadow:0.8px 0.3px 0px 0px rgb(142, 163, 177);
+}

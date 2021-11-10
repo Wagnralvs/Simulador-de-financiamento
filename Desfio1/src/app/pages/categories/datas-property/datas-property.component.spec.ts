@@ -94,11 +94,8 @@ it('should onSubmit() is working', () => {
 
  component.onSubmit();
 
- // expect(component.onKeyup).not.toHaveBeenCalled();
  expect(component.onSubmit).toBeTruthy();
-// expect(component.onKeyup).not.toBeUndefined();
- //expect(valor).not.toThrow();
- //expect(component.onKeyup).toEqual(1000);
+
 
  });
  //----test  3-------
@@ -132,11 +129,17 @@ it('should onSubmit() is working', () => {
       
         let parcelas = component.parcelas
 
-      
-       
-         expect( parcelas).toBeTruthy();
+      expect( parcelas).toBeTruthy();
           
              
    });   
+   //  --- test / test 
+  // it('should valorAprovado() is working', () => {
+      
+  // let valorAprovado =  component.valorAprovado();
+
+
+
+ // expect(valorAprovado.valueOf ).toBe('valorAprovado')});   
   
 });

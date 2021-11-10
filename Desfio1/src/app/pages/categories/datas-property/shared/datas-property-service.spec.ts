@@ -16,9 +16,10 @@ it('should enviarDados to be running ', () => {
  let Dados: Service = new Service(40000, 160000);
 
  servico.enviaDados(Dados);
+ let result = servico.receberDados();
 
- expect(Dados.parcelaInicial).toEqual(40000);
- expect(Dados.valorAprovado).toEqual(160000);
+ expect(result.parcelaInicial).toEqual(40000);
+ expect(result.valorAprovado).toEqual(160000);
 });
 // test 2
 it('should receberDados to be running ', () => {
