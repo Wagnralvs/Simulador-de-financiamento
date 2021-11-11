@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from 'src/app/app.component';
 import { DatasPropertyComponent } from '../datas-property/datas-property.component';
 import { Router } from '@angular/router';
+import { DatasPropertyService } from '../datas-property/shared/datas-property-service';
+import { Service } from '../datas-property/results/shared/service';
 
 
 @Component({
@@ -19,9 +21,11 @@ export class DatasComponent implements OnInit {
  
   
   formulario!: FormGroup;
+  name: any ='';
+  private Model!:Service;
   
 
-  constructor(private fb : FormBuilder , private router:Router) { }
+  constructor(private fb : FormBuilder , private router:Router, private service:DatasPropertyService) { }
 
   
 
@@ -37,16 +41,24 @@ export class DatasComponent implements OnInit {
      telefone :[null , [Validators.required, Validators.minLength(17)]],
    })
 
-   // this.usuario={};
+  
   }
 
   onSubmit(){
 
- 
   alert('Formulário enviado com sucesso!')
   this.router.navigate(['/property'])
- console.log(this.formulario)
+ console.log(this.formulario);
+
+ this.nomeEnviar();
   
+  }
+  nomeEnviar(){
+this.name = this.formulario.get('name')?.value
+let name = this.name;
+
+this.Model = new Service(name, name , name , name );
+this.service.enviaDados(this.Model)
   }
 
 }

@@ -77,13 +77,14 @@ let valido:Boolean = true;
 
 let parcelas:any = this.parcelas();
 let valorAprovado: any = this.valorAprovado();
+let quantidadeParcelas : any = this.formulario.get('quantidadeParcelas')?.value
 
 
 valido = this.renda();
 
 if(valido) {
  // envio de dados para o Service
-this.Model = new Service (parcelas , valorAprovado );
+this.Model = new Service (parcelas , valorAprovado , quantidadeParcelas , quantidadeParcelas );
  this.service.enviaDados(this.Model);
 
 

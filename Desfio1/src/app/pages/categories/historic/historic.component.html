@@ -2,30 +2,70 @@
 <h3 class="m-5 me-5 ">Histórico de Propostas</h3>
 
 <div >
-<table class="container table-responsive" >
-<tr id="titule">
+<table class="container table-responsive" value="['cliente']">
+<tr class="row " id="titule">
   
-    <th >Nome do proponente</th>
-    <th>Data de simulação</th>
-    <th>Valor do imóvel</th>
-    <th>Números de parcelas</th>
+    <th class="col-3" >Nome do proponente</th>
+    <th class="col-2">Data de simulação</th>
+    <th class="col-2">Valor do imóvel</th>
+    <th class="col-2">Números de parcelas</th>
 </tr>
+<body  >
 <tr>
     <td>{{nome}}</td>
-    <td>{{data}}</td>
+    <td>{{cliente}}</td>
     <td>{{valorImovel}}</td>
     <td>{{parcelas}}</td>
-    <td><a ><img routerLink=""  src="/assets/icons/eye-fill.svg" class="text-success"width="20" height="20" title="Visualizar" alt=""></a></td>
-    <td><a onclick="onDelete()"><img  src="/assets/icons/trash.svg" width="20" height="20" title="Excuir" alt=""></a></td>
+    <td><a ><img data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="delete()" src="/assets/icons/eye-fill.svg" type="submit" class="ms-5 me-5 "width="20" height="20" title="Visualizar" alt=""></a></td>
+    <td><a ><img type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="delete()" src="/assets/icons/trash.svg" width="20" height="20" title="Excuir" alt=""></a></td>
 </tr>
-<tr>
+
+
+  <!-- Modal Excluir -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Excluir</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h4>  Você realmente deseja deletar essa proposta ?</h4> 
+           
+<small> Propostas deletadas, não poderão ser mais visualizadas, esse procedimento não é reverssível.</small>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger">Excluir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Visualizar -->
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Dados do Proponente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+<!--<tr>
     <td>{{nome}}</td>
     <td>{{data}}</td>
     <td>{{valorImovel}}</td>
     <td>{{parcelas}}</td>
     <td><img src="/assets/icons/eye-fill.svg" width="20" height="20" title="Visualizar" alt=""></td>
     <td><a href=""><img src="/assets/icons/trash.svg" width="20" height="20" title="Excuir" alt=""></a></td>
-</tr>
+</tr>-->
 </table>
 </div>
 </div>

@@ -5,6 +5,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {Router, RouterModule, Routes} from '@angular/router';
 import { NgxMaskModule  } from 'ngx-mask';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
 
 import { AppComponent } from './app.component';
 import { DatasComponent } from './pages/categories/datas/datas.component';
@@ -30,6 +31,7 @@ import { HistoricComponent } from './pages/categories/historic/historic.componen
     AppRoutingModule,
     FormsModule,
     RouterModule,
+    BrowserAnimationsModule,
     NgxMaskModule.forRoot({
      dropSpecialCharacters:false
     })

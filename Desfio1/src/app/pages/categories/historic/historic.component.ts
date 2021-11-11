@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Service } from '../datas-property/results/shared/service';
+import { DatasPropertyService } from '../datas-property/shared/datas-property-service';
 
 
 @Component({
@@ -10,19 +12,22 @@ export class HistoricComponent implements OnInit {
 
   nome= "Wagner Alves Viana";
   data = "02/05/2021";
-  valorImovel="100.000,00";
+  valorImovel: any ="";
   parcelas="360";
 
 
   hitoric : [] = [];
+  cliente: Service[] = [];
 
-  constructor() { }
+  constructor(private service: DatasPropertyService) { }
 
   ngOnInit(): void {
+   // this.cliente = this.service.consultar();
+    this.valorImovel = localStorage.getItem(JSON.parse('846.4000000000001'))
   }
 
-  onDelete(){
-    alert('você deseja exclir !')
+  delete(): any{
+    //alert('você deseja exclir !')
   }
 
 }
