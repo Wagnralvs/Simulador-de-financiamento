@@ -8,7 +8,8 @@ import { DatasPropertyComponent } from '../datas-property/datas-property.compone
 import { Router } from '@angular/router';
 import { DatasPropertyService } from '../datas-property/shared/datas-property-service';
 import { Service } from '../datas-property/results/shared/service';
-
+import { ModalCliente } from './modal/modal-cliente';
+import { ServiceCliente } from './service-cliente/service-cliente';
 
 @Component({
   selector: 'app-dadas',
@@ -22,10 +23,10 @@ export class DatasComponent implements OnInit {
   
   formulario!: FormGroup;
   name: any ='';
-  private Model!:Service;
+  private Model!:ModalCliente;
   
 
-  constructor(private fb : FormBuilder , private router:Router, private service:DatasPropertyService) { }
+  constructor(private fb : FormBuilder , private router:Router, private service:ServiceCliente) { }
 
   
 
@@ -50,15 +51,24 @@ export class DatasComponent implements OnInit {
   this.router.navigate(['/property'])
  console.log(this.formulario);
 
- this.nomeEnviar();
+ let nome = this.formulario.get('nome')?.value;
+ let profissao = this.formulario.get('profissao')?.value;
+ let cpf = this.formulario.get('cpf')?.value;
+ let email = this.formulario.get('email')?.value;
+ let data = this.formulario.get('data')?.value;
+ let cep = this.formulario.get('cep')?.value;
+ let celular = this.formulario.get('celular')?.value;
+
+
+ // enviar service
+ this.Model = new ModalCliente (nome , profissao , cpf, email,  data , cep , celular,);
+ this.service.enviaDadosCliente(this.Model);
+
+ //this.nomeEnviar();
   
   }
   nomeEnviar(){
-this.name = this.formulario.get('name')?.value
-let name = this.name;
 
-this.Model = new Service(name, name , name , name );
-this.service.enviaDados(this.Model)
   }
 
 }

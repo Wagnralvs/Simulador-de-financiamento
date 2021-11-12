@@ -7,7 +7,7 @@
 
 <form  (ngSubmit)="onSubmit()"  [formGroup]="formulario">
 
-<!---------   nome #f="ngForm" class="needs-validation" (ngSubmit)="onSubmit(f)" --------->
+<!---------   nome  --------->
 
 <div class="row  container m-3">
 
@@ -31,14 +31,6 @@
     </div>
   </div>
 
-   <!--excluir----
-#name="ngModel"   ,  [(ngModel)]="usuario.nome,   [class.is-invalid]="name.invalid && name.touched"",required ,,
-name="nome", pattern="[a-zA-Z ]*"  mask="S*"
-      -->
-        <!--  <div *ngIf="nome.errors && (nome.invalid && nome.touched)">
-           <small class="text text-danger" *ngIf="nome.errors.required">Nome é obrigatório !</small>
-          <small class="text text-danger" *ngIf="nome.errors.minlength">Nome inválido !</small>
-          -->
   <!---------------profissão------------>
   <div class="col-6  form-Group">
     <div class="form-floating">
@@ -59,10 +51,6 @@ name="nome", pattern="[a-zA-Z ]*"  mask="S*"
     
     </div>
   </div>
-       <!--  excluir  
-      [(ngModel)]="usuario.profissao" ,#profissao="ngModel",[class.is-invalid]="profissao.invalid && profissao.touched"
-     name="profissao",  mask="S*",
-    --><!-- <small class="text text-danger" [class.d-none]="profissao.valid || profissao.untouched">Profissão é obrigatório !</small>-->
  
     <!-- ------CPF-------------->
 
@@ -82,13 +70,7 @@ name="nome", pattern="[a-zA-Z ]*"  mask="S*"
       
     </div>
   </div>
-  <!--     excluir
-[(ngModel)]="usuario.cpf",name="cpf" #cpf="ngModel" , [class.is-invalid]="cpf.invalid && cpf.touched",
-  <div *ngIf="cpf.errors && (cpf.invalid && cpf.touched)">
-        <small class="text text-danger" *ngIf="cpf.errors.required">CPF é obrigatório !</small>
-        <small class="text text-danger" *ngIf="cpf.errors.minlength">CPF inválido !</small>
-      </div>
--->
+
   <!---------email----------->
   <div class="col-6  mt-4" >
     <div class="form-floating  form-Group"  >
@@ -108,13 +90,7 @@ name="nome", pattern="[a-zA-Z ]*"  mask="S*"
     </div>
   </div>
 
-  <!--    excluir
-[(ngModel)]="usuario.email" , required ,name="email", #email="ngModel", email
-   <div *ngIf="email.errors && (email.invalid && email.touched)">
-    <small class="text text-danger" *ngIf="email.errors.required">E-mail é obrigatório !</small>
-    <small class="text text-danger" *ngIf="email.errors.email"> formato inválido !</small>
-  </div>
-  -->
+
   <!--------- data de nacimento-------->
   <div class="col-6  mt-4" >
     <div class="form-floating form-Group"  >
@@ -134,14 +110,7 @@ name="nome", pattern="[a-zA-Z ]*"  mask="S*"
     </div>
   </div>
 
-  <!--  excluir
-  name="date" #dataNascimento="ngModel"  [class.is-invalid]="dataNascimento.invalid && dataNascimento.touched"
-  [(ngModel)]="usuario.date",    max="2003-10-10"  
-    <div *ngIf="dataNascimento.errors && (dataNascimento.invalid && dataNascimento.touched)">
-      <small class="text text-danger" *ngIf="dataNascimento.errors.required">Data de Nascimento é obrigatório !</small>
-      <small class="text text-danger" *ngIf="dataNascimento.errors.max ">Data de nascimento invalidar !</small>
-    </div>
-  -->
+ 
   <!-----------------Cep----- ------>
   <div class="col-6  mt-4" >
     <div class="form-floating form-Group"  >
@@ -160,9 +129,7 @@ name="nome", pattern="[a-zA-Z ]*"  mask="S*"
     </div>
   </div>
 
-  <!--  excluir  
-   <small class="text text-danger" [class.d-none]="cep.valid || cep.untouched">CEP é obrigatório !</small>
-  -->
+
   <!---------telefone----------------->
   <div class="col-6  mt-4" >
     <div class="form-floating form-Group"  >
@@ -183,11 +150,7 @@ name="nome", pattern="[a-zA-Z ]*"  mask="S*"
   </div>
 </div>
 
-<!---  excluir ----
-  <div *ngIf="telefone.errors && (telefone.invalid && telefone.touched)">
-        <small class="text text-danger" *ngIf="telefone.errors.required">Telefone é obrigatório !</small>
-        <small class="text text-danger" *ngIf="telefone.errors.minlength"> Telefone inválido !</small>
-      </div>-->
+
 <!---------buttons---------->
 <div class="row container-fluid text-center mt-4" >
   <div class="col-6" >
@@ -196,7 +159,7 @@ name="nome", pattern="[a-zA-Z ]*"  mask="S*"
    <div class="col-6">
    <button   class="btn btn-success btn-lg " [disabled]="formulario.invalid " id="btn-proseguir"  >Prosseguir</button>
  </div>
- <!--routerLink="/property" [disabled]="f.invalid " [disabled]="formulario.invalid " [ngClass]="{'disabled': this.formulario.invalid}"-->
+ 
 </div>
 
 </form>

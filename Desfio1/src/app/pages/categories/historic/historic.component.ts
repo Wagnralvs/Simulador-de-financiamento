@@ -16,13 +16,13 @@ export class HistoricComponent implements OnInit {
   parcelas="360";
 
 
-  hitoric : [] = [];
+  hitoric:any  = '';
   cliente: Service[] = [];
 
   constructor(private service: DatasPropertyService) { }
 
   ngOnInit(): void {
-   // this.cliente = this.service.consultar();
+  //  this.hitoric = this.service.consultar();
     this.valorImovel = localStorage.getItem(JSON.parse('846.4000000000001'))
   }
 

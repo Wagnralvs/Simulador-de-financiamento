@@ -2,6 +2,9 @@ import { Component, OnInit,  Injectable , } from '@angular/core';
 import { FormGroup, Validators , FormBuilder, } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { ServiceCliente } from '../datas/service-cliente/service-cliente';
+import { ModalCliente } from '../datas/modal/modal-cliente';
+
 import { Service } from './results/shared/service';
 import { DatasPropertyService } from './shared/datas-property-service';
 
@@ -11,7 +14,7 @@ import { DatasPropertyService } from './shared/datas-property-service';
   selector: 'app-datas-property',
   templateUrl: './datas-property.component.html',
   styleUrls: ['./datas-property.component.css'],
-  providers: [DatasPropertyService],
+  providers: [DatasPropertyService , ServiceCliente],
 
 })
 
@@ -19,10 +22,19 @@ import { DatasPropertyService } from './shared/datas-property-service';
 export class DatasPropertyComponent implements OnInit {
 
   private Model!: Service;
+  private modelCliente! : ServiceCliente;
   formulario!: FormGroup;
 
   menssage : any ='';
   Serv: any;
+
+  nome:any;
+  profissao: any;
+  email:any;
+  cpf:any;
+  data:any;
+  cep:any;
+  celular:any;
 
 
 //  -----caclulos -----//
@@ -75,16 +87,33 @@ parcelas(){
 validacao() {
 let valido:Boolean = true;
 
+let tipoImovel = this.formulario.get('tipoImovel')?.value;
+let rendaMensal = this.formulario.get('rendaMensal')?.value;
+let valorImovel = this.formulario.get('valorImovel')?.value;
+let valorEntrada = this.formulario.get('valorEntrada')?.value;
+let quantidadeParcelas : any = this.formulario.get('quantidadeParcelas')?.value
+
 let parcelas:any = this.parcelas();
 let valorAprovado: any = this.valorAprovado();
-let quantidadeParcelas : any = this.formulario.get('quantidadeParcelas')?.value
+
+// test service cliente
+
+let nome = this.nome;
+let profissao = this.profissao;
+let cpf = this.cpf;
+let email = this.email;
+let data = this.data;
+let cep = this.cep;
+let celular = this.celular;
 
 
 valido = this.renda();
 
 if(valido) {
  // envio de dados para o Service
-this.Model = new Service (parcelas , valorAprovado , quantidadeParcelas , quantidadeParcelas );
+this.Model = new Service (nome, profissao, cpf ,email, data, cep, celular ,
+                          tipoImovel, rendaMensal, valorImovel , valorEntrada,
+                          parcelas , valorAprovado , quantidadeParcelas , );
  this.service.enviaDados(this.Model);
 
 
@@ -108,6 +137,7 @@ renda(): boolean{
   
   
 constructor(private service:DatasPropertyService,
+              private serviceCliente: ServiceCliente,
               private formBuilder:FormBuilder,
               private router: Router) {
     
@@ -120,10 +150,20 @@ constructor(private service:DatasPropertyService,
      rendaMensal: [null ,[Validators.required,]],
      valorImovel: [null,[Validators.required]], 
      valorEntrada: [null,[Validators.required,  ]],
-     quantidadeParcelas: [null, [Validators.required , Validators.max(360), Validators.min(1) ]],
+     quantidadeParcelas: [null, [Validators.required , Validators.max(360), Validators.min(1) ]]
      
       })
-   
+
+     //  seriço extraido do componente Cliente
+      this.nome = ServiceCliente.model.nome;
+      this.profissao = ServiceCliente.model.profissao;
+      this.cpf = ServiceCliente.model.cpf;
+      this.email = ServiceCliente.model.email;
+      this.data = ServiceCliente.model.data;
+      this.cep = ServiceCliente.model.cep;
+      this.celular = ServiceCliente.model.celular;
+
+
   }
    /*  entradaValidacaoTest (control: FormControl){
     let parcelas = this.formulario.get('valorimovel')?.value * 0.20;
