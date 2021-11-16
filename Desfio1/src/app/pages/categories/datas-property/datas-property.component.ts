@@ -36,6 +36,10 @@ export class DatasPropertyComponent implements OnInit {
   cep:any;
   celular:any;
 
+  //----data -------
+  dataHoje: number = Date.now();
+  id:any = '';
+
 
 //  -----caclulos -----//
 valorAprovado() {
@@ -95,6 +99,8 @@ let quantidadeParcelas : any = this.formulario.get('quantidadeParcelas')?.value
 
 let parcelas:any = this.parcelas();
 let valorAprovado: any = this.valorAprovado();
+let dataHoje = this.dataHoje;
+let id = this.id;
 
 // test service cliente
 
@@ -107,17 +113,23 @@ let cep = this.cep;
 let celular = this.celular;
 
 
+
 valido = this.renda();
 
 if(valido) {
  // envio de dados para o Service
 this.Model = new Service (nome, profissao, cpf ,email, data, cep, celular ,
                           tipoImovel, rendaMensal, valorImovel , valorEntrada,
-                          parcelas , valorAprovado , quantidadeParcelas , );
+                          parcelas , valorAprovado , quantidadeParcelas , dataHoje , id);
  this.service.enviaDados(this.Model);
 
+ // enviar dados para o banco de dados 
+ this.service.criarBD(this.Model).subscribe(() => {
+  this.aprovado()
+ })
 
-  this.aprovado();
+
+  //this.aprovado();
 } 
 else this.reprovado();
   
@@ -188,7 +200,7 @@ customizarValidacao(control: FormControl ){
 
 
   onSubmit(){
-  
+   
    this.validacao();
    
    console.log(this.formulario);

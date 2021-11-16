@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule , LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
@@ -6,6 +6,9 @@ import {Router, RouterModule, Routes} from '@angular/router';
 import { NgxMaskModule  } from 'ngx-mask';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 import { AppComponent } from './app.component';
 import { DatasComponent } from './pages/categories/datas/datas.component';
@@ -15,6 +18,12 @@ import { ResultsComponent } from './pages/categories/datas-property/results/resu
 import { DatasPropertyService } from './pages/categories/datas-property/shared/datas-property-service';
 import { ResultReprovadoComponent } from './pages/categories/datas-property/result-reprovado/result-reprovado.component';
 import { HistoricComponent } from './pages/categories/historic/historic.component';
+
+import localePt  from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localePt);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,13 +39,16 @@ import { HistoricComponent } from './pages/categories/historic/historic.componen
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     RouterModule,
     BrowserAnimationsModule,
     NgxMaskModule.forRoot({
      dropSpecialCharacters:false
     })
   ],
-  providers: [DatasPropertyService],
+  providers: [DatasPropertyService,
+            { provide: LOCALE_ID,
+             useValue : 'pt-BR',}],
   bootstrap: [AppComponent],
   
 })

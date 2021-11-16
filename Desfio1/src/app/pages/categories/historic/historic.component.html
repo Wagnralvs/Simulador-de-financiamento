@@ -2,24 +2,39 @@
 <h3 class="m-5 me-5 ">Histórico de Propostas</h3>
 
 <div >
-<table class="container table-responsive" value="['cliente']">
+<table class="container table-responsive" >
 <tr class="row " id="titule">
   
     <th class="col-3" >Nome do proponente</th>
-    <th class="col-2">Data de simulação</th>
-    <th class="col-2">Valor do imóvel</th>
+    <th class="col-3">Data de simulação</th>
+    <th class="col-3">Valor do imóvel</th>
     <th class="col-2">Números de parcelas</th>
 </tr>
 <body  >
-<tr>
-    <td>{{nome}}</td>
-    <td>{{hitoric}}</td>
-    <td>{{valorImovel}}</td>
-    <td>{{parcelas}}</td>
-    <td><a ><img data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="delete()" src="/assets/icons/eye-fill.svg" type="submit" class="ms-5 me-5 "width="20" height="20" title="Visualizar" alt=""></a></td>
-    <td><a ><img type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="delete()" src="/assets/icons/trash.svg" width="20" height="20" title="Excuir" alt=""></a></td>
+  <tr class="row">
+    <td class="col-3">
+      <li  *ngFor=" let historic of historics">{{historic.nome}} </li>
+    </td>
+    <td class="col-3"> 
+      <li *ngFor=" let historic of historics">{{historic.dataHoje | date: "short"}}</li>
+    </td>
+    <td class="col-3">
+      <li  *ngFor=" let historic of historics">  {{historic.valorImovel| currency : 'BRL'}}  </li>
+   </td>
+<td class="col-3">
+  <li  *ngFor=" let historic of historics"> {{historic.quantidadeParcelas}}
+  <a ><img data-bs-toggle="modal" data-bs-target="#exampleModal2"  src="/assets/icons/eye-fill.svg" type="submit" class="ms-5 me-5 "width="20" height="20" title="Visualizar" alt=""></a>
+  <a ><img type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal"  src="/assets/icons/trash.svg" width="20" height="20" title="Excuir" alt=""></a>
+</li>
+</td>
+<!--
+<td>
+  <li  *ngFor=" let historic of historics">  {{historic.quantidadeParcelas}}
+  <a ><img data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="delete()" src="/assets/icons/eye-fill.svg" type="submit" class="ms-5 me-5 "width="20" height="20" title="Visualizar" alt=""></a>
+  <a ><img type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="delete()" src="/assets/icons/trash.svg" width="20" height="20" title="Excuir" alt=""></a>
+</li>
+</td>-->
 </tr>
-
 
   <!-- Modal Excluir -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -38,7 +53,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger">Excluir</button>
+          <button (click)="delete()" type="button" class="btn btn-danger">Excluir</button>
         </div>
       </div>
     </div>
@@ -51,7 +66,94 @@
           <h5 class="modal-title" id="exampleModalLabel">Dados do Proponente</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body row">
+     <table >
+       <tr class="row">
+        <th class="col-4">Nome do Proponente</th>
+        <th class="col-4">Profissão</th>
+        <th class="col-4">CPF</th>
+
+       </tr>
+       <tr class="row">
+         
+        <td class="col-4">yy</td>
+        <td class="col-4">555</td>
+        <td class="col-4">555</td>
+       </tr>
+        <tr class="row">
+          <th class="col-4">E-mail</th>
+          <th class="col-4">Data de Nascimento</th>
+          <th class="col-4">CEP</th>
+         </tr>
+
+         <tr class="row">
+         
+          <td class="col-4">yy</td>
+          <td class="col-4">555</td>
+          <td class="col-4">555</td>
+         </tr>
+
+         <tr class="row">
+           <th class="col-4">Celular</th>
+         </tr>
+         <tr class="row">
+          <td class="col-4">yy</td>
+        </tr>
+
+        <h5 class="mt-2">Dados do imóvel</h5>
+
+        <tr class="row">
+          <th class="col-4">Tipo do Imóvel</th>
+          <th class="col-4">Renda Mensal</th>
+          <th class="col-4">Valor do imóvel</th>
+  
+         </tr>
+         <tr class="row">
+         
+          <td class="col-4">8888</td>
+          <td class="col-4">555</td>
+          <td class="col-4">555</td>
+         </tr>
+
+         <tr class="row">
+          <th class="col-4">Valor da Entrada</th>
+          <th class="col-4">Parecelas</th>
+          
+        </tr>
+         <tr class="row">
+         
+          <td class="col-4">555</td>
+          <td class="col-4">555</td>
+         </tr>
+       
+         <h5 class="mt-2"> Dados do Financiamento</h5>
+
+        <tr class="row">
+          <th class="col-4">Táxa</th>
+          <th class="col-4">Valor total Financiado</th>
+          <th class="col-4">Valor Total com Juros</th>
+  
+         </tr>
+         <tr class="row">
+         
+          <td class="col-4">8888</td>
+          <td class="col-4">555</td>
+          <td class="col-4">555</td>
+         </tr>
+
+         <tr class="row">
+          <th class="col-4">Valor da Primeira Parcela</th>
+          <th class="col-4">Status</th>
+          
+        </tr>
+         <tr class="row">
+         
+          <td class="col-4">555</td>
+          <td class="col-4">555</td>
+         </tr>
+       
+
+      </table>  
         </div>
       </div>
     </div>

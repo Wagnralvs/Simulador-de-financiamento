@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Service } from '../datas-property/results/shared/service';
 import { DatasPropertyService } from '../datas-property/shared/datas-property-service';
 
@@ -10,24 +11,35 @@ import { DatasPropertyService } from '../datas-property/shared/datas-property-se
 })
 export class HistoricComponent implements OnInit {
 
-  nome= "Wagner Alves Viana";
+ 
   data = "02/05/2021";
   valorImovel: any ="";
-  parcelas="360";
+ 
+  dadosBD!: Service;
+  historics: Service[] = [];
 
-
-  hitoric:any  = '';
-  cliente: Service[] = [];
-
-  constructor(private service: DatasPropertyService) { }
+  constructor(private service: DatasPropertyService, private router:Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-  //  this.hitoric = this.service.consultar();
-    this.valorImovel = localStorage.getItem(JSON.parse('846.4000000000001'))
+
+    // inicializando a exibição do banco de dados
+    this.service.receberBD().subscribe(historics => {
+      this.historics = historics
+      console.log(historics)
+    })
+
+    //this.route.snapshot.paramMap.get('id');
+    const id = '3'
+    this.service.pegarId(id).subscribe((dadosBD) => {
+      this.dadosBD = dadosBD;
+    })
   }
 
   delete(): any{
-    //alert('você deseja exclir !')
-  }
+   // const id = '1'
+   this.service.deletarBD(this.dadosBD.id).subscribe(() => {
+     alert('historico excluido com sucesso !')
+   } )
 
-}
+}}

@@ -3,7 +3,7 @@ import { DatasPropertyService } from "../../shared/datas-property-service";
 
 export  class Service {    
     constructor(
-    
+       
         public nome: string,
         public profissao: string,
         public cpf: number,
@@ -19,8 +19,11 @@ export  class Service {
         public parcelaInicial: number ,
         public valorAprovado: number,
         public quantidadeParcelas: number,
+        public dataHoje: number,
+        public id : number,
         
     ) {
+       this.id = id;
         this.nome = nome;
         this.profissao = profissao;
         this.cpf = cpf;
@@ -36,6 +39,7 @@ export  class Service {
         this.parcelaInicial = parcelaInicial ;
         this.valorAprovado = valorAprovado;
         this.quantidadeParcelas = quantidadeParcelas;
+        this.dataHoje = dataHoje;
       
     }
 }

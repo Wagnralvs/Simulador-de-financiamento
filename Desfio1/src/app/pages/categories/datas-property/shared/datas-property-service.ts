@@ -1,49 +1,55 @@
-import { EventEmitter, Injectable, Input } from '@angular/core';
+import { Injectable, } from '@angular/core';
 import { Service } from '../results/shared/service';
 
-
 import { DatasPropertyComponent } from '../datas-property.component';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-//import { stringify } from 'querystring';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class DatasPropertyService {
+export class  DatasPropertyService {
 // testes
  valorImovel : any = '';
-
  valorEntrada :string[]= [];
 //--------
 
+  urlBD = " http://localhost:3001/historico"
 
   static model: Service;
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
   enviaDados(dados: Service): any {
     DatasPropertyService.model = dados;
-     // tests 
-  //   localStorage.setItem(dados.parcelaInicial.toString(), JSON.stringify(dados)); 
-     localStorage.setItem(dados.nome.toString(), JSON.stringify(dados)); 
+     // tests localStorage
+  // localStorage.setItem(dados.nome.toString(), JSON.stringify(dados)); 
   }
 
  receberDados(): Service {
     return DatasPropertyService.model; } 
 
-   consultar(callback: any){
-     //: Array<Service>
- // let cliente: Service[] = [];
-     for (var i  = 0; i <localStorage.length; i++){
-       callback(
-   // localStorage.getItem(localStorage.key(i))
-        
-        )
-       ;
-    
-    
+// test banco de dados
+ criarBD(dados:Service): Observable<Service>{
+     return this.http.post<Service>(this.urlBD, dados)
+ }
+
+ receberBD(): Observable<Service[]>{
+     return this.http.get<Service[]>(this.urlBD)
+ }
+pegarId(id: string): Observable<Service>{
+  const url = `${this.urlBD}/${id}`
+  return this.http.get<Service>(url)
+
 }
-//return cliente
-}
+
+ deletarBD(id: number): Observable<Service>{
+   const url = `${this.urlBD}/${id}` 
+  return  this.http.delete<Service>(url);
+
+
+ }
+
 }

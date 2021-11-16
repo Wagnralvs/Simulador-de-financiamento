@@ -4,6 +4,12 @@
     padding: 0;
 }
 
+li{ list-style : none}
+
+th{
+    opacity: 0.8;
+}
+
 #mobile{
     display: none;
 }
