@@ -47,7 +47,7 @@ pegarId(id: string): Observable<Service>{
 
  deletarBD(id: number): Observable<Service>{
    const url = `${this.urlBD}/${id}` 
-  return  this.http.delete<Service>(url);
+  return  this.http.delete<Service>(url).pipe();
 
 
  }

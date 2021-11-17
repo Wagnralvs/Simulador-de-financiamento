@@ -20,10 +20,10 @@ export  class Service {
         public valorAprovado: number,
         public quantidadeParcelas: number,
         public dataHoje: number,
-        public id : number,
+      //  public id : number,
         
     ) {
-       this.id = id;
+     //  this.id = id;
         this.nome = nome;
         this.profissao = profissao;
         this.cpf = cpf;
@@ -42,4 +42,5 @@ export  class Service {
         this.dataHoje = dataHoje;
       
     }
+    public id!: number;
 }

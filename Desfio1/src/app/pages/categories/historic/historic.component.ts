@@ -18,7 +18,8 @@ export class HistoricComponent implements OnInit {
   dadosBD!: Service;
   historics: Service[] = [];
 
-  constructor(private service: DatasPropertyService, private router:Router,
+  constructor(private service: DatasPropertyService,
+              private router:Router,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -30,16 +31,17 @@ export class HistoricComponent implements OnInit {
     })
 
     //this.route.snapshot.paramMap.get('id');
-    const id = '3'
-    this.service.pegarId(id).subscribe((dadosBD) => {
+    const id:any = this.dadosBD.id
+    this.service.pegarId(id).subscribe(dadosBD => {
       this.dadosBD = dadosBD;
     })
   }
 
   delete(): any{
-   // const id = '1'
+  
    this.service.deletarBD(this.dadosBD.id).subscribe(() => {
-     alert('historico excluido com sucesso !')
+     //alert('historico excluido com sucesso !');
+     this.router.navigate(["/historic"]);
    } )
 
 }}

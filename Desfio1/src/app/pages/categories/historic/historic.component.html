@@ -13,7 +13,7 @@
 <body  >
   <tr class="row">
     <td class="col-3">
-      <li  *ngFor=" let historic of historics">{{historic.nome}} </li>
+      <li  *ngFor=" let historic of historics">{{historic.id}} {{historic.nome}} </li>
     </td>
     <td class="col-3"> 
       <li *ngFor=" let historic of historics">{{historic.dataHoje | date: "short"}}</li>
@@ -160,21 +160,14 @@
   </div>
 
 </body>
-<!--<tr>
-    <td>{{nome}}</td>
-    <td>{{data}}</td>
-    <td>{{valorImovel}}</td>
-    <td>{{parcelas}}</td>
-    <td><img src="/assets/icons/eye-fill.svg" width="20" height="20" title="Visualizar" alt=""></td>
-    <td><a href=""><img src="/assets/icons/trash.svg" width="20" height="20" title="Excuir" alt=""></a></td>
-</tr>-->
+
 </table>
 </div>
 </div>
 
 
-<div>
-<div class="container mt-4">
+<div *ngIf="historics.length==1">
+<div class="container mt-4 ">
     <strong class="text-center ">  <p>Desculpe :( <br>
         Não encontramos nenhum histórico de propostas. <br>
         Por favor, simule um financiamento para que os dados apareçam aqui.
