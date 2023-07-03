@@ -11,17 +11,17 @@ import { Subject, Observable, BehaviorSubject } from 'rxjs';
 export class ServiceCliente {
 
   static model: ModalCliente;
-  private dadosclientes$ = new  Subject<any>();
+  public dadosclientes$ : Subject<ModalCliente>;
 
   constructor() {
-  //  this.dadosclientes$ = new Subject();
+     this.dadosclientes$ = new Subject<ModalCliente>();
   }
 
-  pegarDadosCliente(): Observable<any> {debugger
+  pegarDadosCliente(): Observable<ModalCliente> {debugger
     return this.dadosclientes$.asObservable();
   }
 
- enviarDadosCliente(dados: ModalCliente): void{
+ enviarDadosCliente(dados: ModalCliente): void{debugger
     this.dadosclientes$.next(dados);
   }
  }

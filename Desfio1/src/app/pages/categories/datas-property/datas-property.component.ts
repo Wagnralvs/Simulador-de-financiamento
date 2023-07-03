@@ -1,32 +1,34 @@
 import {
   Component,
   OnInit,
-  Injectable,
-  OnChanges,
-  SimpleChanges,
   OnDestroy,
+  Input,
+  Inject,
+  Injectable,
 } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ModalCliente } from '../modal/modal-cliente';
 import { ServiceCliente } from '../services/service-cliente';
 import { DadosClienteImovelModel } from './results/shared/service';
 import { DatasPropertyService } from '../services/datas-property-service';
-import { Subscription, pipe } from 'rxjs';
+import { Subscription, tap, pipe} from 'rxjs';
+
 
 @Component({
   selector: 'app-datas-property',
   templateUrl: './datas-property.component.html',
   styleUrls: ['./datas-property.component.css'],
-  providers: [DatasPropertyService, ServiceCliente],
+  // providers: [DatasPropertyService, ServiceCliente],
 })
-
+@Injectable()
 export class DatasPropertyComponent implements OnInit , OnDestroy{
   private dadosClienteImovelModel: DadosClienteImovelModel;
   public dadosClienteModel: ModalCliente ;
-  public formulario: FormGroup;
+  public formulario: UntypedFormGroup;
   public menssage = '';
+
 
   private nome: string;
   private profissao: string;
@@ -36,6 +38,9 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
   private cep: number;
   private celular: number;
   public entradaMin: number;
+
+  @Input() visualizarModel= false;
+  @Input() clienteDados: ModalCliente ;
 
   //----data -------
   public dataHoje: number = Date.now();
@@ -55,10 +60,28 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
   constructor(
     private propertyService: DatasPropertyService,
     private clienteService: ServiceCliente,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router
   ) {
-   this.subscription = new Subscription();
+
+    this.subscription = new Subscription();
+    if(this.clienteDados){
+       debugger
+    }
+
+
+    this.clienteService.pegarDadosCliente().pipe(
+      tap((result) => { debugger
+        this.visualizarModel = true;
+        this.nome = result.nome;
+        this.celular = result.celular;
+        this.cep = result.cep;
+        this.cpf = result.cpf;
+        this.data = result.data;
+        this.email = result.email;
+        this.profissao = result.profissao
+       })
+    ).subscribe();
 
   }
 
@@ -73,18 +96,7 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
       ],
     });
 
-  //  this.subscription.add(
-  //    this.clienteService.pegarDadosCliente().subscribe(
-  //     (result: ModalCliente)=>{ debugger
-  //       this.nome = result.nome;
-  //       this.celular = result.celular;
-  //       this.cep = result.cep;
-  //       this.cpf = result.cpf;
-  //       this.data = result.data;
-  //       this.email = result.email;
-  //       this.profissao = result.profissao
-  //     }
-  //   ))
+
   }
 
   ngOnDestroy(): void {
@@ -139,19 +151,10 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
     this.rendaAprovada = this.renda();
 
     let id = this.id;
-debugger
-    // this.subscription.add(
-      this.clienteService.pegarDadosCliente().subscribe(
-       result=>{ debugger
-         this.nome = result.nome;
-         this.celular = result.celular;
-         this.cep = result.cep;
-         this.cpf = result.cpf;
-         this.data = result.data;
-         this.email = result.email;
-         this.profissao = result.profissao
-       }
-     )
+
+    //
+
+
     let nome = this.nome;
     let profissao = this.profissao;
     let cpf = this.cpf;
@@ -160,7 +163,7 @@ debugger
     let cep = this.cep;
     let celular = this.celular;
 
-this.dadosClienteModel ;
+
 
     if (this.rendaAprovada) {
 
@@ -190,27 +193,14 @@ this.dadosClienteModel ;
   }
 
   renda(): boolean {
-    // let parcelasMensais: number = this.parcelasMensais();
     if (this.mensaisParcelas > (this.rendaMensal * 0.3)) {
       return false;
     }
     return true;
   }
 
-  //    //  seriço extraido do componente Cliente
-  //     this.nome = ServiceCliente.model.nome;
-  //     this.profissao = ServiceCliente.model.profissao;
-  //     this.cpf = ServiceCliente.model.cpf;
-  //     this.email = ServiceCliente.model.email;
-  //     this.data = ServiceCliente.model.data;
-  //     this.cep = ServiceCliente.model.cep;
-  //     this.celular = ServiceCliente.model.celular;
-
-  // }
-
   onSubmit() {
     this.validacao();
-    console.log(this.formulario.value);
   }
 
   reprovado() {

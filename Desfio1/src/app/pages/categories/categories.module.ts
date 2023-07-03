@@ -1,6 +1,6 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { LOCALE_ID, NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 
 import { CategoriesRoutingModule } from './categories-routing.module';
 import { DatasComponent } from './datas/datas.component';
@@ -11,6 +11,7 @@ import { ResultsComponent } from './datas-property/results/results.component';
 import { ResultReprovadoComponent } from './result-reprovado/result-reprovado.component';
 import { AppModule } from 'src/app/app.module';
 import { HistoricComponent } from './historic/historic.component';
+
 
 @NgModule({
   declarations: [
@@ -37,9 +38,10 @@ import { HistoricComponent } from './historic/historic.component';
     ResultReprovadoComponent,
     HistoricComponent
   ],
-  // providers: [
-  //   //DatasPropertyService,
-  //   { provide: LOCALE_ID, useValue: 'pt-BR' },
-  // ],
+  providers: [
+    //DatasPropertyService,
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+  ],
+  schemas:[NO_ERRORS_SCHEMA]
 })
 export class CategoriesModule {}

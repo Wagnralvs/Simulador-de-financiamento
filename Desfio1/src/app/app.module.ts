@@ -11,14 +11,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
-import { DatasComponent } from './pages/categories/datas/datas.component';
-import { DatasPropertyComponent } from './pages/categories/datas-property/datas-property.component';
-import { HomeComponent } from './pages/categories/home/home.component';
-import { ResultsComponent } from './pages/categories/datas-property/results/results.component';
-import { DatasPropertyService } from './pages/categories/services/datas-property-service';
-import { ResultReprovadoComponent } from './pages/categories/result-reprovado/result-reprovado.component';
-import { HistoricComponent } from './pages/categories/historic/historic.component';
-
 import localePt  from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { CategoriesModule } from './pages/categories/categories.module';
@@ -28,13 +20,6 @@ registerLocaleData(localePt);
 @NgModule({
   declarations: [
     AppComponent,
-    // DatasComponent,
-    // DatasPropertyComponent,
-    // HomeComponent,
-    // ResultsComponent,
-    // ResultReprovadoComponent,
-    // HistoricComponent,
-
   ],
   imports: [
     ReactiveFormsModule,

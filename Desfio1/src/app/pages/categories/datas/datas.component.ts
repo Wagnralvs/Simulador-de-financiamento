@@ -1,8 +1,6 @@
-import { Component, Injectable, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup,Validators , ValidatorFn ,  FormBuilder, } from '@angular/forms';
+import { Component, Inject, Injectable, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup,Validators , UntypedFormGroup ,  UntypedFormBuilder, } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
 import { AppComponent } from 'src/app/app.component';
 import { DatasPropertyComponent } from '../datas-property/datas-property.component';
 import { Router } from '@angular/router';
@@ -17,15 +15,19 @@ import { ServiceCliente } from '../services/service-cliente';
   styleUrls: ['./datas.component.css'],
 
 })
-
+@Inject({})
 export class DatasComponent implements OnInit {
 
-
-  public formulario: FormGroup;
+  public formulario: UntypedFormGroup;
   public name ='';
-  public Model:ModalCliente;
 
-  constructor(private fb : FormBuilder , private router:Router, private service:ServiceCliente) { }
+  public visualizar: boolean ;
+  public clienteDados :ModalCliente ;
+  public visualizarModel = false ;
+
+  constructor(private fb : UntypedFormBuilder , private router:Router, private service:ServiceCliente) {
+     this.visualizar = true ;
+  }
 
   ngOnInit(): void {
 
@@ -38,8 +40,6 @@ export class DatasComponent implements OnInit {
      cep :[null , [Validators.required, Validators.minLength(9)]],
      celular :[null , [Validators.required, Validators.minLength(17)]],
    })
-
-
   }
 
 onSubmit(){
@@ -52,16 +52,12 @@ onSubmit(){
  let cep = this.formulario.get('cep')?.value;
  let celular = this.formulario.get('celular')?.value;
 
-
- // enviar service
- this.Model = new ModalCliente (nome , profissao , cpf, email,  data , cep , celular,);
- this.service.enviarDadosCliente(this.Model);debugger
 debugger
-this.router.navigate(['/property'])
-
-  }
-  nomeEnviar(){
-
+ this.clienteDados = new ModalCliente (nome , profissao , cpf, email,  data , cep , celular,);
+ this.visualizarModel = true;
+ this.visualizar = false;
+ this.service.enviarDadosCliente(this.clienteDados);
+//  this.router.navigate(['/property'] )
   }
 
 }
