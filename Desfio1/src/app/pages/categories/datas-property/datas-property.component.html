@@ -1,128 +1,182 @@
-
 <!-------------- tela 3 -------------->
-<h1 class="text-center  mt-5 mb-5 ">Dados do Imóvel</h1>
+<div class="container-forms">
+  <div class="content">
+    <h1 class="text-center mb-3">Dados do Imóvel</h1>
 
-<form  (ngSubmit)="onSubmit()"  [formGroup]="formulario"   >
+    <form (ngSubmit)="onSubmit()" [formGroup]="formulario">
 
-<!-- ------- tipo de imóvel  ---- -->
+      <div class="row container ">
 
-<div class="row  container m-3">
+        <!---------------Renda mensal ------------>
+        <div class="col-6 mt-4">
+          <div class="form-floating form-group">
+            <input
+              type="tell"
+              prefix="R$"
+              suffix=",00"
+              mask="separator.2"
+              thousandSeparator="."
+              [dropSpecialCharacters]="true"
+              class="form-control"
+              formControlName="rendaMensal"
+              id="rendaMensal"
+              placeholder="monthly income"
+            />
 
-  <div class="col-6 form-group">
-  
-      <select type="text" class="form-select form-select-lg   form-control" id="tipoImovel" 
-     formControlName="tipoImovel" aria-label=".form-select-lg example"  >
-     <option selected>Tipo do imóvel:</option>
-        <option value="1">Residencial</option>
-        <option value="2">Comercial</option>
-      </select>
-    
-      <label for="tipoImovel"></label>
-         
-  </div>
-  
-  <!---------------Renda mensal ------------>
-  <div class="col-6">
-    <div class="form-floating form-group">
-      <input type="tell" prefix="R$" suffix=",00"  mask="separator.2" thousandSeparator="." [dropSpecialCharacters]="true" class="form-control" 
-      formControlName="rendaMensal"  id="rendaMensal" placeholder="monthly income" 
-     >
+            <div
+              *ngIf="formulario.controls.rendaMensal?.touched &&
+                formulario.controls.rendaMensal?.errors">
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.rendaMensal.errors?.required">
+                   Renda mensal é obrigatoria
+              </small
+              >
+            </div>
 
-      <div *ngIf="formulario.controls.rendaMensal.touched && formulario.controls.rendaMensal?.errors" >
-        <small class="text text-danger" *ngIf="formulario.controls.rendaMensal.errors?.required">
-          Renda mensal é obrigatoria</small>
+            <label for="rendaMensal">Renda Mensal :</label>
+          </div>
         </div>
-      
-      <label for="rendaMensal">Renda Mensal :</label>
-     
-    </div>
-  </div>
 
-  
-  <!-- ------Valor do imóvel------------>
-  <div class="col-6  mt-4" >
-    <div class="form-floating form-group"  >
+        <!-- ------Valor do imóvel------------>
+        <div class="col-6 mt-4">
+          <div class="form-floating form-group">
+            <input
+              type="tell"
+              min="5"
+              prefix="R$"
+              suffix=",00"
+              [dropSpecialCharacters]="true"
+              mask="separator.2"
+              thousandSeparator="."
+              class="form-control"
+              formControlName="valorImovel"
+              id="valorImovel"
+              placeholder="value of the property "
+            />
 
-      <input type="tell"  min="5" prefix="R$" suffix=",00" [dropSpecialCharacters]="true" mask="separator.2" thousandSeparator="."  class="form-control"
-       formControlName="valorImovel"  id="valorImovel" placeholder="value of the property "  >
-   
-       <div *ngIf="formulario.controls.valorImovel.touched && formulario.controls.valorImovel?.errors" >
-        <small class="text text-danger" *ngIf="formulario.controls.valorImovel.errors?.required">
-          Valor do imóvel é obrigatório</small>
+            <div
+              *ngIf="
+                formulario.controls.valorImovel?.touched &&
+                formulario.controls.valorImovel?.errors
+              "
+            >
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.valorImovel.errors?.required"
+              >
+                Valor do imóvel é obrigatório</small
+              >
+            </div>
+            <label for="valorImovel">Valor do Imóvel :</label>
+          </div>
         </div>
-      <label for="valorImovel">Valor do Imóvel :</label>
-     
-    </div>
-  </div>
 
+        <!---------Valor da entrada --------->
+        <div class="col-6 mt-4">
+          <div class="form-floating form-group">
+            <input
+              type="tell"
+              prefix="R$"
+              suffix=",00"
+              mask="separator.2"
+              thousandSeparator="."
+              [dropSpecialCharacters]="true"
+              class="form-control"
+              formControlName="valorEntrada"
+              id="valorEntrada"
+              placeholder="value of input"
+              required
 
-  <!---------Valor da entrada --------->
-  <div class="col-6  mt-4" >
-    <div class="form-floating form-group"  >
-      
-      <input type="tell" prefix="R$" suffix=",00" mask="separator.2" thousandSeparator="."   [dropSpecialCharacters]="true" class="form-control" 
-      formControlName="valorEntrada"  id="valorEntrada" placeholder="value of input" required  >
-     
-      <div *ngIf="formulario.controls.valorEntrada.touched && formulario.controls.valorEntrada?.errors" >
-        <small class="text text-danger" *ngIf="formulario.controls.valorEntrada.errors?.required">
-          Valor da entrada é obrigatório</small>
+              (keyup)="entradaValidacao()"
+            />
+
+            <div
+              *ngIf="
+                formulario.controls.valorEntrada?.touched &&
+                formulario.controls.valorEntrada?.errors">
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.valorEntrada?.errors?.required">
+                Valor da entrada é obrigatório
+                </small>
+            </div>
+            <small *ngIf="formulario.controls.valorEntrada?.touched" class="text text-danger"
+              >{{ menssage }} {{ entradaMin | currency : "BRL" }}
+            </small
+            >
+            <label for="valorEntrada">Valor da Entrada : </label>
+          </div>
         </div>
-        <small class="text text-danger" >{{menssage}} {{entradaX |currency:'BRL' }}</small>
-      <label for="valorEntrada">Valor da Entrada :   </label>
-     
-    </div>
-  </div>
- 
 
-  
-  <!---------Quantidade de parcelas ---->
+        <!---------Quantidade de parcelas ---->
 
-  <div class="col-6  mt-4" >
-    <div class="form-floating form-group "  >
+        <div class="col-6 mt-4">
+          <div class="form-floating form-group">
+            <input
+              type="number"
+              class="form-control"
+              id="quantidadeParcelas"
+              formControlName="quantidadeParcelas"
+              placeholder="your phone"
+            />
 
-      <input type="number"  class="form-control" id="quantidadeParcelas"
-     formControlName="quantidadeParcelas"  placeholder="your phone" 
-    >
+            <div
+              *ngIf="
+                formulario.controls.quantidadeParcelas.touched &&
+                formulario.controls.quantidadeParcelas?.errors">
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.quantidadeParcelas.errors?.required">
+                Parcelas é obrigatoria !.</small>
+            </div>
 
-      <div *ngIf="formulario.controls.quantidadeParcelas.touched && formulario.controls.quantidadeParcelas?.errors" >
-        <small class="text text-danger" *ngIf="formulario.controls.quantidadeParcelas.errors?.required">
-          Parcelas é obrigatoria !.</small>
-       </div>
+            <div
+              *ngIf="
+                formulario.controls.quantidadeParcelas.touched &&
+                formulario.controls.quantidadeParcelas?.errors">
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.quantidadeParcelas.errors?.max">
+                Parcelas máxima de 360!.</small>
+            </div>
 
-        <div *ngIf="formulario.controls.quantidadeParcelas.touched && formulario.controls.quantidadeParcelas?.errors" >
-          <small class="text text-danger" *ngIf="formulario.controls.quantidadeParcelas.errors?.max">
-            Parcelas máxima de 360!.</small>
-       </div>
-
-        <label  for="quantidadeParcelas">Em quantas parcelas deseja pagar? </label>
+            <label for="quantidadeParcelas"
+              >Quantas parcelas?
+            </label>
+          </div>
+        </div>
       </div>
-     
-    </div>
-</div>
 
-<div>data hoje {{dataHoje | date: "short" }}</div>
-<div >Valor da primeira parcela {{parcelas()|currency:'BRL'}}</div>
-<div>Valor aprovado para o financiamento {{valorAprovado()|currency:'BRL'}}</div>
-<div>Renda reprovada ou aprovada {{renda()}}</div>
-<div>entrada {{entrada()}}</div>
-<div>validacao entrada {{entradaValidacao()}}</div>
+      <!-- <div>data hoje {{ dataHoje | date : "short" }}</div>
+      <div>Valor da primeira parcela {{ parcelasMensais() | currency : "BRL" }}</div>
+      <div>
+        Valor aprovado para o financiamento
+        {{ aprovadoV() | currency : "BRL" }}
+      </div>
+      <div>Renda reprovada ou aprovada {{ renda() }}</div> -->
 
 
-<!--buttons  -->
-<div class="row container-fluid text-center mt-4" >
-  <div class="col-6" >
-    <button class="btn btn-danger btn-lg " id="btn-cancelar" routerLink="/home" >Cancelar</button>
+      <!--buttons  -->
+      <div class="row container-fluid text-center mt-3">
+        <div class="col-6">
+          <button
+            type="button"
+            class="btn btn-outline-dange"
+            routerLink="/home">
+            Cancelar
+          </button>
+        </div>
+        <div class="col-6">
+          <button
+            class="btn btn-outline-succes"
+            type="submit"
+          >
+          <!-- [disabled]="formulario.invalid" -->
+            Prosseguir
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
-   <div class="col-6">
-   <button   class="btn btn-success btn-lg " [disabled]="formulario.invalid"   id="btn-proseguir"  type="submit" >Prosseguir</button>
- </div>
-
- 
 </div>
-
-</form>
-
-
-
-
-

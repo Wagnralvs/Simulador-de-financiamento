@@ -1,167 +1,293 @@
-
-
 <!----------Página 2 --------------->
+<body class="container-forms">
+  <div class="content">
+    <h2 class="text-center mb-2">Dados do Pessoais</h2>
 
+    <form (ngSubmit)="onSubmit()" [formGroup]="formulario">
+      <!---------   nome  --------->
 
-<h1 class="text-center  mt-5 mb-5 ">Dados do Proponente</h1>
+      <div class="row container">
+        <div class="col-6">
+          <div class="form-floating form-Group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="nome"
+              id="nome"
+              placeholder="your name"
+              value=""
+            />
 
-<form  (ngSubmit)="onSubmit()"  [formGroup]="formulario">
+            <div
+              *ngIf="
+                formulario.controls.nome.touched &&
+                formulario.controls.nome?.errors
+              "
+            >
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.nome.errors?.required"
+              >
+                Nome é obrigatório</small
+              >
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.nome.errors?.minlength"
+              >
+                Nome inválido</small
+              >
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.nome.errors?.pattern"
+              >
+                Apenas letras</small
+              >
+            </div>
 
-<!---------   nome  --------->
-
-<div class="row  container m-3">
-
-  <div class="col-6">
-    <div class="form-floating form-Group" >
-
-      <input type="text" 
-        class="form-control"    formControlName="nome"  id="nome" placeholder="your name" value="" >
-     
-           <div *ngIf="formulario.controls.nome.touched && formulario.controls.nome?.errors" >
-            <small class="text text-danger" *ngIf="formulario.controls.nome.errors?.required">
-              Nome é obrigatório</small>
-            <small class="text text-danger" *ngIf="formulario.controls.nome.errors?.minlength">
-                Nome inválido</small>
-            <small class="text text-danger" *ngIf="formulario.controls.nome.errors?.pattern">
-                  Apenas letras</small>
+            <label for="nome">Nome completo :</label>
+          </div>
         </div>
 
-       <label for="nome">Nome completo :</label>
-      
-    </div>
+        <!---------------profissão------------>
+        <div class="col-6 form-Group">
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="profissao"
+              formControlName="profissao"
+              placeholder="your Profession"
+            />
+
+            <div
+              *ngIf="
+                formulario.controls.profissao.touched &&
+                formulario.controls.profissao?.invalid
+              "
+            >
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.profissao.errors?.required"
+              >
+                Profissão é obrigatório.</small
+              >
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.profissao.errors?.minlength"
+              >
+                Profissão invalida.</small
+              >
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.profissao.errors?.pattern"
+              >
+                Apenas letras.</small
+              >
+            </div>
+            <label for="profissao">Profissão :</label>
+          </div>
+        </div>
+
+        <!-- ------CPF-------------->
+
+        <div class="col-6 mt-4">
+          <div class="form-floating form-Group">
+            <input
+              type="text"
+              mask="000.000.000-00"
+              class="form-control"
+              id="cpf"
+              formControlName="cpf"
+              placeholder="your CPF"
+            />
+
+            <div
+              *ngIf="
+                formulario.controls.cpf.touched &&
+                formulario.controls.cpf?.invalid
+              "
+            >
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.cpf.errors?.required"
+              >
+                CPF é obrigatório.</small
+              >
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.cpf.errors?.minlength"
+              >
+                CPF inválido.</small
+              >
+            </div>
+            <label for="cpf">CPF :</label>
+          </div>
+        </div>
+
+        <!---------email----------->
+        <div class="col-6 mt-4">
+          <div class="form-floating form-Group">
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="your e-mail"
+              formControlName="email"
+              minlength="7"
+            />
+
+            <div
+              *ngIf="
+                formulario.controls.email.touched &&
+                formulario.controls.email?.invalid
+              "
+            >
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.email.errors?.required"
+              >
+                E-mail é obrigatório.</small
+              >
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.email.errors?.email"
+              >
+                E-mail inválido.</small
+              >
+            </div>
+
+            <label for="email">E-mail :</label>
+          </div>
+        </div>
+
+        <!--------- data de nacimento-------->
+        <div class="col-6 mt-4">
+          <div class="form-floating form-Group">
+            <input
+              type="date"
+              class="form-control"
+              id="dataNascimento"
+              placeholder="your date"
+              formControlName="dataNascimento"
+            />
+
+            <div
+              *ngIf="
+                formulario.controls.dataNascimento.touched &&
+                formulario.controls.dataNascimento?.invalid
+              "
+            >
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.dataNascimento.errors?.required"
+              >
+                Data de nascimento é obrigatório.</small
+              >
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.dataNascimento.errors?.max"
+              >
+                A sua idade não poder ser menor que 18 anos!</small
+              >
+            </div>
+
+            <label for="dataNascimento">Data de Nascimento :</label>
+          </div>
+        </div>
+
+        <!-----------------Cep----- ------>
+        <div class="col-6 mt-4">
+          <div class="form-floating form-Group">
+            <input
+              type="tel"
+              mask="00000-000"
+              class="form-control"
+              id="cep"
+              placeholder="your cep"
+              formControlName="cep"
+            />
+
+            <div
+              *ngIf="
+                formulario.controls.cep.touched &&
+                formulario.controls.cep?.invalid
+              "
+            >
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.cep.errors?.required"
+              >
+                CEP é obrigatório.</small
+              >
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.cep.errors?.minlength"
+              >
+                CEP inválido !</small
+              >
+            </div>
+            <label for="cep">CEP :</label>
+          </div>
+        </div>
+
+        <!---------telefone----------------->
+        <div class="col-6 mt-4">
+          <div class="form-floating form-Group">
+            <input
+              type="tel"
+              prefix="+55"
+              mask="(00)00000-0000"
+              class="form-control"
+              id="telefone"
+              placeholder="your phone"
+              formControlName="celular"
+            />
+
+            <div
+              *ngIf="
+                formulario.controls.telefone?.touched &&
+                formulario.controls.telefone?.invalid
+              "
+            >
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.telefone.errors?.required"
+              >
+                Telefone é obrigatório.</small
+              >
+              <small
+                class="text text-danger"
+                *ngIf="formulario.controls.telefone.errors?.minlength"
+              >
+                Telefone inválido !</small
+              >
+            </div>
+
+            <label for="telefone">Celular :</label>
+          </div>
+        </div>
+      </div>
+
+      <!---------buttons---------->
+      <div class="btn_forms row container-fluid text-center mt-2">
+        <div class="col-6">
+          <button
+            class="btn btn-outline-danger"
+            routerLink="/home"
+          >
+            Cancelar
+          </button>
+        </div>
+        <div class="col-6">
+          <button
+            class="btn btn-outline-success"
+            type="submit"
+          >
+          <!-- [disabled]="formulario.invalid" -->
+            Prosseguir
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
-
-  <!---------------profissão------------>
-  <div class="col-6  form-Group">
-    <div class="form-floating">
-
-      <input type="text"  class="form-control" id="profissao"
-        formControlName="profissao"  placeholder="your Profession"  >
- 
-    <div *ngIf="formulario.controls.profissao.touched && formulario.controls.profissao?.invalid" >
-      <small class="text text-danger" *ngIf="formulario.controls.profissao.errors?.required">
-        Profissão é obrigatório.</small>
-      <small class="text text-danger" *ngIf="formulario.controls.profissao.errors?.minlength">
-          Profissão invalida.</small>
-      <small class="text text-danger" *ngIf="formulario.controls.profissao.errors?.pattern">
-            Apenas letras.</small>
-  </div>
-      <label for="profissao">Profissão :</label>
-     
-    
-    </div>
-  </div>
- 
-    <!-- ------CPF-------------->
-
-  <div class="col-6  mt-4" >
-    <div class="form-floating form-Group"  >
-
-      <input type="text" mask="000.000.000-00"  class="form-control" id="cpf" 
-       formControlName="cpf"  placeholder="your CPF" >
-    
-       <div *ngIf="formulario.controls.cpf.touched && formulario.controls.cpf?.invalid" >
-        <small class="text text-danger" *ngIf="formulario.controls.cpf.errors?.required">
-          CPF é obrigatório.</small>
-        <small class="text text-danger" *ngIf="formulario.controls.cpf.errors?.minlength">
-            CPF inválido.</small>
-       </div>
-     <label for="cpf">CPF :</label>
-      
-    </div>
-  </div>
-
-  <!---------email----------->
-  <div class="col-6  mt-4" >
-    <div class="form-floating  form-Group"  >
-
-      <input type="email"  class="form-control" id="email" placeholder="your e-mail"
-       formControlName="email"  minlength="7" >
-      
-       <div *ngIf="formulario.controls.email.touched && formulario.controls.email?.invalid" >
-        <small class="text text-danger" *ngIf="formulario.controls.email.errors?.required">
-          E-mail é obrigatório.</small>
-        <small class="text text-danger" *ngIf="formulario.controls.email.errors?.email">
-            E-mail inválido.</small>
-       </div>
-
-      <label for="email">E-mail :</label>
-      
-    </div>
-  </div>
-
-
-  <!--------- data de nacimento-------->
-  <div class="col-6  mt-4" >
-    <div class="form-floating form-Group"  >
-
-      <input type="date"  class="form-control"   id="dataNascimento" placeholder="your date"
-       formControlName="dataNascimento" >
-      
-       <div *ngIf="formulario.controls.dataNascimento.touched && formulario.controls.dataNascimento?.invalid" >
-        <small class="text text-danger" *ngIf="formulario.controls.dataNascimento.errors?.required">
-          Data de nascimento é obrigatório.</small>
-       <small class="text text-danger" *ngIf="formulario.controls.dataNascimento.errors?.max">
-          A sua idade não poder ser menor que 18 anos!</small> 
-       </div>
-
-      <label for="dataNascimento">Data de Nascimento :</label>
-    
-    </div>
-  </div>
-
- 
-  <!-----------------Cep----- ------>
-  <div class="col-6  mt-4" >
-    <div class="form-floating form-Group"  >
-
-      <input type="tel"   mask="00000-000" class="form-control" id="cep" placeholder="your cep"
-    formControlName="cep"  >
-      
-    <div *ngIf="formulario.controls.cep.touched && formulario.controls.cep?.invalid" >
-      <small class="text text-danger" *ngIf="formulario.controls.cep.errors?.required">
-        CEP é obrigatório.</small>
-      <small class="text text-danger" *ngIf="formulario.controls.cep.errors?.minlength">
-        CEP inválido !</small>
-     </div>
-      <label for="cep">CEP :</label>
-     
-    </div>
-  </div>
-
-
-  <!---------telefone----------------->
-  <div class="col-6  mt-4" >
-    <div class="form-floating form-Group"  >
-
-      <input type="tel"  prefix="+55" mask="(00)00000-0000"  class="form-control" id="telefone" placeholder="your phone"
-        formControlName="telefone"    >
-      
-        <div *ngIf="formulario.controls.telefone.touched && formulario.controls.telefone?.invalid" >
-          <small class="text text-danger" *ngIf="formulario.controls.telefone.errors?.required">
-            Telefone é obrigatório.</small>
-          <small class="text text-danger" *ngIf="formulario.controls.telefone.errors?.minlength">
-            Telefone inválido !</small>
-         </div>
-    
-      <label for="telefone">Celular :</label>
-     
-    </div>
-  </div>
-</div>
-
-
-<!---------buttons---------->
-<div class="row container-fluid text-center mt-4" >
-  <div class="col-6" >
-    <button class="btn btn-danger btn-lg " id="btn-cancelar" routerLink="/home" >Cancelar</button>
-  </div>
-   <div class="col-6">
-   <button   class="btn btn-success btn-lg " [disabled]="formulario.invalid " id="btn-proseguir"  >Prosseguir</button>
- </div>
- 
-</div>
-
-</form>
-
-
+</body>

@@ -1,5 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-*{
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");
+
+html, body{
+  width: 100%;
+  height: 100%;
+}
+/* *{
     margin: 0;
     padding: 0;
 }
@@ -10,21 +17,13 @@ th{
     opacity: 0.8;
 }
 
-#mobile{
-    display: none;
-}
-.frases{
-    font-size: 33px;
-    
-}
+
+.
 .m-4  {
     border-top: solid 2px rgb(114, 67, 6);
 }
 .m-4 .mt-5{
     border-top: solid 2px rgb(4, 122, 14);
-}
-#btn{
-    font-size: 25px;
 }
 
 #btn-cancelar{
@@ -47,9 +46,16 @@ input:focus:invalid , text:focus:invalid {
 }
 input:valid, text:valid{
     border-color: green;
-}
 
-/*        --- Moble ---  
+} */
+*{
+  margin: 0;
+  padding: 0;
+}
+#mobile{
+  display: none;
+}
+/*        --- Moble ---
                                 */
 @media (max-width: 650px){
     *{
@@ -64,7 +70,7 @@ input:valid, text:valid{
     }
      .frases{
         font-size: 17px;
-        
+
     }
     #btn{
         font-size: 18px;
@@ -77,7 +83,7 @@ input:valid, text:valid{
     #btn-cancelar{
         font-size: 35px;
     }
-    
+
     #btn-proseguir{
         font-size: 35px;
     }

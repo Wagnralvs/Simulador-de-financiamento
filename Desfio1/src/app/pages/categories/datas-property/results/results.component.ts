@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DatasPropertyComponent } from '../datas-property.component';
-import { DatasPropertyService } from '../shared/datas-property-service';
-import { Service } from './shared/service';
+import { DatasPropertyService } from '../../services/datas-property-service';
+import { DadosClienteImovelModel } from './shared/service';
 
 @Component({
   selector: 'app-results',
@@ -11,20 +11,22 @@ import { Service } from './shared/service';
 })
 export class ResultsComponent implements OnInit {
 
- 
+
  taxa = 7;
- totalParcelaInicial! : any ;
- totalValorAprovado! : any;
- 
-//private service:DatasPropertyService
-  constructor() { }
+ totalParcelaInicial : string;
+ totalValorAprovado: string;
+
+  constructor(private propedyServive: DatasPropertyService) { }
 
   ngOnInit(): void {
+ this.propedyServive.pegarDados().subscribe((dados)=>{debugger
+   this.totalParcelaInicial = dados.parcelaInicial.toLocaleString("pt-BR") ;
+   this.totalValorAprovado = dados.valorAprovado.toLocaleString("pt-BR") ;
+ })
+  // this.totalParcelaInicial = DatasPropertyService..parcelaInicial.toLocaleString("pt-BR");
+  // this.totalValorAprovado = DatasPropertyService.model.valorAprovado.toLocaleString("pt-BR");
 
-  this.totalParcelaInicial = DatasPropertyService.model.parcelaInicial.toLocaleString("pt-BR");
-  this.totalValorAprovado = DatasPropertyService.model.valorAprovado.toLocaleString("pt-BR");
-  
   }
- 
+
 
 }

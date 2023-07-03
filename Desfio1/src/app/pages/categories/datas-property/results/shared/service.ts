@@ -1,9 +1,6 @@
-import { DatasPropertyService } from "../../shared/datas-property-service";
 
-
-export  class Service {    
+export  class DadosClienteImovelModel {
     constructor(
-       
         public nome: string,
         public profissao: string,
         public cpf: number,
@@ -12,7 +9,6 @@ export  class Service {
         public cep: number,
         public celular: number,
 
-        public tipoImovel: string,
         public rendaMensal: number,
         public valorImovel: number,
         public valorEntrada: number,
@@ -21,9 +17,8 @@ export  class Service {
         public quantidadeParcelas: number,
         public dataHoje: number,
       //  public id : number,
-        
+
     ) {
-     //  this.id = id;
         this.nome = nome;
         this.profissao = profissao;
         this.cpf = cpf;
@@ -32,7 +27,6 @@ export  class Service {
         this.cep= cep;
         this.celular = celular;
 
-        this.tipoImovel = tipoImovel;
         this.rendaMensal = rendaMensal;
         this.valorImovel = valorImovel;
         this.valorEntrada = valorEntrada;
@@ -40,7 +34,6 @@ export  class Service {
         this.valorAprovado = valorAprovado;
         this.quantidadeParcelas = quantidadeParcelas;
         this.dataHoje = dataHoje;
-      
     }
     public id!: number;
 }

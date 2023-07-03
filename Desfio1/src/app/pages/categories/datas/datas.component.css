@@ -1,0 +1,22 @@
+
+.container-forms{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content{
+  position: relative;
+  background-color: rgb(201, 198, 198);
+  height: 70%;
+  width: 90%;
+  border-radius: 9px;
+  box-shadow: 2px 4px 4px 4px  gray;
+}
+
+.btn_forms {
+  position: absolute;
+
+}
+
+

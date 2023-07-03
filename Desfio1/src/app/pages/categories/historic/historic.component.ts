@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Service } from '../datas-property/results/shared/service';
-import { DatasPropertyService } from '../datas-property/shared/datas-property-service';
+import { DadosClienteImovelModel } from '../datas-property/results/shared/service';
+import { DatasPropertyService } from '../services/datas-property-service';
 
 
 @Component({
@@ -11,12 +11,12 @@ import { DatasPropertyService } from '../datas-property/shared/datas-property-se
 })
 export class HistoricComponent implements OnInit {
 
- 
+
   data = "02/05/2021";
   valorImovel: any ="";
- 
-  dadosBD!: Service;
-  historics: Service[] = [];
+
+  dadosBD!: DadosClienteImovelModel;
+  historics: DadosClienteImovelModel[] = [];
 
   constructor(private service: DatasPropertyService,
               private router:Router,
@@ -38,7 +38,7 @@ export class HistoricComponent implements OnInit {
   }
 
   delete(): any{
-  
+
    this.service.deletarBD(this.dadosBD.id).subscribe(() => {
      //alert('historico excluido com sucesso !');
      this.router.navigate(["/historic"]);

@@ -1,11 +1,11 @@
 
-export class ModalCliente {    
+export class ModalCliente {
     constructor(
         public nome: string ,
         public profissao: string,
         public cpf: number,
         public email: string,
-        public data: string,
+        public data:string,
         public cep : number,
         public celular: number,
     ) {
