@@ -1,7 +1,7 @@
 <!----------Página 2 --------------->
-<div class="container-forms" >
+<div class="container-forms" *ngIf="visualizar" >
   <div class="content">
-    <h2 class="text-center mb-2">Dados do Pessoais</h2>
+    <h2 class="text-center m-3">Dados do Pessoais</h2>
 
     <form (ngSubmit)="onSubmit()" [formGroup]="formulario">
       <!---------   nome  --------->
@@ -15,15 +15,12 @@
               formControlName="nome"
               id="nome"
               placeholder="your name"
-              value=""
-            />
+              value=""/>
 
             <div
               *ngIf="
                 formulario.controls.nome.touched &&
-                formulario.controls.nome?.errors
-              "
-            >
+                formulario.controls.nome?.errors">
               <small
                 class="text text-danger"
                 *ngIf="formulario.controls.nome.errors?.required"
@@ -32,16 +29,12 @@
               >
               <small
                 class="text text-danger"
-                *ngIf="formulario.controls.nome.errors?.minlength"
-              >
-                Nome inválido</small
-              >
+                *ngIf="formulario.controls.nome.errors?.minlength">
+                Nome inválido</small>
               <small
                 class="text text-danger"
-                *ngIf="formulario.controls.nome.errors?.pattern"
-              >
-                Apenas letras</small
-              >
+                *ngIf="formulario.controls.nome.errors?.pattern">
+                Apenas letras</small>
             </div>
 
             <label for="nome">Nome completo :</label>
@@ -62,14 +55,12 @@
             <div
               *ngIf="
                 formulario.controls.profissao.touched &&
-                formulario.controls.profissao?.invalid
-              "
-            >
+                formulario.controls.profissao?.invalid">
               <small
                 class="text text-danger"
-                *ngIf="formulario.controls.profissao.errors?.required"
-              >
-                Profissão é obrigatório.</small
+                *ngIf="formulario.controls.profissao.errors?.required" >
+                Profissão é obrigatório.
+              </small
               >
               <small
                 class="text text-danger"
@@ -79,10 +70,8 @@
               >
               <small
                 class="text text-danger"
-                *ngIf="formulario.controls.profissao.errors?.pattern"
-              >
-                Apenas letras.</small
-              >
+                *ngIf="formulario.controls.profissao.errors?.pattern">
+                Apenas letras.</small>
             </div>
             <label for="profissao">Profissão :</label>
           </div>
@@ -98,15 +87,11 @@
               class="form-control"
               id="cpf"
               formControlName="cpf"
-              placeholder="your CPF"
-            />
-
+              placeholder="your CPF"/>
             <div
               *ngIf="
                 formulario.controls.cpf.touched &&
-                formulario.controls.cpf?.invalid
-              "
-            >
+                formulario.controls.cpf?.invalid">
               <small
                 class="text text-danger"
                 *ngIf="formulario.controls.cpf.errors?.required"
@@ -161,7 +146,7 @@
         </div>
 
         <!--------- data de nacimento-------->
-        <div class="col-6 mt-4">
+        <!-- <div class="col-6 mt-4">
           <div class="form-floating form-Group">
             <input
               type="date"
@@ -193,7 +178,7 @@
 
             <label for="dataNascimento">Data de Nascimento :</label>
           </div>
-        </div>
+        </div> -->
 
         <!-----------------Cep----- ------>
         <div class="col-6 mt-4">
@@ -204,26 +189,21 @@
               class="form-control"
               id="cep"
               placeholder="your cep"
-              formControlName="cep"
-            />
+              formControlName="cep" />
 
-            <div
-              *ngIf="
+            <div *ngIf="
                 formulario.controls.cep.touched &&
-                formulario.controls.cep?.invalid
-              "
-            >
+                formulario.controls.cep?.invalid" >
               <small
                 class="text text-danger"
-                *ngIf="formulario.controls.cep.errors?.required"
-              >
-                CEP é obrigatório.</small
-              >
+                *ngIf="formulario.controls.cep.errors?.required">
+                   CEP é obrigatório.
+              </small>
               <small
                 class="text text-danger"
-                *ngIf="formulario.controls.cep.errors?.minlength"
-              >
-                CEP inválido !</small
+                *ngIf="formulario.controls.cep.errors?.minlength">
+                CEP inválido !
+              </small
               >
             </div>
             <label for="cep">CEP :</label>
@@ -272,16 +252,17 @@
       <div class="btn_forms row container-fluid text-center mt-2">
         <div class="col-6">
           <button
-            class="btn btn-outline-danger"
-            routerLink="/home"
-          >
+            class="btn btn-outline-warning btn-lg"
+            style="color: orange;"
+            routerLink="/home">
             Cancelar
           </button>
         </div>
         <div class="col-6">
           <button
-            class="btn btn-outline-success"
+            class="btn btn-warning btn-lg"
             type="submit"
+            style="color: white;"
           >
           <!-- [disabled]="formulario.invalid" -->
             Prosseguir
@@ -292,10 +273,7 @@
   </div>
 </div>
 
-<app-datas-property
-   [clienteDados]="clienteDados"
-   [visualizarModel]="visualizarModel">
-
+<app-datas-property>
 </app-datas-property>
 
-
+ <!-- [clienteDados]="clienteDados" -->

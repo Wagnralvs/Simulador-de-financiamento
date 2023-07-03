@@ -29,7 +29,7 @@ registerLocaleData(localePt);
     HttpClientModule,
     RouterModule,
     BrowserAnimationsModule,
-    // CategoriesModule,
+    CategoriesModule,
     NgxMaskModule.forRoot({
      dropSpecialCharacters:false
     })
@@ -39,7 +39,9 @@ registerLocaleData(localePt);
             { provide: LOCALE_ID,
              useValue : 'pt-BR',}],
   bootstrap: [AppComponent],
-  exports:[AppComponent]
+  exports:[
+      AppComponent,
+   ]
 
 })
 export class AppModule { }

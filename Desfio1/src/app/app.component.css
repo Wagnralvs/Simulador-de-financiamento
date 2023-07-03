@@ -1,1 +1,12 @@
 
+.navbar{
+  z-index: 2;
+  background-color: rgb(196, 194, 192);
+  background: linear-gradient(45deg ,rgb(214, 169, 84), rgb(223, 204, 167)) ;
+  top: 0;
+  position: fixed;
+  width: 100%;
+}
+.btn{
+  border: 1px solid white;
+}

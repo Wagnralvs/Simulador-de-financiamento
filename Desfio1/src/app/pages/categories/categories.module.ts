@@ -11,6 +11,7 @@ import { ResultsComponent } from './datas-property/results/results.component';
 import { ResultReprovadoComponent } from './result-reprovado/result-reprovado.component';
 import { AppModule } from 'src/app/app.module';
 import { HistoricComponent } from './historic/historic.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -24,11 +25,12 @@ import { HistoricComponent } from './historic/historic.component';
   ],
   imports: [
     CommonModule,
+    BrowserModule,
     FormsModule,
     CategoriesRoutingModule,
     NgxMaskModule.forChild(),
     ReactiveFormsModule,
-    AppModule,
+   
   ],
   exports: [
     DatasComponent,

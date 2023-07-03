@@ -1,12 +1,11 @@
 <!-------------- tela 3 -------------->
 <div class="container-forms" *ngIf="visualizarModel">
-  <div class="content">
-    <h1 class="text-center mb-3">Dados do Imóvel</h1>
+  <div class="content  mt-4">
+    <h1 class="text-center m-3">Dados do Imóvel</h1>
 
     <form (ngSubmit)="onSubmit()" [formGroup]="formulario">
 
       <div class="row container ">
-
         <!---------------Renda mensal ------------>
         <div class="col-6 mt-4">
           <div class="form-floating form-group">
@@ -20,8 +19,7 @@
               class="form-control"
               formControlName="rendaMensal"
               id="rendaMensal"
-              placeholder="monthly income"
-            />
+              placeholder="monthly income"/>
 
             <div
               *ngIf="formulario.controls.rendaMensal?.touched &&
@@ -30,8 +28,7 @@
                 class="text text-danger"
                 *ngIf="formulario.controls.rendaMensal.errors?.required">
                    Renda mensal é obrigatoria
-              </small
-              >
+              </small>
             </div>
 
             <label for="rendaMensal">Renda Mensal :</label>
@@ -52,8 +49,7 @@
               class="form-control"
               formControlName="valorImovel"
               id="valorImovel"
-              placeholder="value of the property "
-            />
+              placeholder="value of the property "/>
 
             <div
               *ngIf="
@@ -147,31 +143,20 @@
           </div>
         </div>
       </div>
-
-      <!-- <div>data hoje {{ dataHoje | date : "short" }}</div>
-      <div>Valor da primeira parcela {{ parcelasMensais() | currency : "BRL" }}</div>
-      <div>
-        Valor aprovado para o financiamento
-        {{ aprovadoV() | currency : "BRL" }}
-      </div>
-      <div>Renda reprovada ou aprovada {{ renda() }}</div> -->
-
-
       <!--buttons  -->
       <div class="row container-fluid text-center mt-3">
         <div class="col-6">
           <button
             type="button"
-            class="btn btn-outline-dange"
+            class="btn btn-outline-warning btn-lg"
             routerLink="/home">
             Cancelar
           </button>
         </div>
         <div class="col-6">
           <button
-            class="btn btn-outline-succes"
-            type="submit"
-          >
+          class="btn btn-warning btn-lg"
+            type="submit">
           <!-- [disabled]="formulario.invalid" -->
             Prosseguir
           </button>
