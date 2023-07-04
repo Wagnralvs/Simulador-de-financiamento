@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 
 import { ModalCliente } from '../modal/modal-cliente';
 import { ServiceCliente } from '../services/service-cliente';
-import { DadosClienteImovelModel } from './results/shared/service';
+import { DadosClienteImovelModel } from '../modal/model-imovel';
 import { DatasPropertyService } from '../services/datas-property-service';
 import { Subscription, tap, pipe} from 'rxjs';
 

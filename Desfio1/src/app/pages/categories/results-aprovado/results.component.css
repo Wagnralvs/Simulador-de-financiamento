@@ -9,11 +9,12 @@
   height: 100%;
   font-family: var(--fonte-family);
   margin-top: -2rem;
+  position: relative;
 }
 
 .content{
   width: 90%;
-  position: relative;
+  position: absolute;
   background-color: var(--cor-modal);
   height: 22rem;
   width: 90%;
@@ -31,24 +32,17 @@
   width: 100%;
 }
 .header img{
-  width: 50px;
-  height: 50px;
+  width: 55px;
+  height: 45px;
   animation: animecion_icon 3s linear infinite;
-
-}
-
-@keyframes animecion_icon {
-  0% { -webkit-transform:rotate(0deg);}
-	50% { -webkit-transform:rotate(40deg); }
-	100% { -webkit-transform:rotate(0deg); }
 }
 
 .btn{
   border: 1px solid rgb(176, 163, 29);
-  width: 9rem;
-  color: white;
+  width: 11rem;
 }
-p{
-  margin: 0;
-  font-size: 0.9rem;
+@keyframes animecion_icon {
+  0% { -webkit-transform:rotate(0deg);}
+	50% { -webkit-transform:rotate(30deg); }
+	100% { -webkit-transform:rotate(0deg); }
 }

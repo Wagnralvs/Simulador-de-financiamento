@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DatasPropertyComponent } from '../datas-property.component';
-import { DatasPropertyService } from '../../services/datas-property-service';
-import { DadosClienteImovelModel } from './shared/service';
+import { DatasPropertyComponent } from '../datas-property/datas-property.component';
+import { DatasPropertyService } from '../services/datas-property-service';
+import { DadosClienteImovelModel } from '../modal/model-imovel';
 
 @Component({
   selector: 'app-results',

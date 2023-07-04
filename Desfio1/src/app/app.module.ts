@@ -7,9 +7,6 @@ import { NgxMaskModule  } from 'ngx-mask';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { HttpClientModule } from '@angular/common/http';
-
-
-
 import { AppComponent } from './app.component';
 import localePt  from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';

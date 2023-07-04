@@ -19,6 +19,7 @@
   width: 90%;
   border-radius: 9px;
   box-shadow: 2px 4px 4px 4px  gray;
+  animation: efect_model 1s ease-in-out forwards;
 }
  h1{
   font-size: 1.8rem;

@@ -1,5 +1,5 @@
 import { Injectable, } from '@angular/core';
-import { DadosClienteImovelModel } from '../datas-property/results/shared/service';
+import { DadosClienteImovelModel } from '../modal/model-imovel';
 
 import { DatasPropertyComponent } from '../datas-property/datas-property.component';
 import { HttpClient } from '@angular/common/http';

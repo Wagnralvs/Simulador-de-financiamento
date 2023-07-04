@@ -5,7 +5,7 @@ import { AppComponent } from 'src/app/app.component';
 import { DatasPropertyComponent } from '../datas-property/datas-property.component';
 import { Router } from '@angular/router';
 import { DatasPropertyService } from '../services/datas-property-service';
-import { DadosClienteImovelModel } from '../datas-property/results/shared/service';
+import { DadosClienteImovelModel } from '../modal/model-imovel';
 import { ModalCliente } from '../modal/modal-cliente';
 import { ServiceCliente } from '../services/service-cliente';
 

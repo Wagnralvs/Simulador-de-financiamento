@@ -18,6 +18,7 @@
   border-radius: 9px;
   box-shadow: 2px 4px 4px 4px  gray;
   max-width: 700px;
+  animation: efect_model 1s ease-in-out forwards;
 }
 .row .container{
   position: absolute;
