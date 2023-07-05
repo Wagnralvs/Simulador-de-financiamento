@@ -19,7 +19,7 @@ export class ResultsComponent implements OnInit {
   constructor(private propedyServive: DatasPropertyService) { }
 
   ngOnInit(): void {
- this.propedyServive.pegarDados().subscribe((dados)=>{debugger
+ this.propedyServive.pegarDados().subscribe((dados)=>{
    this.totalParcelaInicial = dados.parcelaInicial.toLocaleString("pt-BR") ;
    this.totalValorAprovado = dados.valorAprovado.toLocaleString("pt-BR") ;
  })

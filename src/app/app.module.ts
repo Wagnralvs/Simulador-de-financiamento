@@ -26,6 +26,7 @@ registerLocaleData(localePt);
     HttpClientModule,
     RouterModule,
     BrowserAnimationsModule,
+  
     CategoriesModule,
     NgxMaskModule.forRoot({
      dropSpecialCharacters:false

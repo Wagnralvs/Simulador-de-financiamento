@@ -17,11 +17,11 @@ export class ServiceCliente {
      this.dadosclientes$ = new Subject<ModalCliente>();
   }
 
-  pegarDadosCliente(): Observable<ModalCliente> {debugger
+  pegarDadosCliente(): Observable<ModalCliente> {
     return this.dadosclientes$.asObservable();
   }
 
- enviarDadosCliente(dados: ModalCliente): void{debugger
+ enviarDadosCliente(dados: ModalCliente): void{
     this.dadosclientes$.next(dados);
   }
  }

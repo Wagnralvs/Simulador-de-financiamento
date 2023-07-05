@@ -7,7 +7,7 @@
 
       <div class="row container ">
         <!---------------Renda mensal ------------>
-        <div class="col-6 mt-4">
+        <div class="col-md-6 mt-4">
           <div class="form-floating form-group">
             <input
               type="tell"
@@ -36,7 +36,7 @@
         </div>
 
         <!-- ------Valor do imóvel------------>
-        <div class="col-6 mt-4">
+        <div class="col-md-6 mt-4">
           <div class="form-floating form-group">
             <input
               type="tell"
@@ -69,7 +69,7 @@
         </div>
 
         <!---------Valor da entrada --------->
-        <div class="col-6 mt-4">
+        <div class="col-md-6 mt-4">
           <div class="form-floating form-group">
             <input
               type="tell"
@@ -83,7 +83,6 @@
               id="valorEntrada"
               placeholder="value of input"
               required
-
               (keyup)="entradaValidacao()"
             />
 
@@ -107,7 +106,7 @@
 
         <!---------Quantidade de parcelas ---->
 
-        <div class="col-6 mt-4">
+        <div class="col-md-6 mt-4">
           <div class="form-floating form-group">
             <input
               type="number"
@@ -156,8 +155,8 @@
         <div class="col-6">
           <button
           class="btn btn-warning btn-lg"
-            type="submit">
-          <!-- [disabled]="formulario.invalid" -->
+            type="submit"
+            [disabled]="formulario.invalid">
             Prosseguir
           </button>
         </div>

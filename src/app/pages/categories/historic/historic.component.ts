@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DadosClienteImovelModel } from '../modal/model-imovel';
 import { DatasPropertyService } from '../services/datas-property-service';
-import { filter, map, take, tap, toArray, pipe, from } from 'rxjs';
+import { filter, map, take, tap, toArray, pipe, from, window } from 'rxjs';
 
 
 @Component({
@@ -19,6 +19,7 @@ export class HistoricComponent implements OnInit {
   dadosBD!: DadosClienteImovelModel;
   historics: DadosClienteImovelModel[] = [];
   historicById: DadosClienteImovelModel []=[];
+  id : number ;
 
   constructor(private service: DatasPropertyService,
               private router:Router,
@@ -49,38 +50,30 @@ export class HistoricComponent implements OnInit {
 
   from(this.historics).pipe(
      filter(res => res.id == id),
-
-
-      // const array$ = from(Object.entries(res));
-      //   array$.subscribe(array => { debugger
-      //     console.log(array)
-      //     this.historicById = array
-      //   });
-
-      //  this.historicById = new DadosClienteImovelModel(
-      //     res )
-      //  debugger
-
   ).subscribe(
-    (response)=>{debugger
+    (response)=>{
        const idClient = {response}
-      // for (const key in response){
-      //   this.historicById.push(response[key]);
-
-      //   console.log(this.historicById)
-      // }
-
       const array = Object.values(idClient);
-      console.log(array)
+      this.historicById = array ;
     }
   );
-
   }
-  delete(): any{
 
-   this.service.deletarBD(this.dadosBD.id).subscribe(() => {
-     //alert('historico excluido com sucesso !');
-     this.router.navigate(["/historic"]);
-   } )
+  pegarIdExcluiir(id:number): number{
+     this.id = id ;
+      return id ;
+  }
+  delete(): void{
+   const id = this.id ;
+   this.service.deletarBD(id).pipe(
+    tap((result) => {
+      if(result){
+        alert('histórico apagado com sucesso');
+        this.router.navigate(["/historic"]);
+        location.reload();
+      }
+    } )
+
+   ).subscribe();
 
 }}

@@ -36,7 +36,6 @@ export class DatasComponent implements OnInit {
      profissao :[null , [Validators.required,  Validators.minLength(3), Validators.pattern('^[a-zA-Z ]*$')]],
      cpf :[null , [Validators.required , Validators.minLength(14)] ],
      email :[null , [Validators.required,  Validators.email]],
-     dataNascimento :[null , [Validators.required, Validators.max(2003)]],
      cep :[null , [Validators.required, Validators.minLength(9)]],
      celular :[null , [Validators.required, Validators.minLength(17)]],
    })
@@ -52,7 +51,7 @@ onSubmit(){
  let cep = this.formulario.get('cep')?.value;
  let celular = this.formulario.get('celular')?.value;
 
-debugger
+
  this.clienteDados = new ModalCliente (nome , profissao , cpf, email,  data , cep , celular,);
  this.visualizarModel = true;
  this.visualizar = false;

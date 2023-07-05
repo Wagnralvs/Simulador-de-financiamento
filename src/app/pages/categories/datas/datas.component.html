@@ -7,7 +7,7 @@
       <!---------   nome  --------->
 
       <div class="row container">
-        <div class="col-6">
+        <div class="col-md-6 mt-4">
           <div class="form-floating form-Group">
             <input
               type="text"
@@ -42,7 +42,7 @@
         </div>
 
         <!---------------profissão------------>
-        <div class="col-6 form-Group">
+        <div class="col-md-6 mt-4 form-Group">
           <div class="form-floating">
             <input
               type="text"
@@ -79,7 +79,7 @@
 
         <!-- ------CPF-------------->
 
-        <div class="col-6 mt-4">
+        <div class="col-md-6 mt-4">
           <div class="form-floating form-Group">
             <input
               type="text"
@@ -110,7 +110,7 @@
         </div>
 
         <!---------email----------->
-        <div class="col-6 mt-4">
+        <div class="col-md-6 mt-4">
           <div class="form-floating form-Group">
             <input
               type="email"
@@ -181,7 +181,7 @@
         </div> -->
 
         <!-----------------Cep----- ------>
-        <div class="col-6 mt-4">
+        <div class="col-md-6 mt-4">
           <div class="form-floating form-Group">
             <input
               type="tel"
@@ -211,7 +211,7 @@
         </div>
 
         <!---------telefone----------------->
-        <div class="col-6 mt-4">
+        <div class="col-md-6 mt-4">
           <div class="form-floating form-Group">
             <input
               type="tel"
@@ -220,15 +220,12 @@
               class="form-control"
               id="telefone"
               placeholder="your phone"
-              formControlName="celular"
-            />
+              formControlName="celular"/>
 
             <div
               *ngIf="
                 formulario.controls.telefone?.touched &&
-                formulario.controls.telefone?.invalid
-              "
-            >
+                formulario.controls.telefone?.invalid">
               <small
                 class="text text-danger"
                 *ngIf="formulario.controls.telefone.errors?.required"
@@ -263,8 +260,8 @@
             class="btn btn-warning btn-lg"
             type="submit"
             style="color: white;"
-          >
-          <!-- [disabled]="formulario.invalid" -->
+            [disabled]="formulario.invalid">
+
             Prosseguir
           </button>
         </div>

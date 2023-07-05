@@ -66,12 +66,12 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
 
     this.subscription = new Subscription();
     if(this.clienteDados){
-       debugger
+
     }
 
 
     this.clienteService.pegarDadosCliente().pipe(
-      tap((result) => { debugger
+      tap((result) => {
         this.visualizarModel = true;
         this.nome = result.nome;
         this.celular = result.celular;
@@ -95,8 +95,6 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
         [Validators.required, Validators.max(360), Validators.min(1)],
       ],
     });
-
-
   }
 
   ngOnDestroy(): void {
@@ -127,7 +125,8 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
 
   entradaMinima() {
     const entradaPorcentagem = 0.2;
-    const entradaMinima: number = entradaPorcentagem * this.valorImovel;
+    const valorImovel = +this.formulario.get('valorImovel')?.value;
+    const entradaMinima: number = entradaPorcentagem * valorImovel;
 
     return entradaMinima;
   }
@@ -150,11 +149,6 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
     this.valorAprovado = this.aprovadoValor();
     this.rendaAprovada = this.renda();
 
-    let id = this.id;
-
-    //
-
-
     let nome = this.nome;
     let profissao = this.profissao;
     let cpf = this.cpf;
@@ -162,8 +156,6 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
     let data = this.data;
     let cep = this.cep;
     let celular = this.celular;
-
-
 
     if (this.rendaAprovada) {
 

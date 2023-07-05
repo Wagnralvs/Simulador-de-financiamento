@@ -27,38 +27,10 @@
      <td class="list-icon">
        <li *ngFor=" let historic of historics">
          <a (click)="pegarDados(historic.id)"><img data-bs-toggle="modal" data-bs-target="#myModal"  src="/assets/icons/eye-fill.svg" type="submit"  width="25" height="25" title="Visualizar" alt=""></a>
-         <a><img type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal"  src="/assets/icons/trash.svg" width="25" height="25" title="Excuir" alt=""></a>
+         <a><img (click)="pegarIdExcluiir(historic.id)"  type="submit" data-bs-toggle="modal" data-bs-target="#myModalDelete"  src="/assets/icons/trash.svg" width="25" height="25" title="Excuir" alt=""></a>
        </li>
      </td>
 </tr>
-
-  <!-- Modal Excluir -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Excluir</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <h4>  Você realmente deseja deletar essa proposta ?</h4>
-        <small>
-         Propostas deletadas, não poderão ser mais visualizadas,
-         esse procedimento não é reverssível.
-        </small>
-
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
-          <button (click)="delete()" type="button" class="btn btn-danger">Excluir</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal Visualizar -->
-
 </section>
 </table>
 </div>
@@ -66,7 +38,7 @@
 </div>
 
 
-<div *ngIf="historics.length==1">
+<div *ngIf="historics.length==1 || !historics">
 <div class="container mt-4 ">
     <strong class="text-center ">  <p>Desculpe :( <br>
         Não encontramos nenhum histórico de propostas. <br>
@@ -74,7 +46,7 @@
    </p> </strong>
 </div>
 </div>
-
+  <!-- Modal Visualizar -->
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -83,95 +55,89 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
       </div>
       <div class="modal-body">
-        <table >
+        <table *ngFor="let idClient of historicById">
         <tr class="row">
-          <th class="col-4">Nome do Proponente</th>
-          <th class="col-4"></th>
-          <th class="col-4"></th>
-
+          <th class="col-4">Nome</th>
+          <th class="col-4">Profissão</th>
+          <th class="col-4">E-mail</th>
          </tr>
          <tr class="row">
 
-          <td class="col-4">yy</td>
-          <td class="col-4">555</td>
-          <td class="col-4">555</td>
+          <td class="col-4">{{idClient.nome}}</td>
+          <td class="col-4">{{idClient.profissao}}</td>
+          <td class="col-4">{{idClient.email}}</td>
          </tr>
           <tr class="row">
-            <th class="col-4">E-mail</th>
-            <th class="col-4">Data de Nascimento</th>
             <th class="col-4">CEP</th>
+            <th class="col-4">CPF</th>
+            <th class="col-4">Celular</th>
            </tr>
 
            <tr class="row">
-
-            <td class="col-4">yy</td>
-            <td class="col-4">555</td>
-            <td class="col-4">555</td>
+            <td class="col-4">{{idClient.cep}}</td>
+            <td class="col-4">{{idClient.cpf}}</td>
+            <td class="col-4">{{idClient.celular}}</td>
            </tr>
-
-           <tr class="row">
-             <th class="col-4">Celular</th>
-           </tr>
-           <tr class="row">
-            <td class="col-4">yy</td>
-          </tr>
-
           <h5 class="mt-2">Dados do imóvel</h5>
 
           <tr class="row">
-            <th class="col-4">Tipo do Imóvel</th>
             <th class="col-4">Renda Mensal</th>
             <th class="col-4">Valor do imóvel</th>
-
-           </tr>
-           <tr class="row">
-
-            <td class="col-4">8888</td>
-            <td class="col-4">555</td>
-            <td class="col-4">555</td>
-           </tr>
-
-           <tr class="row">
             <th class="col-4">Valor da Entrada</th>
-            <th class="col-4">Parecelas</th>
+           </tr>
+           <tr class="row">
+            <td class="col-4">{{idClient.rendaMensal}}</td>
+            <td class="col-4">{{idClient.valorImovel}}</td>
+            <td class="col-4">{{idClient.valorEntrada}}</td>
+           </tr>
 
+           <tr class="row">
+            <th class="col-4">Parecelas</th>
           </tr>
            <tr class="row">
-
-            <td class="col-4">555</td>
-            <td class="col-4">555</td>
+            <td class="col-4">{{idClient.quantidadeParcelas}}</td>
            </tr>
 
            <h5 class="mt-2"> Dados do Financiamento</h5>
 
           <tr class="row">
-            <th class="col-4">Táxa</th>
-            <th class="col-4">Valor total Financiado</th>
-            <th class="col-4">Valor Total com Juros</th>
-
-           </tr>
-           <tr class="row">
-
-            <td class="col-4">8888</td>
-            <td class="col-4">555</td>
-            <td class="col-4">555</td>
-           </tr>
-
-           <tr class="row">
-            <th class="col-4">Valor da Primeira Parcela</th>
+            <th class="col-4">Valor Aprovado</th>
+            <th class="col-4">Parcela inicial</th>
             <th class="col-4">Status</th>
-
-          </tr>
+           </tr>
            <tr class="row">
-
-            <td class="col-4">555</td>
-            <td class="col-4">555</td>
+            <td class="col-4">{{idClient.valorAprovado}}</td>
+            <td class="col-4">{{idClient.parcelaInicial}}</td>
            </tr>
         </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal Excluir -->
+<div class="modal fade" id="myModalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Excluir</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+
+        <h4>  Você realmente deseja deletar essa proposta ?</h4>
+        <small>
+         Propostas deletadas, não poderão ser mais visualizadas,
+         esse procedimento não é reverssível.
+        </small>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+          <button (click)="delete()" type="submit" class="btn btn-danger" data-bs-dismiss="modal">Excluir</button>
       </div>
     </div>
   </div>
