@@ -68,6 +68,31 @@
           </div>
         </div>
 
+            <!-- ------juros------------>
+            <div class="col-md-6 mt-4">
+              <div class="form-floating form-group">
+                <input
+                  type="number"
+                  suffix="%"
+                  class="form-control"
+                  formControlName="taxa"
+                  placeholder="taxa"/>
+
+                <div
+                  *ngIf="
+                    formulario.controls.taxa?.touched &&
+                    formulario.controls.taxa?.errors" >
+                  <small
+                    class="text text-danger"
+                    *ngIf="formulario.controls.taxa.errors?.required"
+                  >
+                  taxa é obrigatório</small
+                  >
+                </div>
+                <label for="valorImovel">Taxa :</label>
+              </div>
+            </div>
+
         <!---------Valor da entrada --------->
         <div class="col-md-6 mt-4">
           <div class="form-floating form-group">
@@ -97,7 +122,8 @@
                 </small>
             </div>
             <small *ngIf="formulario.controls.valorEntrada?.touched" class="text text-danger"
-              >{{ menssage }} {{ entradaMin | currency : "BRL" }}
+              >{{ menssage }}
+              <!-- {{ entradaMin | currency : "BRL" }} -->
             </small
             >
             <label for="valorEntrada">Valor da Entrada : </label>

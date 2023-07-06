@@ -16,6 +16,8 @@ export  class DadosClienteImovelModel {
         public valorAprovado: number,
         public quantidadeParcelas: number,
         public dataHoje: number,
+        public taxa :number,
+        public valortodalComJuros: number,
       //  public id : number,
 
     ) {
@@ -34,6 +36,8 @@ export  class DadosClienteImovelModel {
         this.valorAprovado = valorAprovado;
         this.quantidadeParcelas = quantidadeParcelas;
         this.dataHoje = dataHoje;
+        this.taxa = taxa;
+        this.valortodalComJuros = valortodalComJuros;
     }
-    public id!: number;
+       public id: number;
 }

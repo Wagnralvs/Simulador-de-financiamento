@@ -13,7 +13,8 @@ import { ModalCliente } from '../modal/modal-cliente';
 import { ServiceCliente } from '../services/service-cliente';
 import { DadosClienteImovelModel } from '../modal/model-imovel';
 import { DatasPropertyService } from '../services/datas-property-service';
-import { Subscription, tap, pipe} from 'rxjs';
+import { Subscription, tap, pipe, of} from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
   private cep: number;
   private celular: number;
   public entradaMin: number;
+  private taxa :number;
 
   @Input() visualizarModel= false;
   @Input() clienteDados: ModalCliente ;
@@ -53,6 +55,7 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
   public mensaisParcelas: number;
   public valorAprovado: number ;
   public rendaAprovada: boolean ;
+  public valorTotalImovelJuros:number;
 
   public id = '';
 
@@ -71,7 +74,7 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
 
 
     this.clienteService.pegarDadosCliente().pipe(
-      tap((result) => {
+      tap((result) => {debugger
         this.visualizarModel = true;
         this.nome = result.nome;
         this.celular = result.celular;
@@ -90,6 +93,7 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
       rendaMensal: [null, [Validators.required]],
       valorImovel: [null, [Validators.required]],
       valorEntrada: [null, [Validators.required]],
+      taxa: [null, [Validators.required]],
       quantidadeParcelas: [
         null,
         [Validators.required, Validators.max(360), Validators.min(1)],
@@ -106,8 +110,8 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
     if (entradaReal) {
       const entradaMinima: number = this.entradaMinima();
       if (entradaMinima > entradaReal) {
-        this.menssage = 'O valor da entrada não pode ser inferior a';
-        this.entradaMin = this.entradaMinima();
+        this.menssage = `O valor da entrada não pode ser inferior a R$ ${this.entradaMinima()}`;
+        // this.entradaMin = this.entradaMinima();
         return false;
       }
     }
@@ -131,11 +135,19 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
     return entradaMinima;
   }
 
-  parcelasMensais(): number {
+  parcelasMensais(): number {debugger
+    const taxaMensal = (this.taxa / 12)/100;
+
     const totalParcelasMensais =
-      ((this.valorImovel * 0.8) / this.quantidadeParcelas) * 1.058;
+      ((this.valorImovel - this.valorEntrada) / this.quantidadeParcelas) * (taxaMensal + 1);
 
     return totalParcelasMensais;
+  }
+  valorTotalEmprestimoJuros(): number{debugger
+   const jurosTotal = (this.taxa * this.quantidadeParcelas / 12)/100
+   const valorTotalImovelJuros = this.valorImovel * (jurosTotal + 1)
+
+   return valorTotalImovelJuros
   }
 
   // -----caclulo validação-----
@@ -145,9 +157,11 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
     this.valorImovel = +this.formulario.get('valorImovel')?.value;
     this.valorEntrada = +this.formulario.get('valorEntrada')?.value;
     this.quantidadeParcelas = +this.formulario.get('quantidadeParcelas')?.value;
+    this.taxa = +this.formulario.get('taxa')?.value;
     this.mensaisParcelas = this.parcelasMensais();
     this.valorAprovado = this.aprovadoValor();
     this.rendaAprovada = this.renda();
+    this.valorTotalImovelJuros = this.valorTotalEmprestimoJuros()
 
     let nome = this.nome;
     let profissao = this.profissao;
@@ -160,28 +174,27 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
     if (this.rendaAprovada) {
 
       this.dadosClienteImovelModel = new DadosClienteImovelModel(
-        nome,
-        profissao,
-        cpf,
-        email,
-        data,
-        cep,
-        celular,
+        nome,profissao,cpf,email,
+        data,cep,celular,
         this.rendaMensal,
         this.valorImovel,
         this.valorEntrada,
         this.mensaisParcelas,
         this.valorAprovado,
         this.quantidadeParcelas,
-        this.dataHoje
+        this.dataHoje,
+        this.taxa,
+        this.valorTotalImovelJuros
       );
       this.propertyService.receberDados(this.dadosClienteImovelModel);
 
       // enviar dados para o banco de dados
       this.propertyService.criarBD(this.dadosClienteImovelModel).subscribe(() => {
-        this.aprovadoValor();
+
       });
-    } else this.reprovado();
+      this.aprovado();
+    }
+    else this.reprovado();
   }
 
   renda(): boolean {

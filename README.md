@@ -12,7 +12,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Json Server
 
-run npx json-server --watch db.json to open API simulation
+run `npx json-server` --watch db.json to open API simulation. Navigate to `http://localhost:3000/historico`
 
 ## Running unit tests
 
