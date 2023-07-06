@@ -5,11 +5,6 @@
   height: 100%;
   display: flex;
   align-items: center;
-  gap: 1rem;
- /* background-image: url("https://media.seudinheiro.com/uploads/2021/08/shutterstock_1822553567.jpg"); */
- background-repeat: no-repeat;
- background-position: center;
- background-size: cover;
  position: relative;
  color: #000;
  padding: 0 1rem;
@@ -18,7 +13,8 @@
 }
 
 .image{
- width: 50%;
+ box-shadow: 8px 5px 5px gray;
+ width: 70%;
 }
 
 .frases{
@@ -37,12 +33,31 @@
   border-top: 2px solid black ;
 }
 .btn{
-
  padding: 1rem;
  font-family: "Poppins";
 
 }
 
+@media (max-width: 700px){
+  .content{
+    display: block;
+    padding:2rem 0.5rem;
+    position: relative;
+    height: auto;
+  }
 
+  .image{
+    width: 100%;
+    margin-top: 8rem;
+    /* border: 3px solid rgb(121, 96, 96); */
+
+   }
+
+   .frases{
+    padding: 0.8rem;
+    margin-top: 0;
+
+  }
+}
 
 

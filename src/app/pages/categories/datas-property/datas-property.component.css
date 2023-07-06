@@ -27,7 +27,7 @@
 
  @media (max-width: 700px) {
   .content{
-    /* margin-top: 5rem; */
+    margin-top: 3.5rem;
     height: 80%;
     width: 90%;
     padding: 15px;
