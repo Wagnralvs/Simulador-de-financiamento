@@ -3,7 +3,7 @@ import { DadosClienteImovelModel } from '../modal/model-imovel';
 
 import { DatasPropertyComponent } from '../datas-property/datas-property.component';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 
 
 @Injectable({
@@ -11,29 +11,11 @@ import { Observable, Subject } from 'rxjs';
 })
 
 export class  DatasPropertyService {
-// testes
- valorImovel : any = '';
- valorEntrada :string[]= [];
-//--------
 
-  urlBD = " http://localhost:3000/historico"
+private urlBD = " http://localhost:3000/historico"
+constructor(private http:HttpClient) {}
 
-  static dadosClienteModel: DadosClienteImovelModel;
-  public clienteDados$: Subject<DadosClienteImovelModel>;
-
-  constructor(private http:HttpClient) {
-    this.clienteDados$ = new Subject<DadosClienteImovelModel>();
-  }
-
-  pegarDados(): Observable<DadosClienteImovelModel>{
-    return this.clienteDados$.asObservable();
-  }
-
- receberDados(dados: DadosClienteImovelModel): void {
-       this.clienteDados$.next(dados)
-   }
-
-// test banco de dados
+// banco de dados
  criarBD(dados:DadosClienteImovelModel): Observable<DadosClienteImovelModel>{
      return this.http.post<DadosClienteImovelModel>(this.urlBD, dados)
  }

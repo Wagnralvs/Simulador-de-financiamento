@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DadosClienteImovelModel } from '../modal/model-imovel';
 import { DatasPropertyService } from '../services/datas-property-service';
-import { filter, map, take, tap, toArray, pipe, from, window } from 'rxjs';
+import { filter, map, take, tap, toArray, pipe, from, window, Subscription } from 'rxjs';
 
 
 @Component({
@@ -10,24 +10,29 @@ import { filter, map, take, tap, toArray, pipe, from, window } from 'rxjs';
   templateUrl: './historic.component.html',
   styleUrls: ['./historic.component.css']
 })
-export class HistoricComponent implements OnInit {
+export class HistoricComponent implements OnInit , OnDestroy{
 
 
-  data = "02/05/2021";
+
   valorImovel: any ="";
 
   dadosBD!: DadosClienteImovelModel;
   historics: DadosClienteImovelModel[] = [];
   historicById: DadosClienteImovelModel []=[];
   id : number ;
+  subscription: Subscription;
+
 
   constructor(private service: DatasPropertyService,
               private router:Router,
-              ) { }
+     ) {
+      this.subscription = new Subscription();
+    }
 
   ngOnInit(): void {
 
     // inicializando a exibição do banco de dados
+    this.subscription.add(
     this.service.receberBD().pipe(
       tap((historic)=>{
         from(historic).pipe(
@@ -37,13 +42,11 @@ export class HistoricComponent implements OnInit {
                 this.historics = res ;
           })
         ).subscribe()})
-    ).subscribe();
+    ).subscribe())
+  }
 
-    //this.route.snapshot.paramMap.get('id');
-    const id:any = this.dadosBD.id
-    this.service.pegarId(id).subscribe(dadosBD => {
-      this.dadosBD = dadosBD;
-    })
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   pegarDados(id: number){
@@ -65,15 +68,16 @@ export class HistoricComponent implements OnInit {
   }
   delete(): void{
    const id = this.id ;
-   this.service.deletarBD(id).pipe(
-    tap((result) => {
-      if(result){
-        alert('histórico apagado com sucesso');
-        this.router.navigate(["/historic"]);
-        location.reload();
-      }
-    } )
+   this.subscription.add(
+    this.service.deletarBD(id).pipe(
+      tap((result) => {
+        if(result){
+          alert('histórico apagado com sucesso');
+          this.router.navigate(["/historic"]);
+          location.reload();
+        }
+      } )
 
-   ).subscribe();
+     ).subscribe());
 
 }}

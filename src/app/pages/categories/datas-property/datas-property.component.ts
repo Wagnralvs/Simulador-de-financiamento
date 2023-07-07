@@ -30,6 +30,9 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
   public formulario: UntypedFormGroup;
   public menssage = '';
 
+  public requestAprovado : RequestAprovadoModel;
+  public visulizarAprov = false ;
+
 
   private nome: string;
   private profissao: string;
@@ -66,26 +69,7 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
     private formBuilder: UntypedFormBuilder,
     private router: Router
   ) {
-
     this.subscription = new Subscription();
-    if(this.clienteDados){
-
-    }
-
-
-    this.clienteService.pegarDadosCliente().pipe(
-      tap((result) => {debugger
-        this.visualizarModel = true;
-        this.nome = result.nome;
-        this.celular = result.celular;
-        this.cep = result.cep;
-        this.cpf = result.cpf;
-        this.data = result.data;
-        this.email = result.email;
-        this.profissao = result.profissao
-       })
-    ).subscribe();
-
   }
 
   ngOnInit(): void {
@@ -99,6 +83,24 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
         [Validators.required, Validators.max(360), Validators.min(1)],
       ],
     });
+
+
+    this.subscription.add(
+      this.clienteService.pegarDadosCliente().pipe(
+        tap((result) => {
+          this.visualizarModel = true;
+          this.nome = result.nome;
+          this.celular = result.celular;
+          this.cep = result.cep;
+          this.cpf = result.cpf;
+          this.data = result.data;
+          this.email = result.email;
+          this.profissao = result.profissao
+         })
+      ).subscribe()
+    )
+
+
   }
 
   ngOnDestroy(): void {
@@ -135,7 +137,7 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
     return entradaMinima;
   }
 
-  parcelasMensais(): number {debugger
+  parcelasMensais(): number {
     const taxaMensal = (this.taxa / 12)/100;
 
     const totalParcelasMensais =
@@ -143,9 +145,9 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
 
     return totalParcelasMensais;
   }
-  valorTotalEmprestimoJuros(): number{debugger
+  valorTotalEmprestimoJuros(): number{
    const jurosTotal = (this.taxa * this.quantidadeParcelas / 12)/100
-   const valorTotalImovelJuros = this.valorImovel * (jurosTotal + 1)
+   const valorTotalImovelJuros = this.valorAprovado * (jurosTotal + 1)
 
    return valorTotalImovelJuros
   }
@@ -186,12 +188,14 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
         this.taxa,
         this.valorTotalImovelJuros
       );
-      this.propertyService.receberDados(this.dadosClienteImovelModel);
 
       // enviar dados para o banco de dados
-      this.propertyService.criarBD(this.dadosClienteImovelModel).subscribe(() => {
+      this.subscription.add(
+        this.propertyService.criarBD(this.dadosClienteImovelModel).subscribe(() => {
 
-      });
+        })
+      )
+
       this.aprovado();
     }
     else this.reprovado();
@@ -212,7 +216,22 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
     this.router.navigate(['/reprov']);
   }
   aprovado() {
-    this.router.navigate(['/results']);
+    this.requestAprovado = {
+       taxa: this.taxa,
+       totalParcelaInicial: this.mensaisParcelas ,
+       totalValorAprovado: this.valorAprovado,
+       valorTotalImovelJuros : this.valorTotalImovelJuros,
+    }
+
+    this.visulizarAprov = true ;
+    this.visualizarModel = false ;
+
   }
 }
+export class RequestAprovadoModel{
+  taxa : number;
+  totalParcelaInicial : number;
+  totalValorAprovado :number;
+  valorTotalImovelJuros : number;
 
+}

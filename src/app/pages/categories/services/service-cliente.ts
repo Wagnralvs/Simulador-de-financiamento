@@ -2,7 +2,7 @@ import {  Injectable, } from '@angular/core';
 
 import { ModalCliente } from '../modal/modal-cliente';
 import { DatasComponent } from '../datas/datas.component';
-import { Subject, Observable, BehaviorSubject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn:"root"

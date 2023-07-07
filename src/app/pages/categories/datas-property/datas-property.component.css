@@ -27,7 +27,6 @@
 
  @media (max-width: 700px) {
   .content{
-
     height: 80%;
     width: 90%;
     padding: 15px;
@@ -38,7 +37,7 @@
 
   }
   .container-forms{
-    background-color: red;
+    
   }
  }
 

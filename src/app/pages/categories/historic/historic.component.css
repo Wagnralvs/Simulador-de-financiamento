@@ -77,7 +77,13 @@ height: 100%;
 }
 .table-list .list-name td li{
  background-color: red;
+}
 
+.btn_home{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 @media (max-width: 700px) {
 
