@@ -42,9 +42,6 @@ export class HistoricComponent implements OnInit , OnDestroy{
           })
         ).subscribe()})
     ).subscribe())
-
-    console.log(this.historics.length === 0)
-    debugger
   }
 
   ngOnDestroy(): void {
