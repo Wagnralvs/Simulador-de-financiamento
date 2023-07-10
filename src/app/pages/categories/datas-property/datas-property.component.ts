@@ -25,14 +25,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 @Injectable()
 export class DatasPropertyComponent implements OnInit , OnDestroy{
+  @Input() visualizarModel= false;
+  @Input() clienteDados: ModalCliente ;
+
   private dadosClienteImovelModel: DadosClienteImovelModel;
   public dadosClienteModel: ModalCliente ;
   public formulario: UntypedFormGroup;
-  public menssage = '';
-
   public requestAprovado : RequestAprovadoModel;
-  public visulizarAprov = false ;
-
 
   private nome: string;
   private profissao: string;
@@ -43,24 +42,19 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
   private celular: number;
   public entradaMin: number;
   private taxa :number;
-
-  @Input() visualizarModel= false;
-  @Input() clienteDados: ModalCliente ;
-
-  //----data -------
   public dataHoje: number = Date.now();
 
   public rendaMensal: number;
   public valorImovel: number;
   public valorEntrada: number;
   public quantidadeParcelas: number;
-
   public mensaisParcelas: number;
   public valorAprovado: number ;
   public rendaAprovada: boolean ;
   public valorTotalImovelJuros:number;
-
   public id = '';
+  public menssage = '';
+  public visulizarAprov = false ;
 
   private subscription: Subscription ;
   constructor(
@@ -97,10 +91,7 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
           this.email = result.email;
           this.profissao = result.profissao
          })
-      ).subscribe()
-    )
-
-
+      ).subscribe());
   }
 
   ngOnDestroy(): void {
@@ -113,7 +104,6 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
       const entradaMinima: number = this.entradaMinima();
       if (entradaMinima > entradaReal) {
         this.menssage = `O valor da entrada não pode ser inferior a R$ ${this.entradaMinima()}`;
-        // this.entradaMin = this.entradaMinima();
         return false;
       }
     }

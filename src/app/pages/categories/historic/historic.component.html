@@ -1,7 +1,7 @@
 <div class="container">
   <div class="content">
     <h3 class="text-center">Histórico de Propostas</h3>
-  <div>
+  <div *ngIf="historics.length >= 1">
     <table class="table-list" >
       <tr class="list-titule">
          <th>Nome</th>
@@ -34,6 +34,18 @@
 </section>
 </table>
 </div>
+
+<div >
+  <div class="container mt-4 " *ngIf="historics.length === 0">
+     <p class="text-center ">  Desculpe :( <br>
+          Não encontramos nenhum histórico de propostas. <br>
+          Ou o simulador Json-Server está desativado
+          Por favor, execute localmente com o comando
+          <strong> npx json-server --watch db.json </strong>e simule um financiamento para que os dados apareçam aqui.
+     </p>
+  </div>
+  </div>
+
 <div class="btn_home">
   <button
   class="btn btn-warning m-4"
@@ -47,14 +59,7 @@
 </div>
 
 
-<div *ngIf="historics.length==1 || !historics">
-<div class="container mt-4 ">
-    <strong class="text-center ">  <p>Desculpe :( <br>
-        Não encontramos nenhum histórico de propostas. <br>
-        Por favor, simule um financiamento para que os dados apareçam aqui.
-   </p> </strong>
-</div>
-</div>
+
   <!-- Modal Visualizar -->
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">

@@ -14,13 +14,12 @@ export class HistoricComponent implements OnInit , OnDestroy{
 
 
 
-  valorImovel: any ="";
-
-  dadosBD!: DadosClienteImovelModel;
-  historics: DadosClienteImovelModel[] = [];
-  historicById: DadosClienteImovelModel []=[];
-  id : number ;
-  subscription: Subscription;
+  public valorImovel:string;
+  public dadosBD: DadosClienteImovelModel;
+  public historics: DadosClienteImovelModel[] = [];
+  public historicById: DadosClienteImovelModel []=[];
+  public id : number ;
+  private subscription: Subscription;
 
 
   constructor(private service: DatasPropertyService,
@@ -43,6 +42,9 @@ export class HistoricComponent implements OnInit , OnDestroy{
           })
         ).subscribe()})
     ).subscribe())
+
+    console.log(this.historics.length === 0)
+    debugger
   }
 
   ngOnDestroy(): void {
