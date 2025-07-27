@@ -1,158 +1,201 @@
-<div class="container">
-  <div class="content">
-    <h3 class="text-center">Histórico de Propostas</h3>
-  <div *ngIf="historics.length >= 1">
-    <table class="table-list" >
-      <tr class="list-titule">
-         <th>Nome</th>
-         <th>Data de simulação</th>
-         <th>Valor do imóvel</th>
-         <th>Números de parcelas</th>
-         <th></th>
-      </tr>
-    <section class="table-info">
-      <tr class="list-info">
-      <td class="list-name">
-         <li  *ngFor=" let historic of historics">{{historic.id}}{{historic.nome}} </li>
-      </td>
-      <td>
-         <li *ngFor=" let historic of historics">{{historic.dataHoje | date: "short"}}</li>
-       </td>
-      <td class="list-valor">
-         <li  *ngFor=" let historic of historics">  {{historic.valorImovel| currency : 'BRL'}}  </li>
-      </td>
-     <td class="list-parcelas">
-       <li *ngFor=" let historic of historics"> {{historic.quantidadeParcelas}}</li>
-     </td>
-     <td class="list-icon">
-       <li *ngFor=" let historic of historics">
-         <a (click)="pegarDados(historic.id)"><img data-bs-toggle="modal" data-bs-target="#myModal"  src="/assets/icons/eye-fill.svg" type="submit"  width="25" height="25" title="Visualizar" alt=""></a>
-         <a><img (click)="pegarIdExcluiir(historic.id)"  type="submit" data-bs-toggle="modal" data-bs-target="#myModalDelete"  src="/assets/icons/trash.svg" width="25" height="25" title="Excuir" alt=""></a>
-       </li>
-     </td>
-</tr>
-</section>
-</table>
-</div>
+<div class="container-fluid">
+  <div class="mt-4">
+    <div class="d-flex justify-content-between align-items-center border-bottom w-100 pb-4">
+      <h5 >
+        Histórico de Propostas
+      </h5>
+      <button
+        type="button"
+        class="btn btn-link"
+        routerLink="/home"
+      >
+        voltar
+      </button>
+    </div>
+    <div *ngIf="historics.length >= 1">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Data de simulação</th>
+            <th scope="col">Valor do imóvel</th>
+            <th scope="col">Números de parcelas</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let historic of historics">
+            <td>{{ historic.id }}</td>
+            <td>{{ historic.nome }}</td>
+            <td>{{ historic.dataHoje | date : "short" }}</td>
+            <td>{{ historic.valorImovel | currency : "BRL" }}</td>
+            <td>{{ historic.quantidadeParcelas }}</td>
+            <td>
+              <button
+                (click)="getDataView(historic.id)"
+                type="button"
+                class="btn"
+                data-bs-toggle="modal" data-bs-target="#myModal"
+              >
+                <i class="bi bi-pencil"></i>
+              </button>
+              <button
+                (click)="pegarIdExcluiir(historic.id)"
+                type="button"
+                class="btn"
+                data-bs-toggle="modal" data-bs-target="#myModalDelete"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-<div >
-  <div class="container mt-4 " *ngIf="historics.length === 0">
-     <p class="text-center ">  Desculpe :( <br>
-          Não encontramos nenhum histórico de propostas. <br>
-          Ou o simulador Json-Server está desativado
-          Por favor, execute localmente com o comando
-          <strong> npx json-server --watch db.json </strong>e simule um financiamento para que os dados apareçam aqui.
-     </p>
+    <div>
+      <div class="container mt-4" *ngIf="historics.length === 0 && !loading">
+        <p class="text-center">
+          Desculpe :( <br />
+          Não encontramos nenhum histórico de propostas encontrado, <br />
+          Por favor, simule um financiamento para que os dados apareçam aqui.
+        </p>
+      </div>
+    </div>
   </div>
-  </div>
-
-<div class="btn_home">
-  <button
-  class="btn btn-warning m-4"
-  style="color: rgb(255, 255, 255);"
-  routerLink="/home">
-  inicial
-</button>
 </div>
 
-</div>
-</div>
-
-
-
-  <!-- Modal Visualizar -->
-<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Visualizar -->
+<div
+  class="modal fade"
+  id="myModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Título da Modal</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        <h5 class="modal-title" id="exampleModalLabel">Proposta </h5>
+        <strong class="ms-3"> # {{historicById?.id}}</strong>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Fechar"
+        ></button>
       </div>
       <div class="modal-body">
-        <table *ngFor="let idClient of historicById">
-        <tr class="row">
-          <th class="col-4">Nome</th>
-          <th class="col-4">Profissão</th>
-          <th class="col-4">E-mail</th>
-         </tr>
-         <tr class="row">
-
-          <td class="col-4">{{idClient.nome}}</td>
-          <td class="col-4">{{idClient.profissao}}</td>
-          <td class="col-4">{{idClient.email}}</td>
-         </tr>
+        <table>
+          <tr class="row">
+            <th class="col-4">Nome</th>
+            <th class="col-4">Profissão</th>
+            <th class="col-4">E-mail</th>
+          </tr>
+          <tr class="row">
+            <td class="col-4">{{ historicById?.nome }}</td>
+            <td class="col-4">{{ historicById?.profissao }}</td>
+            <td class="col-4">{{ historicById?.email }}</td>
+          </tr>
           <tr class="row">
             <th class="col-4">CEP</th>
             <th class="col-4">CPF</th>
             <th class="col-4">Celular</th>
-           </tr>
+          </tr>
 
-           <tr class="row">
-            <td class="col-4">{{idClient.cep}}</td>
-            <td class="col-4">{{idClient.cpf}}</td>
-            <td class="col-4">{{idClient.celular}}</td>
-           </tr>
+          <tr class="row">
+            <td class="col-4">{{ historicById?.cep }}</td>
+            <td class="col-4">{{ historicById?.cpf }}</td>
+            <td class="col-4">{{ historicById?.celular }}</td>
+          </tr>
           <h5 class="mt-2">Dados do imóvel</h5>
 
           <tr class="row">
             <th class="col-4">Renda Mensal</th>
             <th class="col-4">Valor do imóvel</th>
             <th class="col-4">Valor da Entrada</th>
-           </tr>
-           <tr class="row">
-            <td class="col-4">{{idClient.rendaMensal}}</td>
-            <td class="col-4">{{idClient.valorImovel}}</td>
-            <td class="col-4">{{idClient.valorEntrada}}</td>
-           </tr>
+          </tr>
+          <tr class="row">
+            <td class="col-4">{{ historicById?.rendaMensal }}</td>
+            <td class="col-4">{{ historicById?.valorImovel }}</td>
+            <td class="col-4">{{ historicById?.valorEntrada }}</td>
+          </tr>
 
-           <tr class="row">
+          <tr class="row">
             <th class="col-4">Parecelas</th>
           </tr>
-           <tr class="row">
-            <td class="col-4">{{idClient.quantidadeParcelas}}</td>
-           </tr>
+          <tr class="row">
+            <td class="col-4">{{ historicById?.quantidadeParcelas }}</td>
+          </tr>
 
-           <h5 class="mt-2"> Dados do Financiamento</h5>
+          <h5 class="mt-2">Dados do Financiamento</h5>
 
           <tr class="row">
             <th class="col-4">Valor Aprovado</th>
             <th class="col-4">Parcela inicial</th>
             <th class="col-4">Status</th>
-           </tr>
-           <tr class="row">
-            <td class="col-4">{{idClient.valorAprovado}}</td>
-            <td class="col-4">{{idClient.parcelaInicial}}</td>
-           </tr>
+          </tr>
+          <tr class="row">
+            <td class="col-4">{{ historicById?.valorAprovado }}</td>
+            <td class="col-4">{{ historicById?.parcelaInicial }}</td>
+          </tr>
         </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Fechar
+        </button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- modal Excluir -->
-<div class="modal fade" id="myModalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="myModalDelete"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Excluir</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Fechar"
+        ></button>
       </div>
       <div class="modal-body">
-
-        <h4>  Você realmente deseja deletar essa proposta ?</h4>
+        <h4>Você realmente deseja deletar essa proposta ?</h4>
         <small>
-         Propostas deletadas, não poderão ser mais visualizadas,
-         esse procedimento não é reverssível.
+          Propostas deletadas, não poderão ser mais visualizadas, esse
+          procedimento não é reverssível.
         </small>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
-          <button (click)="delete()" type="submit" class="btn btn-danger" data-bs-dismiss="modal">Excluir</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button
+          (click)="delete()"
+          type="submit"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+        >
+          Excluir
+        </button>
       </div>
     </div>
   </div>
+</div>
+
+ <div class="loading d-flex align-items-center justify-content-center w-100" *ngIf="loading">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
 </div>

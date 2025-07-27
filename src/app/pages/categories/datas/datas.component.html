@@ -1,9 +1,10 @@
 <!----------Página 2 --------------->
-<div class="container-forms" *ngIf="visualizar" >
+<div class="container-forms" *ngIf="!visualizar" >
   <div class="content">
-    <h2 class="text-center m-3">Dados do Pessoais</h2>
+    <h5 class="text-start m-3">
+      <i class="bi bi-person-check"></i> Dados do Pessoais</h5>
 
-    <form (ngSubmit)="onSubmit()" [formGroup]="formulario">
+    <form (ngSubmit)="onSubmit()" class="border-top w-100" [formGroup]="formulario">
       <!---------   nome  --------->
 
       <div class="row container">
@@ -37,7 +38,7 @@
                 Apenas letras</small>
             </div>
 
-            <label for="nome">Nome completo :</label>
+            <label class="form-label" for="nome">Nome completo :</label>
           </div>
         </div>
 
@@ -73,7 +74,7 @@
                 *ngIf="formulario.controls.profissao.errors?.pattern">
                 Apenas letras.</small>
             </div>
-            <label for="profissao">Profissão :</label>
+            <label class="form-label" for="profissao">Profissão :</label>
           </div>
         </div>
 
@@ -105,7 +106,7 @@
                 CPF inválido.</small
               >
             </div>
-            <label for="cpf">CPF :</label>
+            <label class="form-label" for="cpf">CPF :</label>
           </div>
         </div>
 
@@ -141,45 +142,9 @@
               >
             </div>
 
-            <label for="email">E-mail :</label>
+            <label class="form-label" for="email">E-mail :</label>
           </div>
         </div>
-
-        <!--------- data de nacimento-------->
-        <!-- <div class="col-6 mt-4">
-          <div class="form-floating form-Group">
-            <input
-              type="date"
-              class="form-control"
-              id="dataNascimento"
-              placeholder="your date"
-              formControlName="dataNascimento"
-            />
-
-            <div
-              *ngIf="
-                formulario.controls.dataNascimento.touched &&
-                formulario.controls.dataNascimento?.invalid
-              "
-            >
-              <small
-                class="text text-danger"
-                *ngIf="formulario.controls.dataNascimento.errors?.required"
-              >
-                Data de nascimento é obrigatório.</small
-              >
-              <small
-                class="text text-danger"
-                *ngIf="formulario.controls.dataNascimento.errors?.max"
-              >
-                A sua idade não poder ser menor que 18 anos!</small
-              >
-            </div>
-
-            <label for="dataNascimento">Data de Nascimento :</label>
-          </div>
-        </div> -->
-
         <!-----------------Cep----- ------>
         <div class="col-md-6 mt-4">
           <div class="form-floating form-Group">
@@ -206,7 +171,7 @@
               </small
               >
             </div>
-            <label for="cep">CEP :</label>
+            <label class="form-label" for="cep">CEP :</label>
           </div>
         </div>
 
@@ -240,31 +205,24 @@
               >
             </div>
 
-            <label for="telefone">Celular :</label>
+            <label class="form-label" for="telefone">Celular :</label>
           </div>
         </div>
       </div>
 
       <!---------buttons---------->
-      <div class="btn_forms row container-fluid text-center mt-2">
-        <div class="col-6">
-          <button
-            class="btn btn-outline-warning btn-lg"
-            style="color: orange;"
+      <div class="d-flex justify-content-evenly align-items-center text-center mt-4 border-top w-100 pt-4">
+         <button
+            class="btn btn-light"
             routerLink="/home">
             Cancelar
           </button>
-        </div>
-        <div class="col-6">
           <button
-            class="btn btn-warning btn-lg"
+            class="btn btn-dark"
             type="submit"
-            style="color: white;"
             [disabled]="formulario.invalid">
-
             Prosseguir
           </button>
-        </div>
       </div>
     </form>
   </div>

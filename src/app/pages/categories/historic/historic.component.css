@@ -2,82 +2,10 @@
   list-style: none;
 }
 
-.container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-  background-color: rgb(255, 255, 255);
-  width: 100%;
-  height: 100%;
-  position: relative;
-  font-family: var(--fonte-family);
+.container-fluid{
+  margin-top: 5rem;
 }
 
-.content{
-  background-color: var(--cor-modal);
-  background: linear-gradient(var(--cor-linear));
-  height: 80%;
-  width: 95%;
-  border-radius: 9px;
-  box-shadow: 2px 4px 4px 4px  gray;
-  animation: efect_model 1s ease-in-out forwards;
-}
-
-.table-list{
-    background-color: rgb(245, 245, 245);
-    width: 100%;
-    height: 100%
-}
-.table-list .list-titule{
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: rgb(236, 237, 238);
-  padding: 0px 10px;
-}
-
-.list-titule th{
-  flex: 20%;
-}
-.table-list .table-info{
-width: 100%;
-height: 100%;
-}
-.table-info tr{
-  display: flex;
-  justify-content: space-around;
-}
-
-.list-info td li{
-  display: flex;
-  flex: 20%;
-  width: 100%;
-  align-items: center;
-  padding: 10px 0px;
-}
-
-.list-info td{
-  width: 100%;
-}
-.list-icon li {
-  display: flex;
-  justify-content: space-around;
-}
-.list-icon li a img {
-  cursor: pointer;
-  background-color: transparent;
-  border-radius: 50%;
-}
-
-.list-icon li a img:hover {
-  background-color: rgb(219, 198, 198);
-  transition: 1.5s;
-
-}
-.table-list .list-name td li{
- background-color: red;
-}
 
 .btn_home{
   display: flex;

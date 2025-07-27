@@ -1,13 +1,12 @@
 
-<nav class="navbar">
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body fixed-top mb-4">
     <div class="container-fluid">
-      <h4 class="navbar-brand">Simulação Financeira</h4>
-      <form class="d-flex">
+      <h4 class="navbar-brand text-light">Simulação Financeira</h4>
+      <div class="d-flex">
         <button
-        style="color: white;"
-        class="btn btn btn-outline-warning"
-        routerLink="/historic" type="submit">Histórico</button>
-      </form>
+        class="btn btn-outline-success text-light"
+        routerLink="/historic" type="submit">{{btn}}</button>
+      </div>
     </div>
   </nav>
 <router-outlet></router-outlet>

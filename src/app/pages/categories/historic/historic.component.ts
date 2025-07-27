@@ -17,9 +17,10 @@ export class HistoricComponent implements OnInit , OnDestroy{
   public valorImovel:string;
   public dadosBD: DadosClienteImovelModel;
   public historics: DadosClienteImovelModel[] = [];
-  public historicById: DadosClienteImovelModel []=[];
+  public historicById: DadosClienteImovelModel;
   public id : number ;
   private subscription: Subscription;
+  loading = true;
 
 
   constructor(private service: DatasPropertyService,
@@ -39,6 +40,7 @@ export class HistoricComponent implements OnInit , OnDestroy{
           toArray(),
               tap((res)=>{
                 this.historics = res ;
+                this.loading = false
           })
         ).subscribe()})
     ).subscribe())
@@ -48,15 +50,15 @@ export class HistoricComponent implements OnInit , OnDestroy{
     this.subscription.unsubscribe();
   }
 
-  pegarDados(id: number){
+  getDataView(id: number){
 
   from(this.historics).pipe(
      filter(res => res.id == id),
   ).subscribe(
     (response)=>{
-       const idClient = {response}
-      const array = Object.values(idClient);
-      this.historicById = array ;
+      // const idClient = {response}
+      //const array = Object.values(idClient);
+      this.historicById = response ;
     }
   );
   }

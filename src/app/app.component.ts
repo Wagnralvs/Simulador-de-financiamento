@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'cybertron';
+  btn = 'Histórico'
+
+  onBtn(): string {
+    return ''
+  }
 }

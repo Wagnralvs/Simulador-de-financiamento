@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 import localePt  from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { CategoriesModule } from './pages/categories/categories.module';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { ApiMockAngularInMemoryWebApiService } from './pages/categories/services/api-mock/api-mock-angular-in-memory-web-api.service';
 
 registerLocaleData(localePt);
 
@@ -26,7 +28,8 @@ registerLocaleData(localePt);
     HttpClientModule,
     RouterModule,
     BrowserAnimationsModule,
-  
+    HttpClientInMemoryWebApiModule.forRoot(ApiMockAngularInMemoryWebApiService),
+
     CategoriesModule,
     NgxMaskModule.forRoot({
      dropSpecialCharacters:false

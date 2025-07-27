@@ -3,7 +3,7 @@ import { DadosClienteImovelModel } from '../modal/model-imovel';
 
 import { DatasPropertyComponent } from '../datas-property/datas-property.component';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject, tap } from 'rxjs';
+import { map, Observable, of, Subject, tap } from 'rxjs';
 
 
 @Injectable({
@@ -12,7 +12,7 @@ import { Observable, Subject, tap } from 'rxjs';
 
 export class  DatasPropertyService {
 
-private urlBD = " http://localhost:3000/historico"
+private urlBD = "api/historico"
 constructor(private http:HttpClient) {}
 
 // banco de dados
@@ -21,7 +21,12 @@ constructor(private http:HttpClient) {}
  }
 
  receberBD(): Observable<DadosClienteImovelModel[]>{
-     return this.http.get<DadosClienteImovelModel[]>(this.urlBD)
+     return this.http.get<any>(this.urlBD).pipe(
+      map(response => {
+      return response
+    })
+    );
+
  }
 pegarId(id: string): Observable<DadosClienteImovelModel>{
   const url = `${this.urlBD}/${id}`

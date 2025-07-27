@@ -1,9 +1,10 @@
 <!-------------- tela 3 -------------->
-<div class="container-forms" *ngIf="visualizarModel">
+<div class="container-forms" *ngIf="!visualizarModel">
   <div class="content  mt-4">
-    <h1 class="text-center m-3">Dados do Imóvel</h1>
+    <h5 class="text-start m-3">
+      <i class="bi bi-house-up"></i> Dados do Imóvel</h5>
 
-    <form (ngSubmit)="onSubmit()" [formGroup]="formulario">
+    <form (ngSubmit)="onSubmit()" class="border-top w-100" [formGroup]="formulario  ">
 
       <div class="row container ">
         <!---------------Renda mensal ------------>
@@ -169,23 +170,19 @@
         </div>
       </div>
       <!--buttons  -->
-      <div class="row container-fluid text-center mt-3">
-        <div class="col-6">
-          <button
+      <div class="d-flex justify-content-evenly align-items-center text-center mt-4  border-top w-100 pt-4">
+        <button
             type="button"
-            class="btn btn-outline-warning btn-lg"
+            class="btn btn-light"
             routerLink="/home">
-            Cancelar
+            Voltar
           </button>
-        </div>
-        <div class="col-6">
           <button
-          class="btn btn-warning btn-lg"
+          class="btn btn-dark"
             type="submit"
             [disabled]="formulario.invalid">
             Prosseguir
           </button>
-        </div>
       </div>
     </form>
   </div>
