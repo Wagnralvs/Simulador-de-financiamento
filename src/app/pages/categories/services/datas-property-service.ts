@@ -12,7 +12,7 @@ import { map, Observable, of, Subject, tap } from 'rxjs';
 
 export class  DatasPropertyService {
 
-private urlBD = "api/historico" 
+private urlBD = "api/historico"
 constructor(private http:HttpClient) {}
 
 // banco de dados
