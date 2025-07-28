@@ -75,7 +75,7 @@
   aria-hidden="true"
 >
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content" *ngIf="historicById">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Proposta </h5>
         <strong class="ms-3"> # {{historicById.id}}</strong>
@@ -87,7 +87,7 @@
         ></button>
       </div>
       <div class="modal-body">
-        <table *ngIf="historicById">
+        <table >
           <tr class="row">
             <th class="col-4">Nome</th>
             <th class="col-4">Profissão</th>
