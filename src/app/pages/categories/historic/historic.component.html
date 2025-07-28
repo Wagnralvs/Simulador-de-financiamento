@@ -78,7 +78,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Proposta </h5>
-        <strong class="ms-3"> # {{historicById?.id}}</strong>
+        <strong class="ms-3"> # {{historicById.id}}</strong>
         <button
           type="button"
           class="btn-close"
@@ -87,16 +87,16 @@
         ></button>
       </div>
       <div class="modal-body">
-        <table>
+        <table *ngIf="historicById">
           <tr class="row">
             <th class="col-4">Nome</th>
             <th class="col-4">Profissão</th>
             <th class="col-4">E-mail</th>
           </tr>
           <tr class="row">
-            <td class="col-4">{{ historicById?.nome }}</td>
-            <td class="col-4">{{ historicById?.profissao }}</td>
-            <td class="col-4">{{ historicById?.email }}</td>
+            <td class="col-4">{{ historicById.nome }}</td>
+            <td class="col-4">{{ historicById.profissao }}</td>
+            <td class="col-4">{{ historicById.email }}</td>
           </tr>
           <tr class="row">
             <th class="col-4">CEP</th>
@@ -105,9 +105,9 @@
           </tr>
 
           <tr class="row">
-            <td class="col-4">{{ historicById?.cep }}</td>
-            <td class="col-4">{{ historicById?.cpf }}</td>
-            <td class="col-4">{{ historicById?.celular }}</td>
+            <td class="col-4">{{ historicById.cep }}</td>
+            <td class="col-4">{{ historicById.cpf }}</td>
+            <td class="col-4">{{ historicById.celular }}</td>
           </tr>
           <h5 class="mt-2">Dados do imóvel</h5>
 
@@ -117,16 +117,16 @@
             <th class="col-4">Valor da Entrada</th>
           </tr>
           <tr class="row">
-            <td class="col-4">{{ historicById?.rendaMensal }}</td>
-            <td class="col-4">{{ historicById?.valorImovel }}</td>
-            <td class="col-4">{{ historicById?.valorEntrada }}</td>
+            <td class="col-4">{{ historicById.rendaMensal }}</td>
+            <td class="col-4">{{ historicById.valorImovel }}</td>
+            <td class="col-4">{{ historicById.valorEntrada }}</td>
           </tr>
 
           <tr class="row">
             <th class="col-4">Parecelas</th>
           </tr>
           <tr class="row">
-            <td class="col-4">{{ historicById?.quantidadeParcelas }}</td>
+            <td class="col-4">{{ historicById.quantidadeParcelas }}</td>
           </tr>
 
           <h5 class="mt-2">Dados do Financiamento</h5>
@@ -137,8 +137,8 @@
             <th class="col-4">Status</th>
           </tr>
           <tr class="row">
-            <td class="col-4">{{ historicById?.valorAprovado }}</td>
-            <td class="col-4">{{ historicById?.parcelaInicial }}</td>
+            <td class="col-4">{{ historicById.valorAprovado }}</td>
+            <td class="col-4">{{ historicById.parcelaInicial }}</td>
           </tr>
         </table>
       </div>
