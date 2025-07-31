@@ -1,9 +1,5 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
-
-import { DatasPropertyComponent, RequestAprovadoModel } from '../datas-property/datas-property.component';
-import { DatasPropertyService } from '../services/datas-property-service';
-import { DadosClienteImovelModel } from '../modal/model-imovel';
-import { tap, Subscription } from 'rxjs';
+import {  Component, Input, OnInit } from '@angular/core';
+import { RequestAprovadoModel } from '../datas-property/datas-property.component';
 import { ServiceCliente } from '../services/service-cliente';
 
 @Component({
@@ -11,24 +7,30 @@ import { ServiceCliente } from '../services/service-cliente';
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.css'],
 })
-export class ResultsComponent implements OnChanges {
+export class ResultsComponent implements OnInit  {
 
-  @Input() requestAprovado :RequestAprovadoModel ;
-  @Input() visualizar = false
+ requestAprovado :RequestAprovadoModel ;
+  view = false
 
   taxa:number;
   totalParcelaInicial= '';
   totalValorAprovado= '';
   valorTotalImovelJuros = '';
 
-  constructor() {
-  }
+  constructor(private clienteService:ServiceCliente) {}
 
-  ngOnChanges(): void {
-  this.taxa = this.requestAprovado.taxa
-  this.totalParcelaInicial = this.requestAprovado.totalParcelaInicial.toLocaleString('pt-BR', { maximumFractionDigits: 2 });
-  this.totalValorAprovado = this.requestAprovado.totalValorAprovado.toLocaleString('pt-BR', { maximumFractionDigits: 2 });
-  this.valorTotalImovelJuros = this.requestAprovado.valorTotalImovelJuros.toLocaleString('pt-BR', { maximumFractionDigits: 2 })
+  ngOnInit(): void {
+    this.clienteService.requestApproveModel$.subscribe(
+      data => {
+        if(data){
+          this.requestAprovado = data;
+          this.taxa = data.taxa
+          this.totalParcelaInicial = data.totalParcelaInicial.toLocaleString('pt-BR', { maximumFractionDigits: 2 });
+          this.totalValorAprovado = data.totalValorAprovado.toLocaleString('pt-BR', { maximumFractionDigits: 2 });
+          this.valorTotalImovelJuros = data.valorTotalImovelJuros.toLocaleString('pt-BR', { maximumFractionDigits: 2 });
+          this.view = true;
+        }
+      }
+    )
   }
-
 }

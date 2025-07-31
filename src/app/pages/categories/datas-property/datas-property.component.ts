@@ -21,27 +21,16 @@ import { HttpErrorResponse } from '@angular/common/http';
   selector: 'app-datas-property',
   templateUrl: './datas-property.component.html',
   styleUrls: ['./datas-property.component.css'],
-  // providers: [DatasPropertyService, ServiceCliente],
 })
 @Injectable()
-export class DatasPropertyComponent implements OnInit , OnDestroy{
-  @Input() visualizarModel= false;
-  @Input() clienteDados: ModalCliente ;
-
+export class DatasPropertyComponent implements OnInit, OnDestroy {
   private dadosClienteImovelModel: DadosClienteImovelModel;
-  public dadosClienteModel: ModalCliente ;
+  public dadosClienteModel: ModalCliente;
   public formulario: UntypedFormGroup;
-  public requestAprovado : RequestAprovadoModel;
+  public requestAprovado: RequestAprovadoModel;
 
-  private nome: string;
-  private profissao: string;
-  private email: string;
-  private cpf: number;
-  private data: string;
-  private cep: number;
-  private celular: number;
   public entradaMin: number;
-  private taxa :number;
+  private taxa: number;
   public dataHoje: number = Date.now();
 
   public rendaMensal: number;
@@ -49,14 +38,14 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
   public valorEntrada: number;
   public quantidadeParcelas: number;
   public mensaisParcelas: number;
-  public valorAprovado: number ;
-  public rendaAprovada: boolean ;
-  public valorTotalImovelJuros:number;
+  public valorAprovado: number;
+  public rendaAprovada: boolean;
+  public valorTotalImovelJuros: number;
   public id = '';
   public menssage = '';
-  public visulizarAprov = false ;
+  public dataCliente: ModalCliente;
 
-  private subscription: Subscription ;
+  private subscription: Subscription;
   constructor(
     private propertyService: DatasPropertyService,
     private clienteService: ServiceCliente,
@@ -64,9 +53,18 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
     private router: Router
   ) {
     this.subscription = new Subscription();
+    this.onForm();
   }
 
   ngOnInit(): void {
+    this.clienteService.dadosclientes$.subscribe((result) => {
+      if (result) {
+        this.dataCliente = result;
+      }
+    });
+  }
+
+  onForm() {
     this.formulario = this.formBuilder.group({
       rendaMensal: [null, [Validators.required]],
       valorImovel: [null, [Validators.required]],
@@ -77,21 +75,6 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
         [Validators.required, Validators.max(360), Validators.min(1)],
       ],
     });
-
-
-    this.subscription.add(
-      this.clienteService.pegarDadosCliente().pipe(
-        tap((result) => {
-          this.visualizarModel = true;
-          this.nome = result.nome;
-          this.celular = result.celular;
-          this.cep = result.cep;
-          this.cpf = result.cpf;
-          this.data = result.data;
-          this.email = result.email;
-          this.profissao = result.profissao
-         })
-      ).subscribe());
   }
 
   ngOnDestroy(): void {
@@ -128,23 +111,23 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
   }
 
   parcelasMensais(): number {
-    const taxaMensal = (this.taxa / 12)/100;
+    const taxaMensal = this.taxa / 12 / 100;
 
     const totalParcelasMensais =
-      ((this.valorImovel - this.valorEntrada) / this.quantidadeParcelas) * (taxaMensal + 1);
+      ((this.valorImovel - this.valorEntrada) / this.quantidadeParcelas) *
+      (taxaMensal + 1);
 
     return totalParcelasMensais;
   }
-  valorTotalEmprestimoJuros(): number{
-   const jurosTotal = (this.taxa * this.quantidadeParcelas / 12)/100
-   const valorTotalImovelJuros = this.valorAprovado * (jurosTotal + 1)
+  valorTotalEmprestimoJuros(): number {
+    const jurosTotal = (this.taxa * this.quantidadeParcelas) / 12 / 100;
+    const valorTotalImovelJuros = this.valorAprovado * (jurosTotal + 1);
 
-   return valorTotalImovelJuros
+    return valorTotalImovelJuros;
   }
 
   // -----caclulo validação-----
   validacao() {
-
     this.rendaMensal = +this.formulario.get('rendaMensal')?.value;
     this.valorImovel = +this.formulario.get('valorImovel')?.value;
     this.valorEntrada = +this.formulario.get('valorEntrada')?.value;
@@ -153,21 +136,17 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
     this.mensaisParcelas = this.parcelasMensais();
     this.valorAprovado = this.aprovadoValor();
     this.rendaAprovada = this.renda();
-    this.valorTotalImovelJuros = this.valorTotalEmprestimoJuros()
-
-    let nome = this.nome;
-    let profissao = this.profissao;
-    let cpf = this.cpf;
-    let email = this.email;
-    let data = this.data;
-    let cep = this.cep;
-    let celular = this.celular;
+    this.valorTotalImovelJuros = this.valorTotalEmprestimoJuros();
 
     if (this.rendaAprovada) {
-
       this.dadosClienteImovelModel = new DadosClienteImovelModel(
-        nome,profissao,cpf,email,
-        data,cep,celular,
+        this.dataCliente.nome,
+        this.dataCliente.profissao,
+        this.dataCliente.cpf,
+        this.dataCliente.email,
+        this.dataCliente.data,
+        this.dataCliente.cep,
+        this.dataCliente.celular,
         this.rendaMensal,
         this.valorImovel,
         this.valorEntrada,
@@ -178,21 +157,19 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
         this.taxa,
         this.valorTotalImovelJuros
       );
-
-      // enviar dados para o banco de dados
       this.subscription.add(
-        this.propertyService.criarBD(this.dadosClienteImovelModel).subscribe(() => {
-
-        })
-      )
-
+        this.propertyService
+          .criarBD(this.dadosClienteImovelModel)
+          .subscribe((result) => {
+            console.log('dados salvos' + result);
+          })
+      );
       this.aprovado();
-    }
-    else this.reprovado();
+    } else this.reprovado();
   }
 
   renda(): boolean {
-    if (this.mensaisParcelas > (this.rendaMensal * 0.3)) {
+    if (this.mensaisParcelas > this.rendaMensal * 0.3) {
       return false;
     }
     return true;
@@ -207,15 +184,15 @@ export class DatasPropertyComponent implements OnInit , OnDestroy{
   }
   aprovado() {
     this.requestAprovado = {
-       taxa: this.taxa,
-       totalParcelaInicial: this.mensaisParcelas ,
-       totalValorAprovado: this.valorAprovado,
-       valorTotalImovelJuros : this.valorTotalImovelJuros,
-    }
-
-    this.visulizarAprov = true ;
-    this.visualizarModel = false ;
-
+      taxa: this.taxa,
+      totalParcelaInicial: this.mensaisParcelas,
+      totalValorAprovado: this.valorAprovado,
+      valorTotalImovelJuros: this.valorTotalImovelJuros,
+      valorEntrada: this.valorEntrada,
+      juros: this.valorTotalImovelJuros - this.valorAprovado,
+    };
+    this.clienteService.requestApproveModel$.next(this.requestAprovado);
+    this.router.navigate(['/aprov']);
   }
 }
 export class RequestAprovadoModel{
@@ -223,5 +200,7 @@ export class RequestAprovadoModel{
   totalParcelaInicial : number;
   totalValorAprovado :number;
   valorTotalImovelJuros : number;
+  valorEntrada?:number
+  juros?:number
 
 }

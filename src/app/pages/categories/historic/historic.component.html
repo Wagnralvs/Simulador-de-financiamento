@@ -33,12 +33,22 @@
             <td>{{ historic.quantidadeParcelas }}</td>
             <td>
               <button
-                (click)="getDataView(historic.id)"
+                (click)="getChartView(historic.id)"
                 type="button"
                 class="btn"
-                data-bs-toggle="modal" data-bs-target="#myModal"
+                >
+                <!-- data-bs-toggle="modal" data-bs-target="#myChart" -->
+                <i class="bi bi-pie-chart"></i>
+              </button>
+              <button
+                (click)="getDataView(historic.id)"
+                tooltip="teft"
+                type="button"
+                class="btn"
+                data-bs-toggle="tooltip" data-bs-placement="top"
+                data-bs-title="This top tooltip is themed via CSS variables."
               >
-                <i class="bi bi-pencil"></i>
+                <i class="bi bi-eye"></i>
               </button>
               <button
                 (click)="pegarIdExcluiir(historic.id)"
@@ -64,7 +74,15 @@
       </div>
     </div>
   </div>
+  <div *ngIf="requestAprovado && viewChart" class="chart">
+    <div class="d-flex justify-content-end">
+      <button class="btn" (click)="onCloseChart()"><i style="font-size: x-large;" class="bi bi-x"></i></button>
+    </div>
+    <app-chart  [requestAprovado]="requestAprovado"></app-chart>
+  </div>
 </div>
+
+
 
 <!-- Modal Visualizar -->
 <div

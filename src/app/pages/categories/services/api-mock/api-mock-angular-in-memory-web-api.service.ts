@@ -14,4 +14,8 @@ export class ApiMockAngularInMemoryWebApiService implements InMemoryDbService {
       historico: (db as any).historico,
     };
   }
+
+   genId(chamados: any[]): number {
+    return chamados.length > 0 ? Math.max(...chamados.map(c => c.id)) + 1 : 1;
+  }
 }

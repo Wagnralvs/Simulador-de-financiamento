@@ -25,7 +25,7 @@ html, body{
 }
 
 .content{
-  padding: 1.5rem ;
+  padding-bottom: 1.5rem ;
   margin-top: 4rem ;
   position: relative;
   background-color: var(--cor-modal);
@@ -39,6 +39,14 @@ html, body{
   overflow-x: hidden;
   box-sizing: border-box;
 }
+
+.header-modal{
+  padding: 1rem;
+  background-color: rgb(28, 28, 29);
+  height: 4rem;
+  color: white;
+}
+
 
 @keyframes efect_model {
   from{

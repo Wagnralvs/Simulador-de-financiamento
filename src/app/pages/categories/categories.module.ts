@@ -11,6 +11,7 @@ import { HistoricComponent } from './historic/historic.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ResultsComponent } from './results-aprovado/results.component';
+import { ChartComponent } from './chart/chart.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ResultsComponent } from './results-aprovado/results.component';
     ResultsComponent,
     ResultReprovadoComponent,
     HistoricComponent,
+    ChartComponent,
   ],
   imports: [
     RouterModule,

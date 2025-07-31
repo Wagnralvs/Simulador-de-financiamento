@@ -36,7 +36,7 @@ pegarId(id: string): Observable<DadosClienteImovelModel>{
 
  deletarBD(id: number): Observable<DadosClienteImovelModel>{
    const url = `${this.urlBD}/${id}`
-  return  this.http.delete<DadosClienteImovelModel>(url).pipe();
+  return  this.http.delete<any>(url).pipe();
  }
 
 }

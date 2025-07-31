@@ -1,8 +1,10 @@
 <!----------Página 2 --------------->
-<div class="container-forms" *ngIf="!visualizar" >
+<div class="container-forms" *ngIf="visualizar" >
   <div class="content">
-    <h5 class="text-start m-3">
-      <i class="bi bi-person-check"></i> Dados do Pessoais</h5>
+    <header class="header-modal">
+      <h5 class="text-start ">
+        <i class="bi bi-person-check"></i> Dados do Pessoais</h5>
+    </header>
 
     <form (ngSubmit)="onSubmit()" class="border-top w-100" [formGroup]="formulario">
       <!---------   nome  --------->
@@ -211,7 +213,7 @@
       </div>
 
       <!---------buttons---------->
-      <div class="d-flex justify-content-evenly align-items-center text-center mt-4 border-top w-100 pt-4">
+      <div class=" d-flex justify-content-evenly align-items-center text-center mt-4 border-top w-100 pt-4">
          <button
             class="btn btn-light"
             routerLink="/home">
@@ -228,7 +230,3 @@
   </div>
 </div>
 
-<app-datas-property>
-</app-datas-property>
-
- <!-- [clienteDados]="clienteDados" -->

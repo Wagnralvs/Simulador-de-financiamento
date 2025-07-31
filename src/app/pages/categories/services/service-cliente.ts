@@ -1,8 +1,7 @@
 import {  Injectable, } from '@angular/core';
-
 import { ModalCliente } from '../modal/modal-cliente';
-import { DatasComponent } from '../datas/datas.component';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
+import { RequestAprovadoModel } from '../datas-property/datas-property.component';
 
 @Injectable({
   providedIn:"root"
@@ -11,17 +10,9 @@ import { Subject, Observable } from 'rxjs';
 export class ServiceCliente {
 
   static model: ModalCliente;
-  public dadosclientes$ : Subject<ModalCliente>;
+  public dadosclientes$ = new BehaviorSubject<ModalCliente | null>(null);
+  public requestApproveModel$ = new  BehaviorSubject<RequestAprovadoModel | null>(null)
 
-  constructor() {
-     this.dadosclientes$ = new Subject<ModalCliente>();
-  }
 
-  pegarDadosCliente(): Observable<ModalCliente> {
-    return this.dadosclientes$.asObservable();
-  }
-
- enviarDadosCliente(dados: ModalCliente): void{
-    this.dadosclientes$.next(dados);
-  }
+  constructor() {}
  }

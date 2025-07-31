@@ -1,11 +1,6 @@
-import { Component, Inject, Injectable, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup,Validators , UntypedFormGroup ,  UntypedFormBuilder, } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { AppComponent } from 'src/app/app.component';
-import { DatasPropertyComponent } from '../datas-property/datas-property.component';
+import { Component, Inject,  OnInit } from '@angular/core';
+import { Validators , UntypedFormGroup ,  UntypedFormBuilder, } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DatasPropertyService } from '../services/datas-property-service';
-import { DadosClienteImovelModel } from '../modal/model-imovel';
 import { ModalCliente } from '../modal/modal-cliente';
 import { ServiceCliente } from '../services/service-cliente';
 
@@ -42,7 +37,6 @@ export class DatasComponent implements OnInit {
   }
 
 onSubmit(){
-
  let nome = this.formulario.get('nome')?.value;
  let profissao = this.formulario.get('profissao')?.value;
  let cpf = this.formulario.get('cpf')?.value;
@@ -53,10 +47,10 @@ onSubmit(){
 
 
  this.clienteDados = new ModalCliente (nome , profissao , cpf, email,  data , cep , celular,);
+ this.service.dadosclientes$.next(this.clienteDados);
  this.visualizarModel = true;
  this.visualizar = false;
- this.service.enviarDadosCliente(this.clienteDados);
-//  this.router.navigate(['/property'] )
+ this.router.navigate(['/property'] )
   }
 
 }

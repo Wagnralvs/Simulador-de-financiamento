@@ -13,19 +13,9 @@ const routes: Routes = [
    {path: 'home', component: HomeComponent},
    {path: 'next' , component: DatasComponent},
    {path: 'property', component: DatasPropertyComponent},
-   {path: 'results', component: ResultsComponent},
+   {path: 'aprov', component: ResultsComponent},
    {path: 'reprov', component: ResultReprovadoComponent},
    {path: 'historic' , component: HistoricComponent}
-
-  //  {path: '', loadChildren:() => import('../app/pages/categories/home/home.component').then( m => m.HomeComponent) },
-  //  {path: 'home', loadChildren:() => import('../app/pages/categories/home/home.component').then( m => m.HomeComponent) },
-  //  {path: 'next', loadChildren:() => import('../app/pages/categories/datas/datas.component').then( m => m.DatasComponent) },
-  //  {path: 'property', loadChildren:() => import('../app/pages/categories/datas-property/datas-property.component').then( m => m.DatasPropertyComponent) },
-  //  {path: 'results', loadChildren:() => import('./pages/categories/results-aprovado/results.component').then( m => m.ResultsComponent) },
-  //  {path: 'reprov', loadChildren:() => import('../app/pages/categories/historic/historic.component').then( m => m.HistoricComponent) },
-
-
-
   ];
 
 @NgModule({
